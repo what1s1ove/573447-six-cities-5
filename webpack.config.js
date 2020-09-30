@@ -1,22 +1,22 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "public"),
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'public'),
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "public"),
+    contentBase: path.resolve(__dirname, 'public'),
     open: false,
     port: 1337,
     watchContentBase: true,
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
     alias: {
-      "~": path.resolve(__dirname, "src/"),
+      '~': path.resolve(__dirname, 'src/'),
     },
   },
   module: {
@@ -24,7 +24,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: "babel-loader",
+        use: 'babel-loader',
       },
     ],
   },
