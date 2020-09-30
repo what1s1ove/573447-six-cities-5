@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const MainScreen = () => (
+const MainScreen = ({offersCount}) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -77,11 +78,13 @@ const MainScreen = () => (
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">
+              {offersCount} places to stay in Amsterdam
+            </b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
-              <select className="places__sorting-type" id="places-sorting">
-                <option className="places__option" value="popular" selected="">
+              <select onChange={() => {}} className="places__sorting-type" value="">
+                <option className="places__option" value="popular">
                   Popular
                 </option>
                 <option className="places__option" value="to-high">
@@ -368,5 +371,9 @@ const MainScreen = () => (
     </main>
   </div>
 );
+
+MainScreen.propTypes = {
+  offersCount: PropTypes.number.isRequired,
+};
 
 export default MainScreen;
