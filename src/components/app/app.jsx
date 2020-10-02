@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropsTypes from 'prop-types';
 import MainScreen from '../main-screen/main-screen';
 
