@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 const AuthScreen = () => (
-  <div classNames="page page--gray page--login">
-    <header classNames="header">
-      <div classNames="container">
-        <div classNames="header__wrapper">
-          <div classNames="header__left">
-            <a classNames="header__logo-link" href="main.html">
+  <div className="page page--gray page--login">
+    <header className="header">
+      <div className="container">
+        <div className="header__wrapper">
+          <div className="header__left">
+            <a className="header__logo-link" href="main.html">
               <img
-                classNames="header__logo"
+                className="header__logo"
                 src="img/logo.svg"
                 alt="6 cities logo"
                 width="81"
@@ -16,15 +16,15 @@ const AuthScreen = () => (
               />
             </a>
           </div>
-          <nav classNames="header__nav">
-            <ul classNames="header__nav-list">
-              <li classNames="header__nav-item user">
+          <nav className="header__nav">
+            <ul className="header__nav-list">
+              <li className="header__nav-item user">
                 <a
-                  classNames="header__nav-link header__nav-link--profile"
+                  className="header__nav-link header__nav-link--profile"
                   href="#"
                 >
-                  <div classNames="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span classNames="header__login">Sign in</span>
+                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                  <span className="header__login">Sign in</span>
                 </a>
               </li>
             </ul>
@@ -32,25 +32,25 @@ const AuthScreen = () => (
         </div>
       </div>
     </header>
-    <main classNames="page__main page__main--login">
-      <div classNames="page__login-container container">
-        <section classNames="login">
-          <h1 classNames="login__title">Sign in</h1>
-          <form classNames="login__form form" action="#" method="post">
-            <div classNames="login__input-wrapper form__input-wrapper">
-              <label classNames="visually-hidden">E-mail</label>
+    <main className="page__main page__main--login">
+      <div className="page__login-container container">
+        <section className="login">
+          <h1 className="login__title">Sign in</h1>
+          <form className="login__form form" action="#" method="post">
+            <div className="login__input-wrapper form__input-wrapper">
+              <label className="visually-hidden">E-mail</label>
               <input
-                classNames="login__input form__input"
+                className="login__input form__input"
                 type="email"
                 name="email"
                 placeholder="Email"
                 required
               />
             </div>
-            <div classNames="login__input-wrapper form__input-wrapper">
-              <label classNames="visually-hidden">Password</label>
+            <div className="login__input-wrapper form__input-wrapper">
+              <label className="visually-hidden">Password</label>
               <input
-                classNames="login__input form__input"
+                className="login__input form__input"
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -58,16 +58,16 @@ const AuthScreen = () => (
               />
             </div>
             <button
-              classNames="login__submit form__submit button"
+              className="login__submit form__submit button"
               type="submit"
             >
               Sign in
             </button>
           </form>
         </section>
-        <section classNames="locations locations--login locations--current">
-          <div classNames="locations__item">
-            <a classNames="locations__item-link" href="#">
+        <section className="locations locations--login locations--current">
+          <div className="locations__item">
+            <a className="locations__item-link" href="#">
               <span>Amsterdam</span>
             </a>
           </div>

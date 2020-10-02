@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 const FavoritesScreen = () => (
-  <div classNames="page">
-    <header classNames="header">
-      <div classNames="container">
-        <div classNames="header__wrapper">
-          <div classNames="header__left">
-            <a classNames="header__logo-link" href="main.html">
+  <div className="page">
+    <header className="header">
+      <div className="container">
+        <div className="header__wrapper">
+          <div className="header__left">
+            <a className="header__logo-link" href="main.html">
               <img
-                classNames="header__logo"
+                className="header__logo"
                 src="img/logo.svg"
                 alt="6 cities logo"
                 width="81"
@@ -16,15 +16,15 @@ const FavoritesScreen = () => (
               />
             </a>
           </div>
-          <nav classNames="header__nav">
-            <ul classNames="header__nav-list">
-              <li classNames="header__nav-item user">
+          <nav className="header__nav">
+            <ul className="header__nav-list">
+              <li className="header__nav-item user">
                 <a
-                  classNames="header__nav-link header__nav-link--profile"
+                  className="header__nav-link header__nav-link--profile"
                   href="#"
                 >
-                  <div classNames="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span classNames="header__user-name user__name">
+                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                  <span className="header__user-name user__name">
                     Oliver.conner@gmail.com
                   </span>
                 </a>
@@ -35,25 +35,25 @@ const FavoritesScreen = () => (
       </div>
     </header>
 
-    <main classNames="page__main page__main--favorites">
-      <div classNames="page__favorites-container container">
-        <section classNames="favorites">
-          <h1 classNames="favorites__title">Saved listing</h1>
-          <ul classNames="favorites__list">
-            <li classNames="favorites__locations-items">
-              <div classNames="favorites__locations locations locations--current">
-                <div classNames="locations__item">
-                  <a classNames="locations__item-link" href="#">
+    <main className="page__main page__main--favorites">
+      <div className="page__favorites-container container">
+        <section className="favorites">
+          <h1 className="favorites__title">Saved listing</h1>
+          <ul className="favorites__list">
+            <li className="favorites__locations-items">
+              <div className="favorites__locations locations locations--current">
+                <div className="locations__item">
+                  <a className="locations__item-link" href="#">
                     <span>Amsterdam</span>
                   </a>
                 </div>
               </div>
-              <div classNames="favorites__places">
-                <article classNames="favorites__card place-card">
-                  <div classNames="favorites__image-wrapper place-card__image-wrapper">
+              <div className="favorites__places">
+                <article className="favorites__card place-card">
+                  <div className="favorites__image-wrapper place-card__image-wrapper">
                     <a href="#">
                       <img
-                        classNames="place-card__image"
+                        className="place-card__image"
                         src="img/apartment-small-03.jpg"
                         width="150"
                         height="110"
@@ -61,49 +61,49 @@ const FavoritesScreen = () => (
                       />
                     </a>
                   </div>
-                  <div classNames="favorites__card-info place-card__info">
-                    <div classNames="place-card__price-wrapper">
-                      <div classNames="place-card__price">
-                        <b classNames="place-card__price-value">&euro;180</b>
-                        <span classNames="place-card__price-text">
+                  <div className="favorites__card-info place-card__info">
+                    <div className="place-card__price-wrapper">
+                      <div className="place-card__price">
+                        <b className="place-card__price-value">&euro;180</b>
+                        <span className="place-card__price-text">
                           &#47;&nbsp;night
                         </span>
                       </div>
                       <button
-                        classNames="place-card__bookmark-button place-card__bookmark-button--active button"
+                        className="place-card__bookmark-button place-card__bookmark-button--active button"
                         type="button"
                       >
                         <svg
-                          classNames="place-card__bookmark-icon"
+                          className="place-card__bookmark-icon"
                           width="18"
                           height="19"
                         >
                           <use href="#icon-bookmark" />
                         </svg>
-                        <span classNames="visually-hidden">In bookmarks</span>
+                        <span className="visually-hidden">In bookmarks</span>
                       </button>
                     </div>
-                    <div classNames="place-card__rating rating">
-                      <div classNames="place-card__stars rating__stars">
+                    <div className="place-card__rating rating">
+                      <div className="place-card__stars rating__stars">
                         <span
                           style={{
                             width: `80%`,
                           }}
                         />
-                        <span classNames="visually-hidden">Rating</span>
+                        <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
-                    <h2 classNames="place-card__name">
+                    <h2 className="place-card__name">
                       <a href="#">Nice, cozy, warm big bed apartment</a>
                     </h2>
-                    <p classNames="place-card__type">Apartment</p>
+                    <p className="place-card__type">Apartment</p>
                   </div>
                 </article>
-                <article classNames="favorites__card place-card">
-                  <div classNames="favorites__image-wrapper place-card__image-wrapper">
+                <article className="favorites__card place-card">
+                  <div className="favorites__image-wrapper place-card__image-wrapper">
                     <a href="#">
                       <img
-                        classNames="place-card__image"
+                        className="place-card__image"
                         src="img/room-small.jpg"
                         width="150"
                         height="110"
@@ -111,61 +111,61 @@ const FavoritesScreen = () => (
                       />
                     </a>
                   </div>
-                  <div classNames="favorites__card-info place-card__info">
-                    <div classNames="place-card__price-wrapper">
-                      <div classNames="place-card__price">
-                        <b classNames="place-card__price-value">&euro;80</b>
-                        <span classNames="place-card__price-text">
+                  <div className="favorites__card-info place-card__info">
+                    <div className="place-card__price-wrapper">
+                      <div className="place-card__price">
+                        <b className="place-card__price-value">&euro;80</b>
+                        <span className="place-card__price-text">
                           &#47;&nbsp;night
                         </span>
                       </div>
                       <button
-                        classNames="place-card__bookmark-button place-card__bookmark-button--active button"
+                        className="place-card__bookmark-button place-card__bookmark-button--active button"
                         type="button"
                       >
                         <svg
-                          classNames="place-card__bookmark-icon"
+                          className="place-card__bookmark-icon"
                           width="18"
                           height="19"
                         >
                           <use href="#icon-bookmark" />
                         </svg>
-                        <span classNames="visually-hidden">In bookmarks</span>
+                        <span className="visually-hidden">In bookmarks</span>
                       </button>
                     </div>
-                    <div classNames="place-card__rating rating">
-                      <div classNames="place-card__stars rating__stars">
+                    <div className="place-card__rating rating">
+                      <div className="place-card__stars rating__stars">
                         <span
                           style={{
                             width: `80%`,
                           }}
                         />
-                        <span classNames="visually-hidden">Rating</span>
+                        <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
-                    <h2 classNames="place-card__name">
+                    <h2 className="place-card__name">
                       <a href="#">Wood and stone place</a>
                     </h2>
-                    <p classNames="place-card__type">Private room</p>
+                    <p className="place-card__type">Private room</p>
                   </div>
                 </article>
               </div>
             </li>
 
-            <li classNames="favorites__locations-items">
-              <div classNames="favorites__locations locations locations--current">
-                <div classNames="locations__item">
-                  <a classNames="locations__item-link" href="#">
+            <li className="favorites__locations-items">
+              <div className="favorites__locations locations locations--current">
+                <div className="locations__item">
+                  <a className="locations__item-link" href="#">
                     <span>Cologne</span>
                   </a>
                 </div>
               </div>
-              <div classNames="favorites__places">
-                <article classNames="favorites__card place-card">
-                  <div classNames="favorites__image-wrapper place-card__image-wrapper">
+              <div className="favorites__places">
+                <article className="favorites__card place-card">
+                  <div className="favorites__image-wrapper place-card__image-wrapper">
                     <a href="#">
                       <img
-                        classNames="place-card__image"
+                        className="place-card__image"
                         src="img/apartment-small-04.jpg"
                         width="150"
                         height="110"
@@ -173,42 +173,42 @@ const FavoritesScreen = () => (
                       />
                     </a>
                   </div>
-                  <div classNames="favorites__card-info place-card__info">
-                    <div classNames="place-card__price-wrapper">
-                      <div classNames="place-card__price">
-                        <b classNames="place-card__price-value">&euro;180</b>
-                        <span classNames="place-card__price-text">
+                  <div className="favorites__card-info place-card__info">
+                    <div className="place-card__price-wrapper">
+                      <div className="place-card__price">
+                        <b className="place-card__price-value">&euro;180</b>
+                        <span className="place-card__price-text">
                           &#47;&nbsp;night
                         </span>
                       </div>
                       <button
-                        classNames="place-card__bookmark-button place-card__bookmark-button--active button"
+                        className="place-card__bookmark-button place-card__bookmark-button--active button"
                         type="button"
                       >
                         <svg
-                          classNames="place-card__bookmark-icon"
+                          className="place-card__bookmark-icon"
                           width="18"
                           height="19"
                         >
                           <use href="#icon-bookmark" />
                         </svg>
-                        <span classNames="visually-hidden">In bookmarks</span>
+                        <span className="visually-hidden">In bookmarks</span>
                       </button>
                     </div>
-                    <div classNames="place-card__rating rating">
-                      <div classNames="place-card__stars rating__stars">
+                    <div className="place-card__rating rating">
+                      <div className="place-card__stars rating__stars">
                         <span
                           style={{
                             width: `10%`,
                           }}
                         />
-                        <span classNames="visually-hidden">Rating</span>
+                        <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
-                    <h2 classNames="place-card__name">
+                    <h2 className="place-card__name">
                       <a href="#">White castle</a>
                     </h2>
-                    <p classNames="place-card__type">Apartment</p>
+                    <p className="place-card__type">Apartment</p>
                   </div>
                 </article>
               </div>
@@ -217,10 +217,10 @@ const FavoritesScreen = () => (
         </section>
       </div>
     </main>
-    <footer classNames="footer container">
-      <a classNames="footer__logo-link" href="main.html">
+    <footer className="footer container">
+      <a className="footer__logo-link" href="main.html">
         <img
-          classNames="footer__logo"
+          className="footer__logo"
           src="img/logo.svg"
           alt="6 cities logo"
           width="64"
