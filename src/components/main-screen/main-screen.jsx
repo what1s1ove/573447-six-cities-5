@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 const MainScreen = ({offersCount}) => (
@@ -83,7 +83,11 @@ const MainScreen = ({offersCount}) => (
             </b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
-              <select onChange={() => {}} className="places__sorting-type" value="">
+              <select
+                onChange={() => {}}
+                className="places__sorting-type"
+                value=""
+              >
                 <option className="places__option" value="popular">
                   Popular
                 </option>
