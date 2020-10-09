@@ -3,14 +3,13 @@ import {getRandomNumber} from '~/helpers/number/number';
 import {generateRandomId} from '~/helpers/mocks/generate-random-id.helper';
 import {OfferCity, OfferType} from '~/common/enums/enums';
 
-const TITLES = [
-  `Beautiful \u0026 luxurious apartment at great location`,
-  `Wood and stone place`,
-  `Canal View Prinsengracht`,
-  `Nice, cozy, warm big bed apartment`,
-];
-
 const OfferConfig = {
+  TITLES: [
+    `Beautiful \u0026 luxurious apartment at great location`,
+    `Wood and stone place`,
+    `Canal View Prinsengracht`,
+    `Nice, cozy, warm big bed apartment`,
+  ],
   PRICE: {
     MIN: 50,
     MAX: 250,
@@ -29,7 +28,7 @@ const generateOffer = () => ({
   id: generateRandomId(),
   city: getRandomItem(cities),
   type: getRandomItem(offerTypes),
-  title: getRandomItem(TITLES),
+  title: getRandomItem(OfferConfig.TITLES),
   price: getRandomNumber(OfferConfig.PRICE.MIN, OfferConfig.PRICE.MAX),
   rating: getRandomNumber(
       OfferConfig.RATING.MIN,
