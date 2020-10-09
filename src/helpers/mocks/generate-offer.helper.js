@@ -15,6 +15,11 @@ const OfferConfig = {
     MIN: 50,
     MAX: 250,
   },
+  RATING: {
+    MIN: 0,
+    MAX: 5,
+    FRACTIONAL_PART_COUNT: 1,
+  },
 };
 
 const cities = Object.values(OfferCity);
@@ -26,6 +31,11 @@ const generateOffer = () => ({
   type: getRandomItem(offerTypes),
   title: getRandomItem(TITLES),
   price: getRandomNumber(OfferConfig.PRICE.MIN, OfferConfig.PRICE.MAX),
+  rating: getRandomNumber(
+      OfferConfig.RATING.MIN,
+      OfferConfig.RATING.MAX,
+      OfferConfig.RATING.FRACTIONAL_PART_COUNT
+  ),
 });
 
 export {generateOffer};
