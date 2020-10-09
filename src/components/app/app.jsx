@@ -5,7 +5,7 @@ import MainScreen from '../main-screen/main-screen';
 import AuthScree from '../auth-screen/auth-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import RoomScreen from '../room-screen/room-screen';
-import {AppRoute} from '~/common/enums/app/app-route.enum';
+import {AppRoute} from '~/common/enums/enums';
 
 const App = ({offersCount}) => (
   <BrowserRouter>
@@ -19,7 +19,7 @@ const App = ({offersCount}) => (
       <Route path={AppRoute.FAVORITES} exact>
         <FavoritesScreen />
       </Route>
-      <Route path={AppRoute.ROOM_$OFFER_ID} exact>
+      <Route path={AppRoute.OFFER} exact>
         <RoomScreen />
       </Route>
     </Switch>
