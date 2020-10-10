@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {AppRoute} from '~/common/enums/enums';
 import {offerType} from '~/common/prop-types/prop-types';
 import MainScreen from '../main-screen/main-screen';
-import AuthScree from '../auth-screen/auth-screen';
+import AuthScreen from '../auth-screen/auth-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import RoomScreen from '../room-screen/room-screen';
 
@@ -15,10 +15,10 @@ const App = ({offers}) => (
         <MainScreen offers={offers} />
       </Route>
       <Route path={AppRoute.LOGIN} exact>
-        <AuthScree />
+        <AuthScreen />
       </Route>
       <Route path={AppRoute.FAVORITES} exact>
-        <FavoritesScreen />
+        <FavoritesScreen offers={offers} />
       </Route>
       <Route path={AppRoute.OFFER_ID} exact>
         <RoomScreen />
