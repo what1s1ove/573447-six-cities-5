@@ -1,3 +1,3 @@
-export * from './mocks/mocks';
-export * from './number/number';
-export * from './array/array';
+export * from './number';
+export * from './array';
+export * from './string';

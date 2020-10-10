@@ -1,2 +1,2 @@
-export * from './app/app-route.enum';
-export * from './offer/offers';
+export * from './app';
+export * from './offers';

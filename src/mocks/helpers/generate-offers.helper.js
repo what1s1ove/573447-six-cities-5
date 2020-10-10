@@ -1,6 +1,4 @@
-import {getRandomItem} from '~/helpers/array/array';
-import {getRandomNumber} from '~/helpers/number/number';
-import {generateRandomId} from '~/helpers/mocks/generate-random-id.helper';
+import {getRandomItem, getRandomNumber, generateRandomId} from '~/helpers/helpers';
 import {OfferCity, OfferType} from '~/common/enums/enums';
 
 const OfferConfig = {
@@ -37,4 +35,10 @@ const generateOffer = () => ({
   ),
 });
 
-export {generateOffer};
+const generateOffers = (count) => {
+  const offers = Array.from(new Array(count), generateOffer);
+
+  return offers;
+};
+
+export {generateOffer, generateOffers};

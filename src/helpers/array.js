@@ -1,4 +1,4 @@
-import {getRandomNumber} from '~/helpers/number/number';
+import {getRandomNumber} from '~/helpers/number';
 
 const getRandomItem = (items) => {
   const randomIdx = getRandomNumber(0, items.length - 1);
