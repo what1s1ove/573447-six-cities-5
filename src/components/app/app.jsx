@@ -21,7 +21,7 @@ const App = ({offers}) => (
         <FavoritesScreen offers={offers} />
       </Route>
       <Route path={AppRoute.OFFER_ID} exact>
-        <OfferScreen />
+        <OfferScreen offers={offers} />
       </Route>
     </Switch>
   </BrowserRouter>
