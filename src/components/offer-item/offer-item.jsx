@@ -5,11 +5,23 @@ import PropTypes from 'prop-types';
 import {AppRoute} from '~/common/enums/app';
 import {getOfferRatingInPercents} from './helpers';
 
-const OfferItem = ({offer}) => {
+const OfferItem = ({offer, onActiveOfferChange}) => {
   const pathToOffer = `${AppRoute.OFFER}/${offer.id}`;
 
+  const handleOfferMouseOver = () => {
+    onActiveOfferChange(offer);
+  };
+
+  const handleMouseOut = () => {
+    onActiveOfferChange(null);
+  };
+
   return (
-    <article className="cities__place-card place-card">
+    <article
+      className="cities__place-card place-card"
+      onMouseOver={handleOfferMouseOver}
+      onMouseOut={handleMouseOut}
+    >
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -34,8 +46,8 @@ const OfferItem = ({offer}) => {
           </div>
           <button
             className={clsx(
-              `place-card__bookmark-button button`,
-              offer.isFavorite && `place-card__bookmark-button--active`
+                `place-card__bookmark-button button`,
+                offer.isFavorite && `place-card__bookmark-button--active`
             )}
             type="button"
           >
@@ -86,6 +98,7 @@ OfferItem.propTypes = {
     }).isRequired,
     goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }).isRequired,
+  onActiveOfferChange: PropTypes.func.isRequired,
 };
 
 export default OfferItem;
