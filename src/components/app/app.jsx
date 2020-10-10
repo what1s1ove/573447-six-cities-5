@@ -6,7 +6,7 @@ import {offerType} from '~/common/prop-types/prop-types';
 import MainScreen from '../main-screen/main-screen';
 import AuthScreen from '../auth-screen/auth-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
-import RoomScreen from '../room-screen/room-screen';
+import OfferScreen from '../offer-screen/offer-screen';
 
 const App = ({offers}) => (
   <BrowserRouter>
@@ -21,7 +21,7 @@ const App = ({offers}) => (
         <FavoritesScreen offers={offers} />
       </Route>
       <Route path={AppRoute.OFFER_ID} exact>
-        <RoomScreen />
+        <OfferScreen />
       </Route>
     </Switch>
   </BrowserRouter>
