@@ -7,11 +7,11 @@ import FavoritesScreen from '../favorites-screen/favorites-screen';
 import RoomScreen from '../room-screen/room-screen';
 import {AppRoute} from '~/common/enums/enums';
 
-const App = ({offersCount, offers}) => (
+const App = ({offers}) => (
   <BrowserRouter>
     <Switch>
       <Route path={AppRoute.MAIN} exact>
-        <MainScreen offersCount={offersCount} offers={offers} />
+        <MainScreen offers={offers} />
       </Route>
       <Route path={AppRoute.LOGIN} exact>
         <AuthScree />
@@ -19,7 +19,7 @@ const App = ({offersCount, offers}) => (
       <Route path={AppRoute.FAVORITES} exact>
         <FavoritesScreen />
       </Route>
-      <Route path={AppRoute.OFFER} exact>
+      <Route path={AppRoute.OFFER_ID} exact>
         <RoomScreen />
       </Route>
     </Switch>
@@ -27,7 +27,6 @@ const App = ({offersCount, offers}) => (
 );
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
 };
 

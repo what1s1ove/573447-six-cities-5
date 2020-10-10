@@ -3,6 +3,7 @@ const AppRoute = {
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   OFFER: `/offer`,
+  OFFER_ID: `/offer/:id`,
 };
 
 export {AppRoute};
