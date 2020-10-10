@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import {getOfferRatingInPercents, getOfferLink} from '~/helpers/helpers';
+import {getRatingInPercents, getOfferLink} from '~/helpers/helpers';
 import {offerType} from '~/common/prop-types/prop-types';
 
 const OfferItem = ({offer, onActiveOfferChange}) => {
@@ -61,7 +61,7 @@ const OfferItem = ({offer, onActiveOfferChange}) => {
           <div className="place-card__stars rating__stars">
             <span
               style={{
-                width: `${getOfferRatingInPercents(offer.rating)}%`,
+                width: `${getRatingInPercents(offer.rating)}%`,
               }}
             />
             <span className="visually-hidden">Rating</span>

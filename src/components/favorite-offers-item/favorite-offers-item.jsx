@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
-import {getOfferLink, getOfferRatingInPercents} from '~/helpers/helpers';
+import {getOfferLink, getRatingInPercents} from '~/helpers/helpers';
 import {offerType} from '~/common/prop-types/prop-types';
 
 const FavoriteOffersItem = ({offer}) => {
@@ -39,7 +39,7 @@ const FavoriteOffersItem = ({offer}) => {
           <div className="place-card__stars rating__stars">
             <span
               style={{
-                width: `${getOfferRatingInPercents(offer.rating)}%`,
+                width: `${getRatingInPercents(offer.rating)}%`,
               }}
             />
             <span className="visually-hidden">Rating</span>

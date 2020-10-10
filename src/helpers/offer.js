@@ -3,7 +3,7 @@ import {AppRoute} from '~/common/enums/enums';
 const MAX_PERCENTS = 100;
 const MAX_OFFER_RATING = 5;
 
-const getOfferRatingInPercents = (rating) => {
+const getRatingInPercents = (rating) => {
   const offerRatingInPercents = (Math.round(rating) / MAX_OFFER_RATING) * MAX_PERCENTS;
 
   return offerRatingInPercents;
@@ -15,4 +15,4 @@ const getOfferLink = (offerId) => {
   return offerLink;
 };
 
-export {getOfferRatingInPercents, getOfferLink};
+export {getRatingInPercents, getOfferLink};
