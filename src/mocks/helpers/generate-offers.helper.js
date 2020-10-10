@@ -13,12 +13,11 @@ const OfferConfig = {
     `Canal View Prinsengracht`,
     `Nice, cozy, warm big bed apartment`,
   ],
-  DESCRIPTIONS: [
-    `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`,
-    `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.`,
-    `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-    `If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.`,
-  ],
+  DESCRIPTION: {
+    SENTENCES: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`,
+    MIN_SENTENCE: 1,
+    MAX_SENTENCE: 5,
+  },
   PRICE: {
     MIN: 50,
     MAX: 250,
@@ -54,7 +53,15 @@ const generateOffer = () => ({
       OfferConfig.RATING.MAX,
       OfferConfig.RATING.FRACTIONAL_PART_COUNT
   ),
-  description: getRandomItem(OfferConfig.DESCRIPTIONS),
+  description: OfferConfig.DESCRIPTION.SENTENCES.split(`.`)
+    .slice(
+        0,
+        getRandomNumber(
+            OfferConfig.DESCRIPTION.MIN_SENTENCE,
+            OfferConfig.DESCRIPTION.MAX_SENTENCE
+        )
+    )
+    .join(``),
   price: getRandomNumber(OfferConfig.PRICE.MIN, OfferConfig.PRICE.MAX),
   imagePreview: getRandomItem(OfferConfig.IMG.IMG_PATHS),
   images: getRandomItems(
