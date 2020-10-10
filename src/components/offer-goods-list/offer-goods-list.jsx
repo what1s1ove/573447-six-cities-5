@@ -1,14 +1,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import OfferGoodsItem from '~/components/offer-goods-item/offer-goods-item';
 
 const OfferGoodsList = ({goods}) => (
-  <div className="property__gallery-container container">
-    <div className="property__gallery">
-      {cutImgPaths.map((imgPath, idx) => (
-        <OfferGalleryItem imgPath={imgPath} key={`${imgPath}-${idx}`} />
-      ))}
-    </div>
-  </div>
+  <ul className="property__inside-list">
+    {goods.map((good) => (
+      <OfferGoodsItem good={good} key={good} />
+    ))}
+  </ul>
 );
 
 OfferGoodsList.propTypes = {
