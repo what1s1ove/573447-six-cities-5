@@ -1,42 +1,32 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
+import LocationItem from '~/components/locations-item/locations-item';
 
-const LocationsList = () => (
+const LocationsList = ({locations, activeLocation, onLocationChange}) => (
   <div className="tabs">
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Paris</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Cologne</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Brussels</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item tabs__item--active">
-            <span>Amsterdam</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Hamburg</span>
-          </a>
-        </li>
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>Dusseldorf</span>
-          </a>
-        </li>
+        {locations.map((location) => {
+          const isActive = location === activeLocation;
+
+          return (
+            <LocationItem
+              location={location}
+              isActive={isActive}
+              onLocationChange={onLocationChange}
+              key={location}
+            />
+          );
+        })}
       </ul>
     </section>
   </div>
 );
+
+LocationsList.propTypes = {
+  locations: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  activeLocation: PropTypes.string.isRequired,
+  onLocationChange: PropTypes.func.isRequired,
+};
 
 export default LocationsList;

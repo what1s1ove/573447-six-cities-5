@@ -27,7 +27,7 @@ const App = ({offers}) => (
 );
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default App;
