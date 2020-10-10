@@ -4,6 +4,7 @@ import {
   getRandomNumber,
   generateRandomId,
 } from '~/helpers/helpers';
+import {generateOfferLocation} from '~/mocks/helpers/generate-offer-location.helper';
 import {OfferCity, OfferType} from '~/common/enums/enums';
 
 const OfferConfig = {
@@ -38,6 +39,14 @@ const OfferConfig = {
       `img/room.jpg`,
     ],
   },
+  BEDROOMS_COUNT: {
+    MIN: 1,
+    MAX: 3,
+  },
+  MAX_ADULTS_COUNT: {
+    MIN: 1,
+    MAX: 5,
+  }
 };
 
 const cities = Object.values(OfferCity);
@@ -71,6 +80,17 @@ const generateOffer = () => ({
           OfferConfig.IMG.IMG_MAX_COUNT
       )
   ),
+  isPremium: Boolean(getRandomNumber(0, 1)),
+  isFavorite: Boolean(getRandomNumber(0, 1)),
+  bedroomCount: getRandomNumber(
+      OfferConfig.BEDROOMS_COUNT.MIN,
+      OfferConfig.BEDROOMS_COUNT.MAX
+  ),
+  maxAdultsCount: getRandomNumber(
+      OfferConfig.MAX_ADULTS_COUNT.MIN,
+      OfferConfig.MAX_ADULTS_COUNT.MAX
+  ),
+  location: generateOfferLocation(),
 });
 
 const generateOffers = (count) => {
