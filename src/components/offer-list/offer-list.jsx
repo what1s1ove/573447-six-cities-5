@@ -1,9 +1,10 @@
 import * as React from 'react';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {offerType} from '~/common/prop-types/prop-types';
 import OfferItem from '~/components/offer-item/offer-item';
 
-const OfferList = ({offers}) => {
+const OfferList = ({offers, className}) => {
   // eslint-disable-next-line no-unused-vars
   const [activeOffer, setActiveOffer] = React.useState(null);
 
@@ -12,7 +13,7 @@ const OfferList = ({offers}) => {
   };
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={clsx(`places__list`, className)}>
       {offers.map((offer) => (
         <OfferItem
           offer={offer}
@@ -25,6 +26,7 @@ const OfferList = ({offers}) => {
 };
 
 OfferList.propTypes = {
+  className: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerType).isRequired,
 };
 

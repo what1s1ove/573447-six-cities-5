@@ -53,7 +53,7 @@ const MainScreen = ({offers}) => {
                   </option>
                 </select>
               </form>
-              <OfferList offers={offers} />
+              <OfferList className="cities__places-list" offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
