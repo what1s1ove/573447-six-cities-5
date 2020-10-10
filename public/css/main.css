@@ -1356,8 +1356,7 @@ img {
   font-size: 14px;
   line-height: 1.2143;
   color: #000;
-  word-break: break-word;
-  word-wrap: break-word;
+  white-space: nowrap;
   overflow-wrap: break-word;
 }
 .reviews__list {
