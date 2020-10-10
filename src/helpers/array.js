@@ -8,4 +8,10 @@ const getRandomItem = (items) => {
   return randomItem;
 };
 
-export {getRandomItem};
+const getRandomItems = (items, count) => {
+  const randomItems = Array.from(new Array(count), () => getRandomItem(items));
+
+  return randomItems;
+};
+
+export {getRandomItem, getRandomItems};
