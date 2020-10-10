@@ -16,7 +16,7 @@ const OfferConfig = {
   ],
   DESCRIPTION: {
     SENTENCES: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`,
-    MIN_SENTENCE: 1,
+    MIN_SENTENCE: 0,
     MAX_SENTENCE: 5,
   },
   PRICE: {
@@ -46,7 +46,22 @@ const OfferConfig = {
   MAX_ADULTS_COUNT: {
     MIN: 1,
     MAX: 5,
-  }
+  },
+  GOODS: {
+    GOODS: [
+      `Wi-Fi`,
+      `Heating`,
+      `Kitchen`,
+      `Fridge`,
+      `Washing machine`,
+      `Coffee machine`,
+      `Dishwasher`,
+      `Towels`,
+      `Baby seat`,
+      `Cabel TV`,
+    ],
+    MIN: 0,
+  },
 };
 
 const cities = Object.values(OfferCity);
@@ -64,7 +79,7 @@ const generateOffer = () => ({
   ),
   description: OfferConfig.DESCRIPTION.SENTENCES.split(`.`)
     .slice(
-        0,
+        OfferConfig.DESCRIPTION.MIN_SENTENCE,
         getRandomNumber(
             OfferConfig.DESCRIPTION.MIN_SENTENCE,
             OfferConfig.DESCRIPTION.MAX_SENTENCE
@@ -91,6 +106,10 @@ const generateOffer = () => ({
       OfferConfig.MAX_ADULTS_COUNT.MAX
   ),
   location: generateOfferLocation(),
+  goods: OfferConfig.GOODS.GOODS.slice(
+      OfferConfig.GOODS.MIN,
+      getRandomNumber(OfferConfig.GOODS.MIN, OfferConfig.GOODS.GOODS.length)
+  ),
 });
 
 const generateOffers = (count) => {
