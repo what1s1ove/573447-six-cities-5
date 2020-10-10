@@ -9,9 +9,7 @@ const AppConfig = {
 
 const offers = generateOffers(AppConfig.OFFERS_COUNT);
 
-console.log(offers);
-
 ReactDOM.render(
-    <App offersCount={AppConfig.OFFERS_COUNT} />,
+    <App offersCount={AppConfig.OFFERS_COUNT} offers={offers} />,
     document.querySelector(`#root`)
 );

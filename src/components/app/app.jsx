@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import PropsTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import MainScreen from '../main-screen/main-screen';
 import AuthScree from '../auth-screen/auth-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import RoomScreen from '../room-screen/room-screen';
 import {AppRoute} from '~/common/enums/enums';
 
-const App = ({offersCount}) => (
+const App = ({offersCount, offers}) => (
   <BrowserRouter>
     <Switch>
       <Route path={AppRoute.MAIN} exact>
-        <MainScreen offersCount={offersCount} />
+        <MainScreen offersCount={offersCount} offers={offers} />
       </Route>
       <Route path={AppRoute.LOGIN} exact>
         <AuthScree />
@@ -27,7 +27,8 @@ const App = ({offersCount}) => (
 );
 
 App.propTypes = {
-  offersCount: PropsTypes.number.isRequired,
+  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;

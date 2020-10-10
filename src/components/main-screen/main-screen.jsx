@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const MainScreen = ({offersCount}) => (
+const MainScreen = ({offersCount, offers}) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -35,7 +35,6 @@ const MainScreen = ({offersCount}) => (
         </div>
       </div>
     </header>
-
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
@@ -209,7 +208,6 @@ const MainScreen = ({offersCount}) => (
                   <p className="place-card__type">Private room</p>
                 </div>
               </article>
-
               <article className="cities__place-card place-card">
                 <div className="cities__image-wrapper place-card__image-wrapper">
                   <a href="#">
@@ -260,7 +258,6 @@ const MainScreen = ({offersCount}) => (
                   <p className="place-card__type">Apartment</p>
                 </div>
               </article>
-
               <article className="cities__place-card place-card">
                 <div className="place-card__mark">
                   <span>Premium</span>
@@ -314,7 +311,6 @@ const MainScreen = ({offersCount}) => (
                   <p className="place-card__type">Apartment</p>
                 </div>
               </article>
-
               <article className="cities__place-card place-card">
                 <div className="cities__image-wrapper place-card__image-wrapper">
                   <a href="#">
@@ -378,6 +374,7 @@ const MainScreen = ({offersCount}) => (
 
 MainScreen.propTypes = {
   offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
 };
 
 export default MainScreen;
