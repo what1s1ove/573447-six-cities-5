@@ -1,14 +1,14 @@
 import {getRandomNumber, getRandomItem} from '~/helpers/helpers';
 
-const OfferHostConfig = {
+const UserConfig = {
   NAMES: [`Angelina`, `Max`, `Oliver`],
   IMG_PATHS: [`img/avatar-angelina.jpg`, `img/avatar-max.jpg`],
 };
 
-const generateHost = () => ({
-  name: getRandomItem(OfferHostConfig.NAMES),
-  avatarUrl: getRandomItem(OfferHostConfig.IMG_PATHS),
+const generateUser = () => ({
+  name: getRandomItem(UserConfig.NAMES),
+  avatarUrl: getRandomItem(UserConfig.IMG_PATHS),
   isPro: Boolean(getRandomNumber(0, 1)),
 });
 
-export {generateHost};
+export {generateUser};

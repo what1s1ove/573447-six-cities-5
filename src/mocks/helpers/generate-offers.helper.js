@@ -5,7 +5,7 @@ import {
   generateRandomId,
 } from '~/helpers/helpers';
 import {generateOfferLocation} from '~/mocks/helpers/generate-offer-location.helper';
-import {generateHost} from '~/mocks/helpers/generate-host.helper';
+import {generateUser} from '~/mocks/helpers/generate-user.helper';
 import {OfferCity, OfferType} from '~/common/enums/enums';
 
 const OfferConfig = {
@@ -15,11 +15,13 @@ const OfferConfig = {
     `Canal View Prinsengracht`,
     `Nice, cozy, warm big bed apartment`,
   ],
-  DESCRIPTION: {
-    SENTENCES: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`,
-    MIN_SENTENCE: 0,
-    MAX_SENTENCE: 5,
-  },
+  DESCRIPTIONS: [
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra.`,
+    `Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. `,
+    `Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus`,
+    `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
+    `In rutrum ac purus sit amet tempus.`,
+  ],
   PRICE: {
     MIN: 50,
     MAX: 250,
@@ -77,15 +79,7 @@ const generateOffer = () => ({
       OfferConfig.RATING.MAX,
       OfferConfig.RATING.FRACTIONAL_PART_COUNT
   ),
-  description: OfferConfig.DESCRIPTION.SENTENCES.split(`.`)
-    .slice(
-        OfferConfig.DESCRIPTION.MIN_SENTENCE,
-        getRandomNumber(
-            OfferConfig.DESCRIPTION.MIN_SENTENCE,
-            OfferConfig.DESCRIPTION.MAX_SENTENCE
-        )
-    )
-    .join(``),
+  description: getRandomItem(OfferConfig.DESCRIPTIONS),
   price: getRandomNumber(OfferConfig.PRICE.MIN, OfferConfig.PRICE.MAX),
   imagePreview: getRandomItem(OfferConfig.IMG.IMG_PATHS),
   images: getRandomItems(
@@ -110,7 +104,7 @@ const generateOffer = () => ({
       OfferConfig.GOODS.MIN,
       getRandomNumber(OfferConfig.GOODS.MIN, OfferConfig.GOODS.GOODS.length)
   ),
-  host: generateHost(),
+  host: generateUser(),
 });
 
 const generateOffers = (count) => {
