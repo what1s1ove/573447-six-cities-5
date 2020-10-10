@@ -5,6 +5,7 @@ import {
   generateRandomId,
 } from '~/helpers/helpers';
 import {generateOfferLocation} from '~/mocks/helpers/generate-offer-location.helper';
+import {generateHost} from '~/mocks/helpers/generate-host.helper';
 import {OfferCity, OfferType} from '~/common/enums/enums';
 
 const OfferConfig = {
@@ -109,6 +110,7 @@ const generateOffer = () => ({
       OfferConfig.GOODS.MIN,
       getRandomNumber(OfferConfig.GOODS.MIN, OfferConfig.GOODS.GOODS.length)
   ),
+  host: generateHost(),
 });
 
 const generateOffers = (count) => {
