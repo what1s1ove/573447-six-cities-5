@@ -2,7 +2,8 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import {AppRoute} from '~/common/enums/app';
+import {offerType} from '~/common/prop-types/prop-types';
+import {AppRoute} from '~/common/enums/enums';
 import {getOfferRatingInPercents} from './helpers';
 
 const OfferItem = ({offer, onActiveOfferChange}) => {
@@ -77,27 +78,7 @@ const OfferItem = ({offer, onActiveOfferChange}) => {
 };
 
 OfferItem.propTypes = {
-  offer: PropTypes.exact({
-    id: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    imagePreview: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    bedroomCount: PropTypes.number.isRequired,
-    maxAdultsCount: PropTypes.number.isRequired,
-    location: PropTypes.exact({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  }).isRequired,
+  offer: offerType,
   onActiveOfferChange: PropTypes.func.isRequired,
 };
 

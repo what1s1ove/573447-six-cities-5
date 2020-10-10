@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {AppRoute} from '~/common/enums/enums';
+import {offerType} from '~/common/prop-types/prop-types';
 import MainScreen from '../main-screen/main-screen';
 import AuthScree from '../auth-screen/auth-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import RoomScreen from '../room-screen/room-screen';
-import {AppRoute} from '~/common/enums/enums';
 
 const App = ({offers}) => (
   <BrowserRouter>
@@ -27,7 +28,7 @@ const App = ({offers}) => (
 );
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  offers: PropTypes.arrayOf(offerType).isRequired,
 };
 
 export default App;

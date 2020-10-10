@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import {offerType} from '~/common/prop-types/prop-types';
 import OfferItem from '~/components/offer-item/offer-item';
 
 const OfferList = ({offers}) => {
@@ -24,7 +25,7 @@ const OfferList = ({offers}) => {
 };
 
 OfferList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerType).isRequired,
 };
 
 export default OfferList;

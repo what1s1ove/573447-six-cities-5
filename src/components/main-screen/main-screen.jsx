@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import {offerType} from '~/common/prop-types/prop-types';
 import {OfferCity} from '~/common/enums/enums';
 import Header from '~/components/header/header';
 import LocationsList from '~/components/locations-list/locations-list';
@@ -65,7 +66,7 @@ const MainScreen = ({offers}) => {
 };
 
 MainScreen.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  offers: PropTypes.arrayOf(offerType).isRequired,
 };
 
 export default MainScreen;
