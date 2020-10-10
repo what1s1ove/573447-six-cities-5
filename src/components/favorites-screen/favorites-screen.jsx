@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {offerType} from '~/common/prop-types/prop-types';
 import Header from '~/components/header/header';
-import FavoriteOffersList from '~/components/favorite-offer-list/favorite-offer-list';
+import FavoriteOffersList from '~/components/favorite-cities-list/favorite-cities-list';
 
 const FavoritesScreen = ({offers}) => (
   <div className="page">
