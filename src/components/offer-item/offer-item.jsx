@@ -2,12 +2,11 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import {getOfferRatingInPercents, getOfferLink} from '~/helpers/helpers';
 import {offerType} from '~/common/prop-types/prop-types';
-import {AppRoute} from '~/common/enums/enums';
-import {getOfferRatingInPercents} from './helpers';
 
 const OfferItem = ({offer, onActiveOfferChange}) => {
-  const pathToOffer = `${AppRoute.OFFER}/${offer.id}`;
+  const pathToOffer = getOfferLink(offer.id);
 
   const handleOfferMouseOver = () => {
     onActiveOfferChange(offer);

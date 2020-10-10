@@ -1,3 +1,5 @@
+import {AppRoute} from '~/common/enums/enums';
+
 const MAX_PERCENTS = 100;
 const MAX_OFFER_RATING = 5;
 
@@ -7,4 +9,10 @@ const getOfferRatingInPercents = (rating) => {
   return offerRatingInPercents;
 };
 
-export {getOfferRatingInPercents};
+const getOfferLink = (offerId) => {
+  const offerLink = `${AppRoute.OFFER}/${offerId}`;
+
+  return offerLink;
+};
+
+export {getOfferRatingInPercents, getOfferLink};
