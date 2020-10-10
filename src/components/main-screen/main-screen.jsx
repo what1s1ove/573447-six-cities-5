@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import OfferList from '~/components/offer-list/offer-list';
 
-const MainScreen = ({offersCount, offers}) => (
+const MainScreen = ({offers}) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -79,7 +79,7 @@ const MainScreen = ({offersCount, offers}) => (
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">
-              {offersCount} places to stay in Amsterdam
+              {offers.length} places to stay in Amsterdam
             </b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
@@ -114,7 +114,6 @@ const MainScreen = ({offersCount, offers}) => (
 );
 
 MainScreen.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
 };
 
