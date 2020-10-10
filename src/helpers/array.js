@@ -14,4 +14,10 @@ const getRandomItems = (items, count) => {
   return randomItems;
 };
 
-export {getRandomItem, getRandomItems};
+const getUniqueItems = (items) => {
+  const uniqueItems = [...new Set(items)];
+
+  return uniqueItems;
+};
+
+export {getRandomItem, getRandomItems, getUniqueItems};
