@@ -6,6 +6,12 @@ const locationType = PropTypes.exact({
   zoom: PropTypes.number.isRequired,
 }).isRequired;
 
+const hostType = PropTypes.exact({
+  name: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string.isRequired,
+  isPro: PropTypes.bool.isRequired,
+}).isRequired;
+
 const offerType = PropTypes.exact({
   id: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
@@ -20,8 +26,9 @@ const offerType = PropTypes.exact({
   isFavorite: PropTypes.bool.isRequired,
   bedroomCount: PropTypes.number.isRequired,
   maxAdultsCount: PropTypes.number.isRequired,
-  location: locationType,
   goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  location: locationType,
+  host: hostType,
 }).isRequired;
 
 export {locationType, offerType};
