@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {userType} from '~/common/prop-types/prop-types';
+import {userType} from '~/common/prop-types/user';
 
 const locationType = PropTypes.exact({
   latitude: PropTypes.number.isRequired,
@@ -8,6 +8,8 @@ const locationType = PropTypes.exact({
 }).isRequired;
 
 const offerType = PropTypes.exact({
+  host: userType,
+  location: locationType,
   id: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
@@ -22,8 +24,6 @@ const offerType = PropTypes.exact({
   bedroomCount: PropTypes.number.isRequired,
   maxAdultsCount: PropTypes.number.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  location: locationType,
-  host: userType,
 }).isRequired;
 
 export {locationType, offerType};

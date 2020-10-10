@@ -1,2 +1,3 @@
 export * from './user';
-export * from './offers';
+export * from './offer';
+export * from './review';
