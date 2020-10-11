@@ -1,33 +1,35 @@
 import * as React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import PropsTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import {AppRoute} from '~/common/enums/enums';
+import {offerType, reviewType} from '~/common/prop-types/prop-types';
 import MainScreen from '../main-screen/main-screen';
-import AuthScree from '../auth-screen/auth-screen';
+import AuthScreen from '../auth-screen/auth-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
-import RoomScreen from '../room-screen/room-screen';
-import {AppRoute} from '~/common/enums/app/app-route.enum';
+import OfferScreen from '../offer-screen/offer-screen';
 
-const App = ({offersCount}) => (
+const App = ({offers, reviews}) => (
   <BrowserRouter>
     <Switch>
       <Route path={AppRoute.MAIN} exact>
-        <MainScreen offersCount={offersCount} />
+        <MainScreen offers={offers} />
       </Route>
       <Route path={AppRoute.LOGIN} exact>
-        <AuthScree />
+        <AuthScreen />
       </Route>
       <Route path={AppRoute.FAVORITES} exact>
-        <FavoritesScreen />
+        <FavoritesScreen offers={offers} />
       </Route>
-      <Route path={AppRoute.ROOM_$OFFER_ID} exact>
-        <RoomScreen />
+      <Route path={AppRoute.OFFER_ID} exact>
+        <OfferScreen offers={offers} reviews={reviews} />
       </Route>
     </Switch>
   </BrowserRouter>
 );
 
 App.propTypes = {
-  offersCount: PropsTypes.number.isRequired,
+  offers: PropTypes.arrayOf(offerType).isRequired,
+  reviews: PropTypes.arrayOf(reviewType).isRequired,
 };
 
 export default App;
