@@ -3,7 +3,7 @@ import {OfferCity} from '~/common/enums/enums';
 import {locationType} from '~/common/prop-types/location.prop-types';
 
 const offerCityType = PropTypes.exact({
-  location: locationType,
+  location: locationType.isRequired,
   name: PropTypes.oneOf([
     OfferCity.AMSTERDAM,
     OfferCity.BRUSSELS,
@@ -12,6 +12,6 @@ const offerCityType = PropTypes.exact({
     OfferCity.HAMBURG,
     OfferCity.PARIS,
   ]).isRequired,
-}).isRequired;
+});
 
 export {offerCityType};

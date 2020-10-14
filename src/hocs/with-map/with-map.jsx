@@ -68,9 +68,9 @@ const withMap = (Component) => {
   };
 
   WithMap.propTypes = {
-    city: offerCityType,
-    activeOffer: PropTypes.oneOf([offerType, null]),
-    offers: PropTypes.arrayOf(offerType).isRequired,
+    city: offerCityType.isRequired,
+    activeOffer: offerType,
+    offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
   };
 
   return WithMap;

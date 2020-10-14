@@ -5,9 +5,9 @@ import {offerCityType} from '~/common/prop-types/offer-city.prop-types';
 import {locationType} from '~/common/prop-types/location.prop-types';
 
 const offerType = PropTypes.exact({
-  city: offerCityType,
-  host: userType,
-  location: locationType,
+  city: offerCityType.isRequired,
+  host: userType.isRequired,
+  location: locationType.isRequired,
   bedroomCount: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
@@ -26,6 +26,6 @@ const offerType = PropTypes.exact({
     OfferRoomType.HOUSE,
     OfferRoomType.HOTEL,
   ]).isRequired,
-}).isRequired;
+});
 
 export {offerType};

@@ -77,7 +77,7 @@ const OfferItem = ({offer, onActiveOfferChange}) => {
 };
 
 OfferItem.propTypes = {
-  offer: offerType,
+  offer: offerType.isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
 };
 

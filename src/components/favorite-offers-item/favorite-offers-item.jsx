@@ -55,7 +55,7 @@ const FavoriteOffersItem = ({offer}) => {
 };
 
 FavoriteOffersItem.propTypes = {
-  offer: offerType,
+  offer: offerType.isRequired,
 };
 
 export default FavoriteOffersItem;
