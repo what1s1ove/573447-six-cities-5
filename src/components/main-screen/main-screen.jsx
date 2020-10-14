@@ -2,14 +2,19 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {offerType} from '~/common/prop-types/prop-types';
 import {OfferCity} from '~/common/enums/enums';
+import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
+import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
+import {getOfferCityByLocation} from './helpers';
 
+const WrappedMap = withMap(Map);
 const locations = Object.values(OfferCity);
 
 const MainScreen = ({offers}) => {
-  const [activeLocation, setActiveLocation] = React.useState(OfferCity.PARIS);
+  const [activeLocation, setActiveLocation] = React.useState(OfferCity.AMSTERDAM);
+  const offerCity = getOfferCityByLocation(offers, activeLocation);
 
   const onLocationChange = (location) => {
     setActiveLocation(location);
@@ -56,7 +61,13 @@ const MainScreen = ({offers}) => {
               <OfferList className="cities__places-list" offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <WrappedMap
+                  city={offerCity}
+                  activeOffer={null}
+                  offers={offers}
+                />
+              </section>
             </div>
           </div>
         </div>
