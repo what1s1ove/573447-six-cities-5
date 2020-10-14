@@ -30,7 +30,7 @@ const FavoritesScreen = ({offers}) => (
 );
 
 FavoritesScreen.propTypes = {
-  offers: PropTypes.arrayOf(offerType).isRequired,
+  offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
 };
 
 export default FavoritesScreen;

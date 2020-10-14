@@ -28,8 +28,8 @@ const App = ({offers, reviews}) => (
 );
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(offerType).isRequired,
-  reviews: PropTypes.arrayOf(reviewType).isRequired,
+  offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
+  reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
 };
 
 export default App;

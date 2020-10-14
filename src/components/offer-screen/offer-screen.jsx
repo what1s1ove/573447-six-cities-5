@@ -4,15 +4,17 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {offerType, reviewType} from '~/common/prop-types/prop-types';
 import {getRatingInPercents} from '~/helpers/helpers';
+import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
+import Map from '~/components/map/map';
 import OfferList from '~/components/offer-list/offer-list';
 import OfferGalleryList from '~/components/offer-gallery-list/offer-gallery-list';
 import OfferGoodsList from '~/components/offer-goods-list/offer-goods-list';
 import ReviewList from '~/components/review-list/review-list';
 import ReviewForm from '~/components/review-form/review-form';
-import {getOfferById} from './helpers';
+import {getOfferById, getSimilarOffer} from './helpers';
 
-const MAX_SIMILAR_OFFERS_COUNT = 3;
+const WrappedMap = withMap(Map);
 
 const OfferScreen = ({offers, reviews}) => {
   const [offer, setOffer] = React.useState(null);
@@ -28,7 +30,7 @@ const OfferScreen = ({offers, reviews}) => {
     return null;
   }
 
-  const similarOffers = offers.slice(0, MAX_SIMILAR_OFFERS_COUNT);
+  const similarOffers = getSimilarOffer(offers);
 
   return (
     <div className="page">
@@ -125,7 +127,9 @@ const OfferScreen = ({offers, reviews}) => {
               </section>
             </div>
           </div>
-          <section className="property__map map" />
+          <section className="property__map map">
+            <WrappedMap city={offer.city} activeOffer={offer} offers={similarOffers} />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -141,8 +145,8 @@ const OfferScreen = ({offers, reviews}) => {
 };
 
 OfferScreen.propTypes = {
-  offers: PropTypes.arrayOf(offerType).isRequired,
-  reviews: PropTypes.arrayOf(reviewType).isRequired,
+  offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
+  reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
 };
 
 export default OfferScreen;

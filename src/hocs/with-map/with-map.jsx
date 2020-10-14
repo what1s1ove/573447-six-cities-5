@@ -9,11 +9,11 @@ const withMap = (Component) => {
   const WithMap = ({city, activeOffer, offers: allOffers}) => {
     const [points, setPoints] = React.useState([]);
     const [activePoint, setActivePoint] = React.useState(null);
-    let [map] = React.useState(null);
     const mapRef = React.useRef(null);
+    const mapNodeRef = React.useRef(null);
 
     React.useEffect(() => {
-      map = getMap(city, mapRef.current);
+      mapRef.current = getMap(city, mapNodeRef.current);
 
       addToMap(leaflet.tileLayer(MAP_IMG_URL));
 
@@ -56,21 +56,21 @@ const withMap = (Component) => {
 
     const removeMarkers = (markers) => markers.forEach(removeMarker);
 
-    const removeMarker = (marker) => map.removeLayer(marker);
+    const removeMarker = (marker) => mapRef.current.removeLayer(marker);
 
-    const setMapView = (latitude, longitude) => map.setView([latitude, longitude]);
+    const setMapView = (latitude, longitude) => mapRef.current.setView([latitude, longitude]);
 
-    const addToMap = (layer) => layer.addTo(map);
+    const addToMap = (layer) => layer.addTo(mapRef.current);
 
-    const renderMap = () => <div id="map" ref={mapRef} />;
+    const renderMap = () => <div id="map" ref={mapNodeRef} />;
 
     return <Component renderMap={renderMap} />;
   };
 
   WithMap.propTypes = {
-    city: offerCityType,
-    activeOffer: PropTypes.oneOf([offerType, null]),
-    offers: PropTypes.arrayOf(offerType).isRequired,
+    city: offerCityType.isRequired,
+    activeOffer: offerType,
+    offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
   };
 
   return WithMap;

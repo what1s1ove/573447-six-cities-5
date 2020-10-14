@@ -77,7 +77,7 @@ const MainScreen = ({offers}) => {
 };
 
 MainScreen.propTypes = {
-  offers: PropTypes.arrayOf(offerType).isRequired,
+  offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
 };
 
 export default MainScreen;
