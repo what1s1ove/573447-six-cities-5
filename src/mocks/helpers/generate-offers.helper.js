@@ -2,7 +2,6 @@ import {
   getRandomItem,
   getRandomItems,
   getRandomNumber,
-  generateRandomId,
 } from '~/helpers/helpers';
 import {generateOfferLocation} from '~/mocks/helpers/generate-offer-location.helper';
 import {generateUser} from '~/mocks/helpers/generate-user.helper';

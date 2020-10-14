@@ -1,17 +1,17 @@
 const OfferCity = {
-  PARIS: `Paris`,
-  COLOGNE: `Cologne`,
-  BRUSSELS: `Brussels`,
   AMSTERDAM: `Amsterdam`,
-  HAMBURG: `Hamburg`,
+  BRUSSELS: `Brussels`,
+  COLOGNE: `Cologne`,
   DUSSELDORF: `Dusseldorf`,
+  HAMBURG: `Hamburg`,
+  PARIS: `Paris`,
 };
 
 const OfferRoomType = {
   APARTMENT: `Apartment`,
-  ROOM: `Room`,
-  HOUSE: `House`,
   HOTEL: `Hotel`,
+  HOUSE: `House`,
+  ROOM: `Room`,
 };
 
 export {OfferCity, OfferRoomType};
