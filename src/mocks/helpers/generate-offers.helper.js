@@ -69,8 +69,8 @@ const OfferConfig = {
 const cities = Object.values(OfferCity);
 const offerTypes = Object.values(OfferRoomType);
 
-const generateOffer = () => ({
-  id: generateRandomId(),
+const generateOffer = (id) => ({
+  id,
   city: getRandomItem(cities),
   type: getRandomItem(offerTypes),
   title: getRandomItem(OfferConfig.TITLES),
@@ -108,7 +108,11 @@ const generateOffer = () => ({
 });
 
 const generateOffers = (count) => {
-  const offers = Array.from(new Array(count), generateOffer);
+  const offers = Array.from(new Array(count), (_, idx) => {
+    const offerId = idx.toString();
+
+    return generateOffer(offerId);
+  });
 
   return offers;
 };
