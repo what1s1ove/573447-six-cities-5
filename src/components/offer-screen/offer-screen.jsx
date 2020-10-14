@@ -14,14 +14,18 @@ import {getOfferById, getSimilarOffer} from './helpers';
 
 const WrappedMap = withMap(Map);
 
-const OfferScreen = ({offers, reviews}) => {
+const OfferScreen = ({offers, activeOffer, reviews, onActiveOfferChange}) => {
   const [offer, setOffer] = React.useState(null);
   const params = useParams();
 
   React.useEffect(() => {
-    const offerById = getOfferById(offers, params.id) || null;
+    const offerById = getOfferById(offers, params.id);
 
-    setOffer(offerById);
+    if (offerById) {
+      setOffer(offerById);
+      onActiveOfferChange(offerById);
+    }
+
   }, [params.id]);
 
   if (!offer) {
@@ -41,7 +45,8 @@ const OfferScreen = ({offers, reviews}) => {
               <OfferPropertyDashboard offer={offer} />
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
+                  Reviews &middot;
+                  <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ReviewList reviews={reviews} />
                 <ReviewForm />
@@ -49,7 +54,11 @@ const OfferScreen = ({offers, reviews}) => {
             </div>
           </div>
           <section className="property__map map">
-            <WrappedMap city={offer.city} activeOffer={offer} offers={similarOffers} />
+            <WrappedMap
+              city={offer.city}
+              activeOffer={activeOffer}
+              offers={similarOffers}
+            />
           </section>
         </section>
         <div className="container">
@@ -57,7 +66,11 @@ const OfferScreen = ({offers, reviews}) => {
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <OfferList className="near-places__list" offers={similarOffers} />
+            <OfferList
+              className="near-places__list"
+              offers={similarOffers}
+              onActiveOfferChange={onActiveOfferChange}
+            />
           </section>
         </div>
       </main>
@@ -66,8 +79,10 @@ const OfferScreen = ({offers, reviews}) => {
 };
 
 OfferScreen.propTypes = {
+  activeOffer: offerType,
   offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
   reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
+  onActiveOfferChange: PropTypes.func.isRequired,
 };
 
 export default OfferScreen;
