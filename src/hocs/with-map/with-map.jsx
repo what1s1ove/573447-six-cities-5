@@ -9,18 +9,11 @@ const withMap = (Component) => {
   const WithMap = ({city, activeOffer, offers: allOffers}) => {
     const [points, setPoints] = React.useState([]);
     const [activePoint, setActivePoint] = React.useState(null);
-    let map = React.useRef(null);
     const mapRef = React.useRef(null);
+    const mapNodeRef = React.useRef(null);
 
     React.useEffect(() => {
-      if (activeOffer) {
-        updateActiveMarker(activeOffer);
-      }
-    }, [activeOffer]);
-
-
-    React.useEffect(() => {
-      map.current = getMap(city, mapRef.current);
+      mapRef.current = getMap(city, mapNodeRef.current);
 
       addToMap(leaflet.tileLayer(MAP_IMG_URL));
 
@@ -30,10 +23,18 @@ const withMap = (Component) => {
     React.useEffect(() => {
       updateMarkers(allOffers);
 
-
-
       setMapView(city.location.latitude, city.location.longitude);
     }, [city]);
+
+    React.useEffect(() => {
+      if (activeOffer) {
+        updateActiveMarker(activeOffer);
+      }
+
+      if (activePoint) {
+        removeMarker(activePoint);
+      }
+    }, [activeOffer]);
 
     const updateMarkers = (offers) => {
       removeMarkers(points);
@@ -61,13 +62,13 @@ const withMap = (Component) => {
 
     const removeMarkers = (markers) => markers.forEach(removeMarker);
 
-    const removeMarker = (marker) => map.current.removeLayer(marker);
+    const removeMarker = (marker) => mapRef.current.removeLayer(marker);
 
-    const setMapView = (latitude, longitude) => map.current.setView([latitude, longitude]);
+    const setMapView = (latitude, longitude) => mapRef.current.setView([latitude, longitude]);
 
-    const addToMap = (layer) => layer.addTo(map.current);
+    const addToMap = (layer) => layer.addTo(mapRef.current);
 
-    const renderMap = () => <div id="map" ref={mapRef} />;
+    const renderMap = () => <div id="map" ref={mapNodeRef} />;
 
     return <Component renderMap={renderMap} />;
   };
