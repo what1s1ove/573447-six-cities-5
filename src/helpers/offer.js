@@ -15,4 +15,14 @@ const getOfferLink = (offerId) => {
   return offerLink;
 };
 
-export {getRatingInPercents, getOfferLink};
+const getUniqueOfferCities = (offers) => {
+  const uniquesOffersCities = offers.reduce((offersCities, offer) => {
+    const hasSuchCity = offersCities.some((city) => city.name === offer.city.name);
+
+    return hasSuchCity ? offersCities : [...offersCities, offer.city];
+  }, []);
+
+  return uniquesOffersCities;
+};
+
+export {getRatingInPercents, getOfferLink, getUniqueOfferCities};

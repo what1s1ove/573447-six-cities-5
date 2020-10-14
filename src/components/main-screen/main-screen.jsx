@@ -1,12 +1,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import {getUniqueOfferCities} from '~/helpers/helpers';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
 import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
-import {getUniqueOfferCities, getDefaultLocation} from './helpers';
+import {getDefaultLocation} from './helpers';
 
 const WrappedMap = withMap(Map);
 
