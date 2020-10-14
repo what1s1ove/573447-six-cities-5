@@ -15,6 +15,7 @@ const LocationsItem = ({location, isActive, onLocationChange}) => {
             isActive && `tabs__item--active`
         )}
         onClick={handleLocationChange}
+        disabled
       >
         <span>{location}</span>
       </button>
