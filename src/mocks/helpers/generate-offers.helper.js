@@ -28,7 +28,7 @@ const OfferConfig = {
   },
   RATING: {
     MIN: 0,
-    MAX: 5,
+    MAX: 4,
     FRACTIONAL_PART_COUNT: 1,
   },
   IMG: {
