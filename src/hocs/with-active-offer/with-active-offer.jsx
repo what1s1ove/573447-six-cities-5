@@ -1,23 +1,35 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
+import {offerType} from '~/common/prop-types/prop-types';
+import withActiveItem from '~/hocs/with-active-item/with-active-item';
 
 const withActiveOffer = (Component) => {
   const WithActiveOffer = (props) => {
-    const [activeOffer, setActiveOffer] = React.useState(null);
+    const {activeItem, onActiveItemChange} = props;
+    const restProps = Object.assign({}, props);
+
+    delete restProps.activeItem;
+    delete restProps.onActiveItemChange;
 
     const onActiveOfferChange = (item) => {
-      setActiveOffer(item);
+      onActiveItemChange(item);
     };
 
     return (
       <Component
-        {...props}
-        activeOffer={activeOffer}
+        {...restProps}
+        activeOffer={activeItem}
         onActiveOfferChange={onActiveOfferChange}
       />
     );
   };
 
-  return WithActiveOffer;
+  WithActiveOffer.propTypes = {
+    activeItem: offerType,
+    onActiveItemChange: PropTypes.func.isRequired,
+  };
+
+  return withActiveItem(WithActiveOffer);
 };
 
 export default withActiveOffer;
