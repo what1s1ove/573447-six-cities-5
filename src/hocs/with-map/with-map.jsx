@@ -17,28 +17,28 @@ const withMap = (Component) => {
 
       addToMap(leaflet.tileLayer(MAP_IMG_URL));
 
-      updateMarkers(allOffers);
+      renderMarkers(allOffers);
     }, []);
 
     React.useEffect(() => {
-      updateMarkers(allOffers);
+      removeMarkers(points);
+
+      renderMarkers(allOffers);
 
       setMapView(city.location.latitude, city.location.longitude);
     }, [city]);
 
     React.useEffect(() => {
-      if (activeOffer) {
-        updateActiveMarker(activeOffer);
-      }
-
       if (activePoint) {
         removeMarker(activePoint);
       }
+
+      if (activeOffer) {
+        renderActiveMarker(activeOffer);
+      }
     }, [activeOffer]);
 
-    const updateMarkers = (offers) => {
-      removeMarkers(points);
-
+    const renderMarkers = (offers) => {
       const markers = getMarkers(offers, ICON_CONFIG);
 
       setPoints(markers);
@@ -46,11 +46,7 @@ const withMap = (Component) => {
       addToMap(leaflet.layerGroup(markers));
     };
 
-    const updateActiveMarker = (offer) => {
-      if (activePoint) {
-        removeMarker(activePoint);
-      }
-
+    const renderActiveMarker = (offer) => {
       const newActivePoint = getMarker(offer, ACTIVE_ICON_CONFIG);
 
       setActivePoint(newActivePoint);
