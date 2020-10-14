@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import {OfferRoomType} from '~/common/enums/enums';
 import {userType} from '~/common/prop-types/user';
 
 const locationType = PropTypes.exact({
@@ -12,7 +13,12 @@ const offerType = PropTypes.exact({
   location: locationType,
   id: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([
+    OfferRoomType.APARTMENT,
+    OfferRoomType.ROOM,
+    OfferRoomType.HOUSE,
+    OfferRoomType.HOTEL,
+  ]).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

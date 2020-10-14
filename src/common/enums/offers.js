@@ -7,11 +7,11 @@ const OfferCity = {
   DUSSELDORF: `Dusseldorf`,
 };
 
-const OfferType = {
+const OfferRoomType = {
   APARTMENT: `Apartment`,
   ROOM: `Room`,
   HOUSE: `House`,
   HOTEL: `Hotel`,
 };
 
-export {OfferCity, OfferType};
+export {OfferCity, OfferRoomType};
