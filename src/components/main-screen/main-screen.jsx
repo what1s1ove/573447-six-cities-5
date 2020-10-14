@@ -12,7 +12,7 @@ import {getOfferCityByLocation} from './helpers';
 const WrappedMap = withMap(Map);
 const locations = Object.values(OfferCity);
 
-const MainScreen = ({offers}) => {
+const MainScreen = ({activeOffer, offers, onActiveOfferChange}) => {
   const [activeLocation, setActiveLocation] = React.useState(OfferCity.AMSTERDAM);
   const offerCity = getOfferCityByLocation(offers, activeLocation);
 
@@ -58,13 +58,17 @@ const MainScreen = ({offers}) => {
                   </option>
                 </select>
               </form>
-              <OfferList className="cities__places-list" offers={offers} />
+              <OfferList
+                className="cities__places-list"
+                offers={offers}
+                onActiveOfferChange={onActiveOfferChange}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <WrappedMap
                   city={offerCity}
-                  activeOffer={null}
+                  activeOffer={activeOffer}
                   offers={offers}
                 />
               </section>
@@ -77,7 +81,9 @@ const MainScreen = ({offers}) => {
 };
 
 MainScreen.propTypes = {
+  activeOffer: offerType,
   offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
+  onActiveOfferChange: PropTypes.func.isRequired,
 };
 
 export default MainScreen;
