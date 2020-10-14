@@ -5,6 +5,7 @@ import {
 } from '~/helpers/helpers';
 import {generateOfferLocation} from '~/mocks/helpers/generate-offer-location.helper';
 import {generateUser} from '~/mocks/helpers/generate-user.helper';
+import {generateOfferCity} from '~/mocks/helpers/generate-offer-city.helper';
 import {OfferCity, OfferRoomType} from '~/common/enums/enums';
 
 const OfferConfig = {
@@ -65,12 +66,11 @@ const OfferConfig = {
   },
 };
 
-const cities = Object.values(OfferCity);
 const offerTypes = Object.values(OfferRoomType);
 
 const generateOffer = (id) => ({
   id,
-  city: getRandomItem(cities),
+  city: generateOfferCity(OfferCity.AMSTERDAM),
   type: getRandomItem(offerTypes),
   title: getRandomItem(OfferConfig.TITLES),
   rating: getRandomNumber(
