@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
 import {OfferRoomType} from '~/common/enums/enums';
-import {userType} from '~/common/prop-types/user';
-
-const locationType = PropTypes.exact({
-  latitude: PropTypes.number.isRequired,
-  longitude: PropTypes.number.isRequired,
-  zoom: PropTypes.number.isRequired,
-}).isRequired;
+import {locationType} from '~/common/prop-types/location.prop-types';
+import {userType} from '~/common/prop-types/user.prop-types';
 
 const offerType = PropTypes.exact({
   host: userType,
@@ -32,4 +27,4 @@ const offerType = PropTypes.exact({
   ]).isRequired,
 }).isRequired;
 
-export {locationType, offerType};
+export {offerType};
