@@ -1,16 +1,19 @@
-import {getRandomNumber} from '~/helpers/helpers';
+import {getRandomNumber, getRandomItem} from '~/helpers/helpers';
 
 const OfferLocationConfig = {
   COORDS: {
-    LATITUDE: {
-      MIN: 52.3,
-      MAX: 52.3,
-    },
-    LONGITUDE: {
-      MIN: 4.8,
-      MAX: 4.9,
-    },
-    FRACTIONAL_PART_COUNT: 12,
+    LATITUDES: [
+      52.3909553943508,
+      52.369553943508,
+      52.3909553943508,
+      52.3809553943508,
+    ],
+    LONGITUDES: [
+      4.85309666406198,
+      4.85309666406198,
+      4.929309666406198,
+      4.939309666406198,
+    ],
   },
   ZOOM: {
     MIN: 5,
@@ -19,17 +22,12 @@ const OfferLocationConfig = {
 };
 
 const generateOfferLocation = () => ({
-  latitude: getRandomNumber(
-      OfferLocationConfig.COORDS.LATITUDE.MIN,
-      OfferLocationConfig.COORDS.LATITUDE.MAX,
-      OfferLocationConfig.COORDS.FRACTIONAL_PART_COUNT
+  latitude: getRandomItem(OfferLocationConfig.COORDS.LATITUDES),
+  longitude: getRandomItem(OfferLocationConfig.COORDS.LONGITUDES),
+  zoom: getRandomNumber(
+      OfferLocationConfig.ZOOM.MIN,
+      OfferLocationConfig.ZOOM.MAX
   ),
-  longitude: getRandomNumber(
-      OfferLocationConfig.COORDS.LONGITUDE.MIN,
-      OfferLocationConfig.COORDS.LONGITUDE.MAX,
-      OfferLocationConfig.COORDS.FRACTIONAL_PART_COUNT
-  ),
-  zoom: getRandomNumber(OfferLocationConfig.ZOOM.MIN, OfferLocationConfig.ZOOM.MAX),
 });
 
 export {generateOfferLocation};
