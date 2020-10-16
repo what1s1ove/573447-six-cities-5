@@ -8,7 +8,7 @@ import {generateUser} from '~/mocks/helpers/generate-user.helper';
 const ReviewConfig = {
   RATING: {
     MIN: 1,
-    MAX: 2,
+    MAX: 4,
     FRACTIONAL_PART_COUNT: 1,
   },
   COMMENTS: [

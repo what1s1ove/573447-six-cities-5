@@ -1,12 +1,12 @@
 import PropType from 'prop-types';
-import {userType} from '~/common/prop-types/user';
+import {userType} from '~/common/prop-types/user.prop-types';
 
 const reviewType = PropType.exact({
-  user: userType,
-  id: PropType.string.isRequired,
-  rating: PropType.number.isRequired,
+  user: userType.isRequired,
   comment: PropType.string.isRequired,
   date: PropType.object.isRequired,
-}).isRequired;
+  id: PropType.string.isRequired,
+  rating: PropType.number.isRequired,
+});
 
 export {reviewType};

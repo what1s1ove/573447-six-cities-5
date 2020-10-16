@@ -12,7 +12,7 @@ const FavoriteOffersList = ({offers}) => (
 );
 
 FavoriteOffersList.propTypes = {
-  offers: PropTypes.arrayOf(offerType).isRequired,
+  offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
 };
 
 export default FavoriteOffersList;

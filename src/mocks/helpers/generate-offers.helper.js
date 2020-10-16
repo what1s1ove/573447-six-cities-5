@@ -2,11 +2,11 @@ import {
   getRandomItem,
   getRandomItems,
   getRandomNumber,
-  generateRandomId,
 } from '~/helpers/helpers';
 import {generateOfferLocation} from '~/mocks/helpers/generate-offer-location.helper';
 import {generateUser} from '~/mocks/helpers/generate-user.helper';
-import {OfferCity, OfferType} from '~/common/enums/enums';
+import {generateOfferCity} from '~/mocks/helpers/generate-offer-city.helper';
+import {OfferCity, OfferRoomType} from '~/common/enums/enums';
 
 const OfferConfig = {
   TITLES: [
@@ -28,7 +28,7 @@ const OfferConfig = {
   },
   RATING: {
     MIN: 0,
-    MAX: 5,
+    MAX: 4,
     FRACTIONAL_PART_COUNT: 1,
   },
   IMG: {
@@ -66,12 +66,11 @@ const OfferConfig = {
   },
 };
 
-const cities = Object.values(OfferCity);
-const offerTypes = Object.values(OfferType);
+const offerTypes = Object.values(OfferRoomType);
 
-const generateOffer = () => ({
-  id: generateRandomId(),
-  city: getRandomItem(cities),
+const generateOffer = (offerIdx) => ({
+  id: offerIdx.toString(),
+  city: generateOfferCity(OfferCity.AMSTERDAM),
   type: getRandomItem(offerTypes),
   title: getRandomItem(OfferConfig.TITLES),
   rating: getRandomNumber(
@@ -99,7 +98,7 @@ const generateOffer = () => ({
       OfferConfig.MAX_ADULTS_COUNT.MIN,
       OfferConfig.MAX_ADULTS_COUNT.MAX
   ),
-  location: generateOfferLocation(),
+  location: generateOfferLocation(offerIdx),
   goods: OfferConfig.GOODS.GOODS.slice(
       OfferConfig.GOODS.MIN,
       getRandomNumber(OfferConfig.GOODS.MIN, OfferConfig.GOODS.GOODS.length)
@@ -108,7 +107,7 @@ const generateOffer = () => ({
 });
 
 const generateOffers = (count) => {
-  const offers = Array.from(new Array(count), generateOffer);
+  const offers = Array.from(new Array(count), (_, idx) => generateOffer(idx));
 
   return offers;
 };

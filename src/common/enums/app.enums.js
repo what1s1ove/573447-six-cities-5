@@ -1,7 +1,7 @@
 const AppRoute = {
-  MAIN: `/`,
-  LOGIN: `/login`,
   FAVORITES: `/favorites`,
+  LOGIN: `/login`,
+  MAIN: `/`,
   OFFER: `/offer`,
   OFFER_ID: `/offer/:id`,
 };
