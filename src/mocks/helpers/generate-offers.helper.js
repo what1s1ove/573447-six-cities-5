@@ -68,8 +68,8 @@ const OfferConfig = {
 
 const offerTypes = Object.values(OfferRoomType);
 
-const generateOffer = (id) => ({
-  id,
+const generateOffer = (offerIdx) => ({
+  id: offerIdx.toString(),
   city: generateOfferCity(OfferCity.AMSTERDAM),
   type: getRandomItem(offerTypes),
   title: getRandomItem(OfferConfig.TITLES),
@@ -98,7 +98,7 @@ const generateOffer = (id) => ({
       OfferConfig.MAX_ADULTS_COUNT.MIN,
       OfferConfig.MAX_ADULTS_COUNT.MAX
   ),
-  location: generateOfferLocation(),
+  location: generateOfferLocation(offerIdx),
   goods: OfferConfig.GOODS.GOODS.slice(
       OfferConfig.GOODS.MIN,
       getRandomNumber(OfferConfig.GOODS.MIN, OfferConfig.GOODS.GOODS.length)
@@ -107,11 +107,7 @@ const generateOffer = (id) => ({
 });
 
 const generateOffers = (count) => {
-  const offers = Array.from(new Array(count), (_, idx) => {
-    const offerId = idx.toString();
-
-    return generateOffer(offerId);
-  });
+  const offers = Array.from(new Array(count), (_, idx) => generateOffer(idx));
 
   return offers;
 };
