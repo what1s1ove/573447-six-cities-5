@@ -1,7 +1,9 @@
-const getOfferCityByLocation = (offers, location) => {
-  const offerCity = offers.find((offer) => offer.city.name === location);
+const DEFAULT_SELECTED_CITY_IDX = 0;
 
-  return offerCity.city;
+const getDefaultLocation = (cities) => {
+  const defaultLocation = cities[DEFAULT_SELECTED_CITY_IDX] || null;
+
+  return defaultLocation;
 };
 
-export {getOfferCityByLocation};
+export {getDefaultLocation};

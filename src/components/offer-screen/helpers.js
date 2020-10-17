@@ -3,7 +3,7 @@ const MAX_SIMILAR_OFFERS_COUNT = 3;
 const getOfferById = (offers, id) => {
   const offerById = offers.find((offer) => offer.id === id);
 
-  return offerById;
+  return offerById || null;
 };
 
 const getSimilarOffer = (offers) => {

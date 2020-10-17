@@ -3,16 +3,21 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {AppRoute} from '~/common/enums/enums';
 import {offerType, reviewType} from '~/common/prop-types/prop-types';
-import MainScreen from '../main-screen/main-screen';
-import AuthScreen from '../auth-screen/auth-screen';
-import FavoritesScreen from '../favorites-screen/favorites-screen';
-import OfferScreen from '../offer-screen/offer-screen';
+import withActiveOffer from '~/hocs/with-active-offer/with-active-offer';
+import withActiveItem from '~/hocs/with-active-item/with-active-item';
+import MainScreen from '~/components/main-screen/main-screen';
+import AuthScreen from '~/components/auth-screen/auth-screen';
+import FavoritesScreen from '~/components/favorites-screen/favorites-screen';
+import OfferScreen from '~/components/offer-screen/offer-screen';
+
+const WrappedMainScreen = withActiveOffer(withActiveItem(MainScreen));
+const WrappedOfferScreen = withActiveOffer(OfferScreen);
 
 const App = ({offers, reviews}) => (
   <BrowserRouter>
     <Switch>
       <Route path={AppRoute.MAIN} exact>
-        <MainScreen offers={offers} />
+        <WrappedMainScreen offers={offers} />
       </Route>
       <Route path={AppRoute.LOGIN} exact>
         <AuthScreen />
@@ -21,7 +26,7 @@ const App = ({offers, reviews}) => (
         <FavoritesScreen offers={offers} />
       </Route>
       <Route path={AppRoute.OFFER_ID} exact>
-        <OfferScreen offers={offers} reviews={reviews} />
+        <WrappedOfferScreen offers={offers} reviews={reviews} />
       </Route>
     </Switch>
   </BrowserRouter>

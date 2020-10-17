@@ -1,24 +1,34 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {offerType} from '~/common/prop-types/prop-types';
-import {OfferCity} from '~/common/enums/enums';
+import {getUniqueOfferCities} from '~/helpers/helpers';
+import {offerType, offerCityType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
 import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
-import {getOfferCityByLocation} from './helpers';
+import {getDefaultLocation} from './helpers';
 
 const WrappedMap = withMap(Map);
-const locations = Object.values(OfferCity);
 
-const MainScreen = ({offers}) => {
-  const [activeLocation, setActiveLocation] = React.useState(OfferCity.AMSTERDAM);
-  const offerCity = getOfferCityByLocation(offers, activeLocation);
+const MainScreen = ({
+  activeOffer,
+  offers,
+  onActiveOfferChange,
+  activeItem: activeLocation,
+  onActiveItemChange: onLocationChange,
+}) => {
+  const uniqueOfferCities = getUniqueOfferCities(offers);
 
-  const onLocationChange = (location) => {
-    setActiveLocation(location);
-  };
+  React.useState(() => {
+    const defaultLocation = getDefaultLocation(uniqueOfferCities);
+
+    onLocationChange(defaultLocation);
+  }, []);
+
+  if (!activeLocation) {
+    return null;
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -26,7 +36,7 @@ const MainScreen = ({offers}) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList
-          locations={locations}
+          locations={uniqueOfferCities}
           activeLocation={activeLocation}
           onLocationChange={onLocationChange}
         />
@@ -58,13 +68,17 @@ const MainScreen = ({offers}) => {
                   </option>
                 </select>
               </form>
-              <OfferList className="cities__places-list" offers={offers} />
+              <OfferList
+                className="cities__places-list"
+                offers={offers}
+                onActiveOfferChange={onActiveOfferChange}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <WrappedMap
-                  city={offerCity}
-                  activeOffer={null}
+                  city={activeLocation}
+                  activeOffer={activeOffer}
                   offers={offers}
                 />
               </section>
@@ -77,7 +91,11 @@ const MainScreen = ({offers}) => {
 };
 
 MainScreen.propTypes = {
+  activeItem: offerCityType,
+  activeOffer: offerType,
   offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
+  onActiveOfferChange: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
 };
 
 export default MainScreen;
