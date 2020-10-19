@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {offerType} from '~/common/prop-types/prop-types';
 import Header from '~/components/header/header';
@@ -33,4 +34,6 @@ FavoritesScreen.propTypes = {
   offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
 };
 
-export default FavoritesScreen;
+export default connect(({offers: offersState}) => ({
+  offers: offersState.offers,
+}))(FavoritesScreen);

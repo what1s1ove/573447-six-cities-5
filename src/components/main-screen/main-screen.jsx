@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getUniqueOfferCities} from '~/helpers/helpers';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
@@ -98,4 +99,6 @@ MainScreen.propTypes = {
   onActiveItemChange: PropTypes.func.isRequired,
 };
 
-export default MainScreen;
+export default connect(({offers: offersState}) => ({
+  offers: offersState.offers,
+}))(MainScreen);

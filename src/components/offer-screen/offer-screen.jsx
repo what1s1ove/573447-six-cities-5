@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerType, reviewType} from '~/common/prop-types/prop-types';
@@ -25,7 +26,6 @@ const OfferScreen = ({offers, activeOffer, reviews, onActiveOfferChange}) => {
       setOffer(offerById);
       onActiveOfferChange(offerById);
     }
-
   }, [params.id]);
 
   if (!offer) {
@@ -85,4 +85,6 @@ OfferScreen.propTypes = {
   onActiveOfferChange: PropTypes.func.isRequired,
 };
 
-export default OfferScreen;
+export default connect(({offers: offersState}) => ({
+  offers: offersState.offers,
+}))(OfferScreen);
