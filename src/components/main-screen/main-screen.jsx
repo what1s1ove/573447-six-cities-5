@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getUniqueOfferCities} from '~/helpers/helpers';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
@@ -15,14 +14,13 @@ const WrappedMap = withMap(Map);
 const MainScreen = ({
   activeOffer,
   offers,
+  locations,
   onActiveOfferChange,
   activeItem: activeLocation,
   onActiveItemChange: onLocationChange,
 }) => {
-  const uniqueOfferCities = getUniqueOfferCities(offers);
-
   React.useState(() => {
-    const defaultLocation = getDefaultLocation(uniqueOfferCities);
+    const defaultLocation = getDefaultLocation(locations);
 
     onLocationChange(defaultLocation);
   }, []);
@@ -37,7 +35,7 @@ const MainScreen = ({
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList
-          locations={uniqueOfferCities}
+          locations={locations}
           activeLocation={activeLocation}
           onLocationChange={onLocationChange}
         />
@@ -95,10 +93,12 @@ MainScreen.propTypes = {
   activeItem: offerCityType,
   activeOffer: offerType,
   offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
+  locations: PropTypes.arrayOf(offerCityType.isRequired).isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
 };
 
 export default connect(({offers: offersState}) => ({
   offers: offersState.offers,
+  locations: offersState.locations,
 }))(MainScreen);
