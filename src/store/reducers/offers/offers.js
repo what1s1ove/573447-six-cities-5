@@ -6,7 +6,7 @@ const initialState = {
   locations,
 };
 
-const gameReducer = (state = initialState, action) => {
+const offersReducer = (state = initialState, action) => {
   switch (action.type) {
     default: {
       return state;
@@ -14,4 +14,4 @@ const gameReducer = (state = initialState, action) => {
   }
 };
 
-export {gameReducer};
+export {offersReducer};
