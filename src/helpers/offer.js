@@ -25,4 +25,10 @@ const getUniqueOfferCities = (offers) => {
   return uniquesOffersCities;
 };
 
-export {getRatingInPercents, getOfferLink, getUniqueOfferCities};
+const getOffersByCity = (offers, city) => {
+  const offersByCity = offers.filter((offer) => offer.city.name === city.name);
+
+  return offersByCity;
+};
+
+export {getRatingInPercents, getOfferLink, getUniqueOfferCities, getOffersByCity};
