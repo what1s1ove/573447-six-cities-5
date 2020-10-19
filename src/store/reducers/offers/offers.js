@@ -10,12 +10,8 @@ const initialState = {
   locations,
 };
 
-const offersReducer = (state = initialState, action) => {
-  switch (action.type) {
-    default: {
-      return state;
-    }
-  }
+const offersReducer = (state = initialState) => {
+  return state;
 };
 
 export {offersReducer};
