@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {getOffersByCity} from '~/helpers/offer';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
@@ -19,6 +20,10 @@ const MainScreen = ({
   activeItem: activeLocation,
   onActiveItemChange: onLocationChange,
 }) => {
+  const localOffers = activeLocation
+    ? getOffersByCity(offers, activeLocation)
+    : offers;
+
   React.useState(() => {
     const defaultLocation = getDefaultLocation(locations);
 
@@ -44,7 +49,7 @@ const MainScreen = ({
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {offers.length} places to stay in Amsterdam
+                {localOffers.length} places to stay in Amsterdam
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -69,7 +74,7 @@ const MainScreen = ({
               </form>
               <OfferList
                 className="cities__places-list"
-                offers={offers}
+                offers={localOffers}
                 onActiveOfferChange={onActiveOfferChange}
               />
             </section>
@@ -78,7 +83,7 @@ const MainScreen = ({
                 <WrappedMap
                   city={activeLocation}
                   activeOffer={activeOffer}
-                  offers={offers}
+                  offers={localOffers}
                 />
               </section>
             </div>
