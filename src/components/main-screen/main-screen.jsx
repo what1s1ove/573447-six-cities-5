@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getOffersByCity} from '~/helpers/offer';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
@@ -14,12 +14,15 @@ const WrappedMap = withMap(Map);
 
 const MainScreen = ({
   activeOffer,
-  offers,
-  locations,
   onActiveOfferChange,
   activeItem: activeLocation,
   onActiveItemChange: onLocationChange,
 }) => {
+  const {offers, locations} = useSelector(({places}) => ({
+    offers: places.offers,
+    locations: places.locations,
+  }));
+
   const localOffers = activeLocation
     ? getOffersByCity(offers, activeLocation)
     : offers;
@@ -97,13 +100,8 @@ const MainScreen = ({
 MainScreen.propTypes = {
   activeItem: offerCityType,
   activeOffer: offerType,
-  offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
-  locations: PropTypes.arrayOf(offerCityType.isRequired).isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
 };
 
-export default connect(({places}) => ({
-  offers: places.offers,
-  locations: places.locations,
-}))(MainScreen);
+export default MainScreen;
