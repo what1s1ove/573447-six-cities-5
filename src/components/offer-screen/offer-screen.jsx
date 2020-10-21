@@ -85,6 +85,6 @@ OfferScreen.propTypes = {
   onActiveOfferChange: PropTypes.func.isRequired,
 };
 
-export default connect(({offers: offersState}) => ({
-  offers: offersState.offers,
+export default connect(({places}) => ({
+  offers: places.offers,
 }))(OfferScreen);

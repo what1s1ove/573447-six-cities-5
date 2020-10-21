@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import {offersReducer} from '~/store/reducers/reducers';
+import {placesReducer} from '~/store/reducers/reducers';
 
 const rootReducer = combineReducers({
-  offers: offersReducer,
+  places: placesReducer,
 });
 
 export default rootReducer;

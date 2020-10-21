@@ -34,6 +34,6 @@ FavoritesScreen.propTypes = {
   offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
 };
 
-export default connect(({offers: offersState}) => ({
-  offers: offersState.offers,
+export default connect(({places}) => ({
+  offers: places.offers,
 }))(FavoritesScreen);

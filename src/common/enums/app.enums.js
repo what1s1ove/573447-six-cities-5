@@ -7,7 +7,7 @@ const AppRoute = {
 };
 
 const AppConfig = {
-  OFFERS_COUNT: 4,
+  OFFERS_COUNT: 40,
   REVIEWS_COUNT: 5,
 };
 

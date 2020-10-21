@@ -103,7 +103,7 @@ MainScreen.propTypes = {
   onActiveItemChange: PropTypes.func.isRequired,
 };
 
-export default connect(({offers: offersState}) => ({
-  offers: offersState.offers,
-  locations: offersState.locations,
+export default connect(({places}) => ({
+  offers: places.offers,
+  locations: places.locations,
 }))(MainScreen);
