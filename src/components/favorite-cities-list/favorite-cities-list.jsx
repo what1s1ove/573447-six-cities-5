@@ -13,7 +13,7 @@ const FavoriteCitiesList = ({offers}) => {
         const offersByCity = getOffersByCity(offers, city);
 
         return (
-          <FavoriteCitiesItem city={city} offers={offersByCity} key={city} />
+          <FavoriteCitiesItem city={city} offers={offersByCity} key={city.name} />
         );
       })}
     </ul>
