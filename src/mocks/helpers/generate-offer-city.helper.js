@@ -26,6 +26,11 @@ const cityToLocationMap = {
     longitude: 6.959974,
     zoom: 13,
   },
+  [OfferCity.DUSSELDORF]: {
+    latitude: 51.225402,
+    longitude: 6.776314,
+    zoom: 13,
+  },
 };
 
 const generateOfferCity = (city) => ({
