@@ -5,6 +5,7 @@ import {getOffersByCity} from '~/helpers/offer';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
+import OffersSort from '~/components/offers-sort/offers-sort';
 import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
@@ -54,27 +55,7 @@ const MainScreen = ({
               <b className="places__found">
                 {localOffers.length} places to stay in {activeLocation.name}
               </b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <select
-                  onChange={() => {}}
-                  className="places__sorting-type"
-                  value=""
-                >
-                  <option className="places__option" value="popular">
-                    Popular
-                  </option>
-                  <option className="places__option" value="to-high">
-                    Price: low to high
-                  </option>
-                  <option className="places__option" value="to-low">
-                    Price: high to low
-                  </option>
-                  <option className="places__option" value="top-rated">
-                    Top rated first
-                  </option>
-                </select>
-              </form>
+              <OffersSort />
               <OfferList
                 className="cities__places-list"
                 offers={localOffers}
