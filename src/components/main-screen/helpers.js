@@ -1,5 +1,5 @@
 import {SortType} from '~/common/enums/enums';
-import {getSortedItems} from '~/helpers/helpers';
+import {getSortedItems, getOffersByCity} from '~/helpers/helpers';
 
 const DEFAULT_SELECTED_CITY_IDX = 0;
 
@@ -42,4 +42,16 @@ const getSortedOffers = (offers, activeFilter) => {
   return offers;
 };
 
-export {getDefaultLocation, getSortedLocations, getSortedOffers};
+const getFilteredOffers = (offers, activeLocation, activeSort) => {
+  const offersByLocation = getOffersByCity(offers, activeLocation);
+  const sortedOffers = getSortedOffers(offersByLocation, activeSort);
+
+  return sortedOffers;
+};
+
+export {
+  getDefaultLocation,
+  getSortedLocations,
+  getSortedOffers,
+  getFilteredOffers,
+};
