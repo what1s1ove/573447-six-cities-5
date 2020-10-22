@@ -1,3 +1,5 @@
+import {getSortedItems} from '~/helpers/helpers';
+
 const DEFAULT_SELECTED_CITY_IDX = 0;
 
 const getDefaultLocation = (cities) => {
@@ -6,4 +8,12 @@ const getDefaultLocation = (cities) => {
   return defaultLocation;
 };
 
-export {getDefaultLocation};
+const getSortedLocations = (locations) => {
+  const sortedLocations = getSortedItems(locations, (locationA, locationB) =>
+    locationA.name.localeCompare(locationB.name)
+  );
+
+  return sortedLocations;
+};
+
+export {getDefaultLocation, getSortedLocations};

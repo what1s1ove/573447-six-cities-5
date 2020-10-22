@@ -8,7 +8,7 @@ import Header from '~/components/header/header';
 import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
-import {getDefaultLocation} from './helpers';
+import {getDefaultLocation, getSortedLocations} from './helpers';
 
 const WrappedMap = withMap(Map);
 
@@ -20,7 +20,7 @@ const MainScreen = ({
 }) => {
   const {offers, locations} = useSelector(({places}) => ({
     offers: places.offers,
-    locations: places.locations,
+    locations: getSortedLocations(places.locations),
   }));
 
   const localOffers = activeLocation
