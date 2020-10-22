@@ -14,4 +14,10 @@ const getRandomItems = (items, count) => {
   return randomItems;
 };
 
-export {getRandomItem, getRandomItems};
+const getSortedItems = (items, compareFn) => {
+  const sortedItems = items.slice().sort(compareFn);
+
+  return sortedItems;
+};
+
+export {getRandomItem, getRandomItems, getSortedItems};
