@@ -52,7 +52,7 @@ const MainScreen = ({
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {localOffers.length} places to stay in Amsterdam
+                {localOffers.length} places to stay in {activeLocation.name}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
