@@ -2,6 +2,7 @@ import * as React from 'react';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getOffersByCity} from '~/helpers/offer';
+import {SortType} from '~/common/enums/enums';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
@@ -10,6 +11,8 @@ import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
 import {getDefaultLocation, getSortedLocations} from './helpers';
+
+const sortTypes = Object.values(SortType);
 
 const WrappedMap = withMap(Map);
 
@@ -23,6 +26,7 @@ const MainScreen = ({
     offers: places.offers,
     locations: getSortedLocations(places.locations),
   }));
+  const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
 
   const localOffers = activeLocation
     ? getOffersByCity(offers, activeLocation)
@@ -55,7 +59,11 @@ const MainScreen = ({
               <b className="places__found">
                 {localOffers.length} places to stay in {activeLocation.name}
               </b>
-              <OffersSort />
+              <OffersSort
+                activeSort={activeSort}
+                sorts={sortTypes}
+                onSortChange={setActiveSort}
+              />
               <OfferList
                 className="cities__places-list"
                 offers={localOffers}
