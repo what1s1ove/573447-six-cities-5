@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerType, reviewType} from '~/common/prop-types/prop-types';
@@ -14,7 +15,10 @@ import {getOfferById, getSimilarOffer} from './helpers';
 
 const WrappedMap = withMap(Map);
 
-const OfferScreen = ({offers, activeOffer, reviews, onActiveOfferChange}) => {
+const OfferScreen = ({activeOffer, reviews, onActiveOfferChange}) => {
+  const {offers} = useSelector(({places}) => ({
+    offers: places.offers,
+  }));
   const [offer, setOffer] = React.useState(null);
   const params = useParams();
 
@@ -25,7 +29,6 @@ const OfferScreen = ({offers, activeOffer, reviews, onActiveOfferChange}) => {
       setOffer(offerById);
       onActiveOfferChange(offerById);
     }
-
   }, [params.id]);
 
   if (!offer) {
@@ -80,7 +83,6 @@ const OfferScreen = ({offers, activeOffer, reviews, onActiveOfferChange}) => {
 
 OfferScreen.propTypes = {
   activeOffer: offerType,
-  offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
   reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
 };

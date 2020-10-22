@@ -67,44 +67,49 @@ const OfferConfig = {
 };
 
 const offerTypes = Object.values(OfferRoomType);
+const offerCities = Object.values(OfferCity);
 
-const generateOffer = (offerIdx) => ({
-  id: offerIdx.toString(),
-  city: generateOfferCity(OfferCity.AMSTERDAM),
-  type: getRandomItem(offerTypes),
-  title: getRandomItem(OfferConfig.TITLES),
-  rating: getRandomNumber(
-      OfferConfig.RATING.MIN,
-      OfferConfig.RATING.MAX,
-      OfferConfig.RATING.FRACTIONAL_PART_COUNT
-  ),
-  description: getRandomItem(OfferConfig.DESCRIPTIONS),
-  price: getRandomNumber(OfferConfig.PRICE.MIN, OfferConfig.PRICE.MAX),
-  imagePreview: getRandomItem(OfferConfig.IMG.IMG_PATHS),
-  images: getRandomItems(
-      OfferConfig.IMG.IMG_PATHS,
-      getRandomNumber(
-          OfferConfig.IMG.IMG_MIN_COUNT,
-          OfferConfig.IMG.IMG_MAX_COUNT
-      )
-  ),
-  isPremium: Boolean(getRandomNumber(0, 1)),
-  isFavorite: Boolean(getRandomNumber(0, 1)),
-  bedroomCount: getRandomNumber(
-      OfferConfig.BEDROOMS_COUNT.MIN,
-      OfferConfig.BEDROOMS_COUNT.MAX
-  ),
-  maxAdultsCount: getRandomNumber(
-      OfferConfig.MAX_ADULTS_COUNT.MIN,
-      OfferConfig.MAX_ADULTS_COUNT.MAX
-  ),
-  location: generateOfferLocation(offerIdx),
-  goods: OfferConfig.GOODS.GOODS.slice(
-      OfferConfig.GOODS.MIN,
-      getRandomNumber(OfferConfig.GOODS.MIN, OfferConfig.GOODS.GOODS.length)
-  ),
-  host: generateUser(),
-});
+const generateOffer = (offerIdx) => {
+  const city = getRandomItem(offerCities);
+
+  return {
+    id: offerIdx.toString(),
+    city: generateOfferCity(city),
+    type: getRandomItem(offerTypes),
+    title: getRandomItem(OfferConfig.TITLES),
+    rating: getRandomNumber(
+        OfferConfig.RATING.MIN,
+        OfferConfig.RATING.MAX,
+        OfferConfig.RATING.FRACTIONAL_PART_COUNT
+    ),
+    description: getRandomItem(OfferConfig.DESCRIPTIONS),
+    price: getRandomNumber(OfferConfig.PRICE.MIN, OfferConfig.PRICE.MAX),
+    imagePreview: getRandomItem(OfferConfig.IMG.IMG_PATHS),
+    images: getRandomItems(
+        OfferConfig.IMG.IMG_PATHS,
+        getRandomNumber(
+            OfferConfig.IMG.IMG_MIN_COUNT,
+            OfferConfig.IMG.IMG_MAX_COUNT
+        )
+    ),
+    isPremium: Boolean(getRandomNumber(0, 1)),
+    isFavorite: Boolean(getRandomNumber(0, 1)),
+    bedroomCount: getRandomNumber(
+        OfferConfig.BEDROOMS_COUNT.MIN,
+        OfferConfig.BEDROOMS_COUNT.MAX
+    ),
+    maxAdultsCount: getRandomNumber(
+        OfferConfig.MAX_ADULTS_COUNT.MIN,
+        OfferConfig.MAX_ADULTS_COUNT.MAX
+    ),
+    location: generateOfferLocation(city),
+    goods: OfferConfig.GOODS.GOODS.slice(
+        OfferConfig.GOODS.MIN,
+        getRandomNumber(OfferConfig.GOODS.MIN, OfferConfig.GOODS.GOODS.length)
+    ),
+    host: generateUser(),
+  };
+};
 
 const generateOffers = (count) => {
   const offers = Array.from(new Array(count), (_, idx) => generateOffer(idx));

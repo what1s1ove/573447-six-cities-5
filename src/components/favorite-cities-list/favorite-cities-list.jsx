@@ -1,9 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {getUniqueOfferCities} from '~/helpers/helpers';
+import {getUniqueOfferCities, getOffersByCity} from '~/helpers/helpers';
 import {offerType} from '~/common/prop-types/prop-types';
 import FavoriteCitiesItem from '~/components/favorite-cities-item/favorite-cities-item';
-import {getOffersByCity} from './helpers';
 
 const FavoriteCitiesList = ({offers}) => {
   const uniqueCities = getUniqueOfferCities(offers);
@@ -14,7 +13,7 @@ const FavoriteCitiesList = ({offers}) => {
         const offersByCity = getOffersByCity(offers, city);
 
         return (
-          <FavoriteCitiesItem city={city} offers={offersByCity} key={city} />
+          <FavoriteCitiesItem city={city} offers={offersByCity} key={city.name} />
         );
       })}
     </ul>

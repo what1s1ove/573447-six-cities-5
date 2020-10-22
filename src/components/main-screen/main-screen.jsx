@@ -1,6 +1,7 @@
 import * as React from 'react';
+import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getUniqueOfferCities} from '~/helpers/helpers';
+import {getOffersByCity} from '~/helpers/offer';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
@@ -13,15 +14,21 @@ const WrappedMap = withMap(Map);
 
 const MainScreen = ({
   activeOffer,
-  offers,
   onActiveOfferChange,
   activeItem: activeLocation,
   onActiveItemChange: onLocationChange,
 }) => {
-  const uniqueOfferCities = getUniqueOfferCities(offers);
+  const {offers, locations} = useSelector(({places}) => ({
+    offers: places.offers,
+    locations: places.locations,
+  }));
+
+  const localOffers = activeLocation
+    ? getOffersByCity(offers, activeLocation)
+    : offers;
 
   React.useState(() => {
-    const defaultLocation = getDefaultLocation(uniqueOfferCities);
+    const defaultLocation = getDefaultLocation(locations);
 
     onLocationChange(defaultLocation);
   }, []);
@@ -36,7 +43,7 @@ const MainScreen = ({
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList
-          locations={uniqueOfferCities}
+          locations={locations}
           activeLocation={activeLocation}
           onLocationChange={onLocationChange}
         />
@@ -45,7 +52,7 @@ const MainScreen = ({
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {offers.length} places to stay in Amsterdam
+                {localOffers.length} places to stay in Amsterdam
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -70,7 +77,7 @@ const MainScreen = ({
               </form>
               <OfferList
                 className="cities__places-list"
-                offers={offers}
+                offers={localOffers}
                 onActiveOfferChange={onActiveOfferChange}
               />
             </section>
@@ -79,7 +86,7 @@ const MainScreen = ({
                 <WrappedMap
                   city={activeLocation}
                   activeOffer={activeOffer}
-                  offers={offers}
+                  offers={localOffers}
                 />
               </section>
             </div>
@@ -93,7 +100,6 @@ const MainScreen = ({
 MainScreen.propTypes = {
   activeItem: offerCityType,
   activeOffer: offerType,
-  offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
 };
