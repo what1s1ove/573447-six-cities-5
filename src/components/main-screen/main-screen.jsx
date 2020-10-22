@@ -10,7 +10,7 @@ import OffersSort from '~/components/offers-sort/offers-sort';
 import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
-import {getDefaultLocation, getSortedLocations} from './helpers';
+import {getDefaultLocation, getSortedLocations, getSortedOffers} from './helpers';
 
 const sortTypes = Object.values(SortType);
 
@@ -28,10 +28,6 @@ const MainScreen = ({
   }));
   const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
 
-  const localOffers = activeLocation
-    ? getOffersByCity(offers, activeLocation)
-    : offers;
-
   React.useState(() => {
     const defaultLocation = getDefaultLocation(locations);
 
@@ -41,6 +37,9 @@ const MainScreen = ({
   if (!activeLocation) {
     return null;
   }
+
+  const filteredOffers = getOffersByCity(offers, activeLocation);
+  const sortedOffers = getSortedOffers(filteredOffers, activeSort);
 
   return (
     <div className="page page--gray page--main">
@@ -57,7 +56,7 @@ const MainScreen = ({
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {localOffers.length} places to stay in {activeLocation.name}
+                {sortedOffers.length} places to stay in {activeLocation.name}
               </b>
               <OffersSort
                 activeSort={activeSort}
@@ -66,7 +65,7 @@ const MainScreen = ({
               />
               <OfferList
                 className="cities__places-list"
-                offers={localOffers}
+                offers={sortedOffers}
                 onActiveOfferChange={onActiveOfferChange}
               />
             </section>
@@ -75,7 +74,7 @@ const MainScreen = ({
                 <WrappedMap
                   city={activeLocation}
                   activeOffer={activeOffer}
-                  offers={localOffers}
+                  offers={sortedOffers}
                 />
               </section>
             </div>
