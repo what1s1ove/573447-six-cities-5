@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '~/common/enums/enums';
 import {useSelector} from 'react-redux';
 import Header from '~/components/header/header';
 import FavoriteOffersList from '~/components/favorite-cities-list/favorite-cities-list';
@@ -20,7 +22,7 @@ const FavoritesScreen = () => {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={AppRoute.MAIN}>
           <img
             className="footer__logo"
             src="img/logo.svg"
@@ -28,7 +30,7 @@ const FavoritesScreen = () => {
             width="64"
             height="33"
           />
-        </a>
+        </Link>
       </footer>
     </div>
   );

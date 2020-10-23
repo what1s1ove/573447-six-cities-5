@@ -11,4 +11,11 @@ const AppConfig = {
   REVIEWS_COUNT: 5,
 };
 
-export {AppRoute, AppConfig};
+const SortType = {
+  POPULAR: `Popular`,
+  TO_HIGHT: `Price: low to high`,
+  TO_LOW: `Price: high to low`,
+  TOP_RATE: `Top rated first`,
+};
+
+export {AppRoute, AppConfig, SortType};

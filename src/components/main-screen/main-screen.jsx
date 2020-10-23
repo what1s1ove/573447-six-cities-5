@@ -1,14 +1,17 @@
 import * as React from 'react';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getOffersByCity} from '~/helpers/offer';
+import {SortType} from '~/common/enums/enums';
 import {offerType, offerCityType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
+import OffersSort from '~/components/offers-sort/offers-sort';
 import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
-import {getDefaultLocation} from './helpers';
+import {getDefaultLocation, getSortedLocations, getFilteredOffers} from './helpers';
+
+const sortTypes = Object.values(SortType);
 
 const WrappedMap = withMap(Map);
 
@@ -20,12 +23,9 @@ const MainScreen = ({
 }) => {
   const {offers, locations} = useSelector(({places}) => ({
     offers: places.offers,
-    locations: places.locations,
+    locations: getSortedLocations(places.locations),
   }));
-
-  const localOffers = activeLocation
-    ? getOffersByCity(offers, activeLocation)
-    : offers;
+  const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
 
   React.useState(() => {
     const defaultLocation = getDefaultLocation(locations);
@@ -36,6 +36,8 @@ const MainScreen = ({
   if (!activeLocation) {
     return null;
   }
+
+  const filteredOffers = getFilteredOffers(offers, activeLocation, activeSort);
 
   return (
     <div className="page page--gray page--main">
@@ -52,32 +54,16 @@ const MainScreen = ({
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {localOffers.length} places to stay in Amsterdam
+                {filteredOffers.length} places to stay in {activeLocation.name}
               </b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <select
-                  onChange={() => {}}
-                  className="places__sorting-type"
-                  value=""
-                >
-                  <option className="places__option" value="popular">
-                    Popular
-                  </option>
-                  <option className="places__option" value="to-high">
-                    Price: low to high
-                  </option>
-                  <option className="places__option" value="to-low">
-                    Price: high to low
-                  </option>
-                  <option className="places__option" value="top-rated">
-                    Top rated first
-                  </option>
-                </select>
-              </form>
+              <OffersSort
+                activeSort={activeSort}
+                sorts={sortTypes}
+                onSortChange={setActiveSort}
+              />
               <OfferList
                 className="cities__places-list"
-                offers={localOffers}
+                offers={filteredOffers}
                 onActiveOfferChange={onActiveOfferChange}
               />
             </section>
@@ -86,7 +72,7 @@ const MainScreen = ({
                 <WrappedMap
                   city={activeLocation}
                   activeOffer={activeOffer}
-                  offers={localOffers}
+                  offers={filteredOffers}
                 />
               </section>
             </div>
