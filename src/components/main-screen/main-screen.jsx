@@ -27,7 +27,7 @@ const MainScreen = ({
   }));
   const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
 
-  React.useState(() => {
+  React.useEffect(() => {
     const defaultLocation = getDefaultLocation(locations);
 
     onLocationChange(defaultLocation);
