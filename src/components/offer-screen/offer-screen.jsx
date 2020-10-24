@@ -17,7 +17,11 @@ import {getOfferById, getSimilarOffer} from './helpers';
 const WrappedMap = withMap(Map);
 const WrappedReviewForm = withFormEditing(ReviewForm);
 
-const OfferScreen = ({activeOffer, reviews, onActiveOfferChange}) => {
+const OfferScreen = ({
+  reviews,
+  activeItem: activeOffer,
+  onActiveItemChange: onActiveOfferChange,
+}) => {
   const {offers} = useSelector(({places}) => ({
     offers: places.offers,
   }));
@@ -84,9 +88,9 @@ const OfferScreen = ({activeOffer, reviews, onActiveOfferChange}) => {
 };
 
 OfferScreen.propTypes = {
-  activeOffer: offerType,
+  activeItem: offerType,
   reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
-  onActiveOfferChange: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
 };
 
 export default OfferScreen;
