@@ -18,6 +18,7 @@ const ReviewRating = ({value, name, isChecked, onRatingChange}) => {
         id={ratingLabel}
         name="rating"
         type="radio"
+        required
       />
       <label
         htmlFor={ratingLabel}
