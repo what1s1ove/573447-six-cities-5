@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import {SortType} from '~/common/enums/enums';
-import {offerType, offerCityType} from '~/common/prop-types/prop-types';
+import {offerType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
 import OffersSort from '~/components/offers-sort/offers-sort';
@@ -16,28 +16,18 @@ const sortTypes = Object.values(SortType);
 const WrappedMap = withMap(Map);
 
 const MainScreen = ({
-  activeOffer,
-  onActiveOfferChange,
-  activeItem: activeLocation,
-  onActiveItemChange: onLocationChange,
+  activeItem: activeOffer,
+  onActiveItemChange: onActiveOfferChange,
 }) => {
   const {offers, locations} = useSelector(({places}) => ({
     offers: places.offers,
     locations: getSortedLocations(places.locations),
   }));
+
   const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
+  const [currentLocation, setCurrentLocation] = React.useState(getDefaultLocation(locations));
 
-  React.useState(() => {
-    const defaultLocation = getDefaultLocation(locations);
-
-    onLocationChange(defaultLocation);
-  }, []);
-
-  if (!activeLocation) {
-    return null;
-  }
-
-  const filteredOffers = getFilteredOffers(offers, activeLocation, activeSort);
+  const filteredOffers = getFilteredOffers(offers, currentLocation, activeSort);
 
   return (
     <div className="page page--gray page--main">
@@ -46,15 +36,15 @@ const MainScreen = ({
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList
           locations={locations}
-          activeLocation={activeLocation}
-          onLocationChange={onLocationChange}
+          activeLocation={currentLocation}
+          onLocationChange={setCurrentLocation}
         />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {filteredOffers.length} places to stay in {activeLocation.name}
+                {filteredOffers.length} places to stay in {currentLocation.name}
               </b>
               <OffersSort
                 activeSort={activeSort}
@@ -70,7 +60,7 @@ const MainScreen = ({
             <div className="cities__right-section">
               <section className="cities__map map">
                 <WrappedMap
-                  city={activeLocation}
+                  city={currentLocation}
                   activeOffer={activeOffer}
                   offers={filteredOffers}
                 />
@@ -84,9 +74,7 @@ const MainScreen = ({
 };
 
 MainScreen.propTypes = {
-  activeItem: offerCityType,
-  activeOffer: offerType,
-  onActiveOfferChange: PropTypes.func.isRequired,
+  activeItem: offerType,
   onActiveItemChange: PropTypes.func.isRequired,
 };
 

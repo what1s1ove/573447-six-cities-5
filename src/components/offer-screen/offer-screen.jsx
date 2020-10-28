@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerType, reviewType} from '~/common/prop-types/prop-types';
 import withMap from '~/hocs/with-map/with-map';
+import withFormEditing from '~/hocs/with-form-editing/with-form-editing';
 import Header from '~/components/header/header';
 import Map from '~/components/map/map';
 import OfferPropertyDashboard from '~/components/offer-property-dashboard/offer-property-dashboard';
@@ -14,8 +15,13 @@ import ReviewForm from '~/components/review-form/review-form';
 import {getOfferById, getSimilarOffer} from './helpers';
 
 const WrappedMap = withMap(Map);
+const WrappedReviewForm = withFormEditing(ReviewForm);
 
-const OfferScreen = ({activeOffer, reviews, onActiveOfferChange}) => {
+const OfferScreen = ({
+  reviews,
+  activeItem: activeOffer,
+  onActiveItemChange: onActiveOfferChange,
+}) => {
   const {offers} = useSelector(({places}) => ({
     offers: places.offers,
   }));
@@ -52,7 +58,7 @@ const OfferScreen = ({activeOffer, reviews, onActiveOfferChange}) => {
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ReviewList reviews={reviews} />
-                <ReviewForm />
+                <WrappedReviewForm />
               </section>
             </div>
           </div>
@@ -82,9 +88,9 @@ const OfferScreen = ({activeOffer, reviews, onActiveOfferChange}) => {
 };
 
 OfferScreen.propTypes = {
-  activeOffer: offerType,
+  activeItem: offerType,
   reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
-  onActiveOfferChange: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
 };
 
 export default OfferScreen;

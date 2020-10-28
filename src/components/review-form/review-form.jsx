@@ -1,16 +1,15 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import ReviewRatings from '~/components/review-ratings/review-ratings';
+import {ReviewFormKey} from './common';
 
-const ReviewForm = () => {
-  const [comment, setComment] = React.useState(``);
-  const [rating, setRating] = React.useState(``);
-
+const ReviewForm = ({formState, onFormStateChange}) => {
   const onRatingChange = (newRating) => {
-    setRating(newRating);
+    onFormStateChange(ReviewFormKey.RARING, newRating);
   };
 
   const handleCommentChange = ({target}) => {
-    setComment(target.value);
+    onFormStateChange(ReviewFormKey.COMMENT, target.value);
   };
 
   return (
@@ -18,10 +17,10 @@ const ReviewForm = () => {
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <ReviewRatings currentRating={rating} onRatingChange={onRatingChange} />
+      <ReviewRatings currentRating={formState.rating || ``} onRatingChange={onRatingChange} />
       <textarea
         className="reviews__textarea form__textarea"
-        value={comment}
+        value={formState.comment || ``}
         onChange={handleCommentChange}
         id="review"
         name="review"
@@ -41,6 +40,11 @@ const ReviewForm = () => {
       </div>
     </form>
   );
+};
+
+ReviewForm.propTypes = {
+  formState: PropTypes.object.isRequired,
+  onFormStateChange: PropTypes.func.isRequired,
 };
 
 export default ReviewForm;
