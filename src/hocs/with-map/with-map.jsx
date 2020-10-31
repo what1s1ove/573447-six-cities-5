@@ -16,9 +16,11 @@ const withMap = (Component) => {
       mapRef.current = getMap(city, mapNodeRef.current);
 
       addToMap(leaflet.tileLayer(MAP_IMG_URL));
-
-      renderMarkers(allOffers);
     }, []);
+
+    React.useEffect(() => {
+      renderMarkers(allOffers);
+    }, [allOffers]);
 
     React.useEffect(() => {
       removeMarkers(points);
