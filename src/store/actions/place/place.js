@@ -1,4 +1,4 @@
-import {PlaceActionType} from '~/common/enums/enums';
+import {PlaceActionType, OfferFavoriteStatus} from '~/common/enums/enums';
 import {
   adaptOffersToClient,
   adaptOfferToClient,
@@ -61,6 +61,16 @@ const PlaceActionCreator = {
       .post(`/comments/${offerId}`, comment)
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadReviews(adaptReviewsToClient(data)))
+      )
+      .catch((err) => {
+        throw err;
+      });
+  },
+  toggleFavorite: (offerId, isFavorite) => (dispatch, _, {api}) => {
+    api
+      .post(`/favorite/${offerId}/${isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`)
+      .then(({data}) =>
+        dispatch(PlaceActionCreator.loadReviews(adaptOfferToClient(data)))
       )
       .catch((err) => {
         throw err;
