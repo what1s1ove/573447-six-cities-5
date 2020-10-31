@@ -8,14 +8,14 @@ const LocationsList = ({locations, activeLocation, onLocationChange}) => (
     <section className="locations container">
       <ul className="locations__list tabs__list">
         {locations.map((location) => {
-          const isActive = location.name === activeLocation.name;
+          const isActive = location === activeLocation.name;
 
           return (
             <LocationItem
               location={location}
               isActive={isActive}
               onLocationChange={onLocationChange}
-              key={location.name}
+              key={location}
             />
           );
         })}
@@ -25,7 +25,7 @@ const LocationsList = ({locations, activeLocation, onLocationChange}) => (
 );
 
 LocationsList.propTypes = {
-  locations: PropTypes.arrayOf(offerCityType.isRequired).isRequired,
+  locations: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeLocation: offerCityType.isRequired,
   onLocationChange: PropTypes.func.isRequired,
 };

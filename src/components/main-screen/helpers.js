@@ -1,5 +1,5 @@
+import {getSortedItems, getOffersByCity, getUniqueOfferCities} from '~/helpers/helpers';
 import {SortType} from '~/common/enums/enums';
-import {getSortedItems, getOffersByCity} from '~/helpers/helpers';
 
 const DEFAULT_SELECTED_CITY_IDX = 0;
 
@@ -15,6 +15,21 @@ const getSortedLocations = (locations) => {
   );
 
   return sortedLocations;
+};
+
+const getOfferLocations = (offers) => {
+  const locations = getUniqueOfferCities(offers);
+  const sortedLocations = getSortedLocations(locations);
+
+  return sortedLocations;
+};
+
+const getLocationByName = (locations, offerCity) => {
+  const locationByName = locations.find(
+      (location) => location.name === offerCity
+  );
+
+  return locationByName;
 };
 
 const getSortedOffers = (offers, activeFilter) => {
@@ -52,6 +67,8 @@ const getFilteredOffers = (offers, activeLocation, activeSort) => {
 export {
   getDefaultLocation,
   getSortedLocations,
+  getOfferLocations,
+  getLocationByName,
   getSortedOffers,
   getFilteredOffers,
 };
