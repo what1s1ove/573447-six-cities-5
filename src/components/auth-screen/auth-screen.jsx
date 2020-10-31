@@ -83,6 +83,7 @@ const AuthScreen = ({formState, onFormStateChange}) => {
 AuthScreen.propTypes = {
   formState: PropTypes.object.isRequired,
   onFormStateChange: PropTypes.func.isRequired,
+  onFormReset: PropTypes.func.isRequired,
 };
 
 export default AuthScreen;

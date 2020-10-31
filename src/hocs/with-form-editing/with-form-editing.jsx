@@ -13,11 +13,14 @@ const withFormEditing = (Component) => {
       );
     };
 
+    const handleFormReset = () => setFormState({});
+
     return (
       <Component
         {...props}
         formState={formState}
         onFormStateChange={handleFormState}
+        onFormReset={handleFormReset}
       />
     );
   };
