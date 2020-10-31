@@ -94,6 +94,7 @@ const adaptOfferToClient = (offer) => ({
   location: offer.location,
   goods: offer.goods,
   host: adaptUserToClient(offer.host),
+  isSaving: false,
 });
 
 const adaptOffersToClient = (offers) => {
