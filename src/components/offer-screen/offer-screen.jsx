@@ -46,7 +46,7 @@ const OfferScreen = ({
   }, [offerId, dispatch]);
 
   const handleFavoriteToggle = React.useCallback(() => {
-    dispatch(PlaceActionCreator.toggleFavorite(offerId, !offer.isFavorite));
+    dispatch(PlaceActionCreator.toggleFavorite(offer, !offer.isFavorite));
   }, [offerId, offer, dispatch]);
 
   if (!offer) {

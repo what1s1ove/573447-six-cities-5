@@ -20,6 +20,7 @@ const OfferPropertyDashboard = ({offer, onFavoriteToggle}) => (
             offer.isFavorite && `property__bookmark-button--active`
         )}
         onClick={onFavoriteToggle}
+        disabled={offer.isSaving}
         type="button"
       >
         <svg className="property__bookmark-icon" width="31" height="33">

@@ -3,6 +3,7 @@ import {
   adaptOffersToClient,
   adaptOfferToClient,
   adaptReviewsToClient,
+  extendObject,
 } from '~/helpers/helpers';
 
 const PlaceActionCreator = {
@@ -66,13 +67,21 @@ const PlaceActionCreator = {
         throw err;
       });
   },
-  toggleFavorite: (offerId, isFavorite) => (dispatch, _, {api}) => {
+  toggleFavorite: (offer, isFavorite) => (dispatch, _, {api}) => {
+    dispatch(PlaceActionCreator.loadOffer(extendObject(offer, {
+      isSaving: true
+    })));
+
     api
-      .post(`/favorite/${offerId}/${isFavorite ? OfferFavoriteStatus.TRUE : OfferFavoriteStatus.FALSE}`)
+      .post(`/favorite/${offer.id}/${isFavorite ? OfferFavoriteStatus.TRUE : OfferFavoriteStatus.FALSE}`)
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
       .catch((err) => {
+        dispatch(PlaceActionCreator.loadOffer(extendObject(offer, {
+          isSaving: false
+        })));
+
         throw err;
       });
   },
