@@ -11,7 +11,7 @@ const offerType = PropTypes.exact({
   bedroomCount: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   imagePreview: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,

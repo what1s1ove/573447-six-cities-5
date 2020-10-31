@@ -1,4 +1,5 @@
 import {PlacesDataActionType} from '~/common/enums/enums';
+import {adaptOffersToClient} from '~/helpers/offer';
 
 const PlacesDataActionCreator = {
   loadOffers: (offers) => ({
@@ -10,7 +11,11 @@ const PlacesDataActionCreator = {
   fetchOffers: () => (dispatch, _, {api}) => {
     api
       .get(`/hotels`)
-      .then(({data}) => dispatch(PlacesDataActionCreator.loadOffers(data)))
+      .then(({data}) => {
+        const adaptedOffers = adaptOffersToClient(data);
+
+        dispatch(PlacesDataActionCreator.loadOffers(adaptedOffers));
+      })
       .catch((err) => {
         throw err;
       });

@@ -8,10 +8,10 @@ const OfferCity = {
 };
 
 const OfferRoomType = {
-  APARTMENT: `Apartment`,
-  HOTEL: `Hotel`,
-  HOUSE: `House`,
-  ROOM: `Room`,
+  APARTMENT: `apartment`,
+  HOTEL: `hotel`,
+  HOUSE: `house`,
+  ROOM: `room`,
 };
 
 export {OfferCity, OfferRoomType};
