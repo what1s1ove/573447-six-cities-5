@@ -14,4 +14,9 @@ const OfferRoomType = {
   ROOM: `room`,
 };
 
-export {OfferCity, OfferRoomType};
+const OfferFavoriteStatus = {
+  TRUE: 1,
+  FALSE: 0,
+};
+
+export {OfferCity, OfferRoomType, OfferFavoriteStatus};
