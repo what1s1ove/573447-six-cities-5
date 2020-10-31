@@ -5,7 +5,7 @@ const reviewType = PropType.exact({
   user: userType.isRequired,
   comment: PropType.string.isRequired,
   date: PropType.object.isRequired,
-  id: PropType.string.isRequired,
+  id: PropType.number.isRequired,
   rating: PropType.number.isRequired,
 });
 
