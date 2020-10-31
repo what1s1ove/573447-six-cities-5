@@ -3,7 +3,7 @@ import {extendObject} from '~/helpers/object';
 
 const initialState = {
   offer: null,
-  comments: [],
+  reviews: [],
   similarOffers: [],
 };
 
@@ -16,11 +16,11 @@ const placeReducer = (state = initialState, action) => {
         offer,
       });
     }
-    case PlaceActionType.LOAD_COMMENTS: {
-      const {comments} = action.payload;
+    case PlaceActionType.LOAD_REVIEWS: {
+      const {reviews} = action.payload;
 
       return extendObject(state, {
-        comments,
+        reviews,
       });
     }
     case PlaceActionType.LOAD_SIMILAR_OFFERS: {
