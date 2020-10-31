@@ -1,7 +1,9 @@
 import * as React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerType} from '~/common/prop-types/prop-types';
+import {PlaceActionCreator} from '~/store/actions/place/place';
 import {
   getOffer,
   getReviews,
@@ -24,11 +26,19 @@ const OfferScreen = ({
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
+  const dispatch = useDispatch();
+  const params = useParams();
   const {offer, reviews, similarOffers} = useSelector((state) => ({
     offer: getOffer(state),
     reviews: getReviews(state),
     similarOffers: getSimilarOffers(state),
   }));
+
+  React.useEffect(() => {
+    dispatch(PlaceActionCreator.fetchOffer(params.id));
+    dispatch(PlaceActionCreator.fetchReviews(params.id));
+    dispatch(PlaceActionCreator.fetchSimilarOffers(params.id));
+  }, []);
 
   if (!offer) {
     return null;
