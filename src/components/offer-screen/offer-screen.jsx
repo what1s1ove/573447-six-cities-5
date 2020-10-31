@@ -1,9 +1,12 @@
 import * as React from 'react';
 import {useSelector} from 'react-redux';
-import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {offerType, reviewType} from '~/common/prop-types/prop-types';
-import {getOffers} from '~/store/selectors/selectors';
+import {offerType} from '~/common/prop-types/prop-types';
+import {
+  getOffer,
+  getReviews,
+  getSimilarOffers,
+} from '~/store/selectors/selectors';
 import withMap from '~/hocs/with-map/with-map';
 import withFormEditing from '~/hocs/with-form-editing/with-form-editing';
 import Header from '~/components/header/header';
@@ -13,34 +16,23 @@ import OfferList from '~/components/offer-list/offer-list';
 import OfferGalleryList from '~/components/offer-gallery-list/offer-gallery-list';
 import ReviewList from '~/components/review-list/review-list';
 import ReviewForm from '~/components/review-form/review-form';
-import {getOfferById, getSimilarOffer} from './helpers';
 
 const WrappedMap = withMap(Map);
 const WrappedReviewForm = withFormEditing(ReviewForm);
 
 const OfferScreen = ({
-  reviews,
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
-  const offers = useSelector(getOffers);
-  const [offer, setOffer] = React.useState(null);
-  const params = useParams();
-
-  React.useEffect(() => {
-    const offerById = getOfferById(offers, params.id);
-
-    if (offerById) {
-      setOffer(offerById);
-      onActiveOfferChange(offerById);
-    }
-  }, [params.id]);
+  const {offer, reviews, similarOffers} = useSelector((state) => ({
+    offer: getOffer(state),
+    reviews: getReviews(state),
+    similarOffers: getSimilarOffers(state),
+  }));
 
   if (!offer) {
     return null;
   }
-
-  const similarOffers = getSimilarOffer(offers);
 
   return (
     <div className="page">
@@ -88,7 +80,6 @@ const OfferScreen = ({
 
 OfferScreen.propTypes = {
   activeItem: offerType,
-  reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
 };
 
