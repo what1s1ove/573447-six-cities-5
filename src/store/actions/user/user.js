@@ -1,5 +1,5 @@
+import {adaptUserToClient} from '~/helpers/helpers';
 import {AppRoute, AuthStatus, UserActionType} from '~/common/enums/enums';
-import { adaptUserToClient } from '~/helpers/user';
 
 const UserActionCreator = {
   setAuthStatus: (status) => ({
