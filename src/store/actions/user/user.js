@@ -1,4 +1,5 @@
 import {AppRoute, AuthStatus, UserActionType} from '~/common/enums/enums';
+import { adaptUserToClient } from '~/helpers/user';
 
 const UserActionCreator = {
   setAuthStatus: (status) => ({
@@ -22,7 +23,9 @@ const UserActionCreator = {
   checkAuth: () => (dispatch, _, {api}) => {
     api
       .get(`/login`)
-      .then(({data}) => dispatch(UserActionCreator.setUser(data)))
+      .then(({data}) =>
+        dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
+      )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
       .catch((err) => {
         throw err;
@@ -31,7 +34,9 @@ const UserActionCreator = {
   login: ({email, password}) => (dispatch, _, {api}) => {
     api
       .post(`/login`, {email, password})
-      .then(({data}) => dispatch(UserActionCreator.setUser(data)))
+      .then(({data}) =>
+        dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
+      )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
       .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.MAIN)))
       .catch((err) => {
