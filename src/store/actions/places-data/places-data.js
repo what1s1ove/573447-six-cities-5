@@ -11,11 +11,9 @@ const PlacesDataActionCreator = {
   fetchOffers: () => (dispatch, _, {api}) => {
     api
       .get(`/hotels`)
-      .then(({data}) => {
-        const adaptedOffers = adaptOffersToClient(data);
-
-        dispatch(PlacesDataActionCreator.loadOffers(adaptedOffers));
-      })
+      .then(({data}) =>
+        dispatch(PlacesDataActionCreator.loadOffers(adaptOffersToClient(data)))
+      )
       .catch((err) => {
         throw err;
       });

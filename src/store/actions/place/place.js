@@ -1,5 +1,9 @@
 import {PlaceActionType} from '~/common/enums/enums';
-import {adaptOfferToClient} from '~/helpers/helpers';
+import {
+  adaptOffersToClient,
+  adaptOfferToClient,
+  adaptReviewsToClient,
+} from '~/helpers/helpers';
 
 const PlaceActionCreator = {
   loadOffer: (offer) => ({
@@ -39,7 +43,9 @@ const PlaceActionCreator = {
   fetchReviews: (offerId) => (dispatch, _, {api}) => {
     api
       .get(`/comments/${offerId}`)
-      .then(({data}) => dispatch(PlaceActionCreator.loadReviews(data)))
+      .then(({data}) =>
+        dispatch(PlaceActionCreator.loadReviews(adaptReviewsToClient(data)))
+      )
       .catch((err) => {
         throw err;
       });
@@ -47,7 +53,11 @@ const PlaceActionCreator = {
   fetchSimilarOffers: (offerId) => (dispatch, _, {api}) => {
     api
       .get(`/hotels/${offerId}/nearby`)
-      .then(({data}) => dispatch(PlaceActionCreator.loadSimilarOffers(data)))
+      .then(({data}) =>
+        dispatch(
+            PlaceActionCreator.loadSimilarOffers(adaptOffersToClient(data))
+        )
+      )
       .catch((err) => {
         throw err;
       });
