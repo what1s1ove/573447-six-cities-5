@@ -68,9 +68,9 @@ const PlaceActionCreator = {
   },
   toggleFavorite: (offerId, isFavorite) => (dispatch, _, {api}) => {
     api
-      .post(`/favorite/${offerId}/${isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`)
+      .post(`/favorite/${offerId}/${isFavorite ? OfferFavoriteStatus.TRUE : OfferFavoriteStatus.FALSE}`)
       .then(({data}) =>
-        dispatch(PlaceActionCreator.loadReviews(adaptOfferToClient(data)))
+        dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
       .catch((err) => {
         throw err;

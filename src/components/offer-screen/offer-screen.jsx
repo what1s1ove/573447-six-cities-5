@@ -45,6 +45,10 @@ const OfferScreen = ({
     dispatch(PlaceActionCreator.uploadReview(offerId, review));
   }, [offerId, dispatch]);
 
+  const handleFavoriteToggle = React.useCallback(() => {
+    dispatch(PlaceActionCreator.toggleFavorite(offerId, !offer.isFavorite));
+  }, [offerId, offer, dispatch]);
+
   if (!offer) {
     return null;
   }
@@ -57,7 +61,10 @@ const OfferScreen = ({
           <OfferGalleryList imgPaths={offer.images} />
           <div className="property__container container">
             <div className="property__wrapper">
-              <OfferPropertyDashboard offer={offer} />
+              <OfferPropertyDashboard
+                offer={offer}
+                onFavoriteToggle={handleFavoriteToggle}
+              />
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">
                   Reviews &middot;

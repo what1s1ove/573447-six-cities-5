@@ -1,10 +1,11 @@
 import * as React from 'react';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import {getRatingInPercents} from '~/helpers/helpers';
 import {offerType} from '~/common/prop-types/prop-types';
 import OfferGoodsList from '~/components/offer-goods-list/offer-goods-list';
 
-const OfferPropertyDashboard = ({offer}) => (
+const OfferPropertyDashboard = ({offer, onFavoriteToggle}) => (
   <>
     {offer.isPremium && (
       <div className="property__mark">
@@ -13,7 +14,14 @@ const OfferPropertyDashboard = ({offer}) => (
     )}
     <div className="property__name-wrapper">
       <h1 className="property__name">{offer.title}</h1>
-      <button className="property__bookmark-button button" type="button">
+      <button
+        className={clsx(
+            `property__bookmark-button button`,
+            offer.isFavorite && `property__bookmark-button--active`
+        )}
+        onClick={onFavoriteToggle}
+        type="button"
+      >
         <svg className="property__bookmark-icon" width="31" height="33">
           <use href="#icon-bookmark" />
         </svg>
@@ -80,6 +88,7 @@ const OfferPropertyDashboard = ({offer}) => (
 
 OfferPropertyDashboard.propTypes = {
   offer: offerType.isRequired,
+  onFavoriteToggle: PropTypes.func.isRequired,
 };
 
 export default OfferPropertyDashboard;
