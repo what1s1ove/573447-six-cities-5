@@ -38,6 +38,12 @@ const UserActionCreator = {
         throw err;
       });
   },
+  logout: () => (dispatch) => {
+    Promise.resolve()
+      .then(() => dispatch(UserActionCreator.setUser(null)))
+      .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.NO_AUTH)))
+      .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.LOGIN)));
+  },
 };
 
 export {UserActionCreator};
