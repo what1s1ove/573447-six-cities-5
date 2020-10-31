@@ -30,13 +30,6 @@ const placeReducer = (state = initialState, action) => {
         similarOffers,
       });
     }
-    case PlaceActionType.UPLOAD_REVIEW: {
-      const {review} = action.payload;
-
-      return extendObject(state, {
-        reviews: [...state.reviews, review],
-      });
-    }
   }
 
   return state;

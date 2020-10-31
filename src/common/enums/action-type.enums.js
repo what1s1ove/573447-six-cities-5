@@ -6,7 +6,6 @@ const PlaceActionType = {
   LOAD_OFFER: `LOAD_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_SIMILAR_OFFERS: `LOAD_SIMILAR_OFFERS`,
-  UPLOAD_REVIEW: `UPLOAD_REVIEW`,
 };
 
 const UserActionType = {

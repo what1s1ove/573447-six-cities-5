@@ -24,12 +24,6 @@ const PlaceActionCreator = {
       similarOffers,
     },
   }),
-  uploadReview: (review) => ({
-    type: PlaceActionType.UPLOAD_COMMENT,
-    payload: {
-      review,
-    },
-  }),
   fetchOffer: (offerId) => (dispatch, _, {api}) => {
     api
       .get(`/hotels/${offerId}`)
@@ -62,10 +56,12 @@ const PlaceActionCreator = {
         throw err;
       });
   },
-  saveReview: (offerId, comment) => (dispatch, _, {api}) => {
+  uploadReview: (offerId, comment) => (dispatch, _, {api}) => {
     api
       .post(`/comments/${offerId}`, comment)
-      .then(({data}) => dispatch(PlaceActionCreator.uploadReview(data)))
+      .then(({data}) =>
+        dispatch(PlaceActionCreator.loadReviews(adaptReviewsToClient(data)))
+      )
       .catch((err) => {
         throw err;
       });
