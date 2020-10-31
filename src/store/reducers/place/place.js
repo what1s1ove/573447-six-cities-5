@@ -4,6 +4,7 @@ import {extendObject} from '~/helpers/object';
 const initialState = {
   offer: null,
   comments: [],
+  similarOffers: [],
 };
 
 const placeReducer = (state = initialState, action) => {
@@ -20,6 +21,13 @@ const placeReducer = (state = initialState, action) => {
 
       return extendObject(state, {
         comments,
+      });
+    }
+    case PlaceActionType.LOAD_SIMILAR_OFFERS: {
+      const {similarOffers} = action.payload;
+
+      return extendObject(state, {
+        similarOffers,
       });
     }
     case PlaceActionType.UPLOAD_COMMENT: {

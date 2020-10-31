@@ -5,6 +5,7 @@ const PlacesDataActionType = {
 const PlaceActionType = {
   LOAD_OFFER: `LOAD_OFFER`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  LOAD_SIMILAR_OFFERS: `LOAD_SIMILAR_OFFERS`,
   UPLOAD_COMMENT: `UPLOAD_COMMENT`,
 };
 
