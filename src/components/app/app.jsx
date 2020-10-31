@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import {AppRoute} from '~/common/enums/enums';
 import {reviewType} from '~/common/prop-types/prop-types';
 import withActiveItem from '~/hocs/with-active-item/with-active-item';
+import withFormEditing from '~/hocs/with-form-editing/with-form-editing';
 import MainScreen from '~/components/main-screen/main-screen';
 import AuthScreen from '~/components/auth-screen/auth-screen';
 import FavoritesScreen from '~/components/favorites-screen/favorites-screen';
 import OfferScreen from '~/components/offer-screen/offer-screen';
 
 const WrappedMainScreen = withActiveItem(MainScreen);
+const WrappedAuthScreen = withFormEditing(AuthScreen);
 const WrappedOfferScreen = withActiveItem(OfferScreen);
 
 const App = ({reviews}) => (
@@ -19,7 +21,7 @@ const App = ({reviews}) => (
         <WrappedMainScreen />
       </Route>
       <Route path={AppRoute.LOGIN} exact>
-        <AuthScreen />
+        <WrappedAuthScreen />
       </Route>
       <Route path={AppRoute.FAVORITES} exact>
         <FavoritesScreen />
