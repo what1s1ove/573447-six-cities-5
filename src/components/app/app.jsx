@@ -9,6 +9,7 @@ import MainScreen from '~/components/main-screen/main-screen';
 import AuthScreen from '~/components/auth-screen/auth-screen';
 import FavoritesScreen from '~/components/favorites-screen/favorites-screen';
 import OfferScreen from '~/components/offer-screen/offer-screen';
+import PrivateRoute from '~/components/private-route/private-route';
 
 const WrappedMainScreen = withActiveItem(MainScreen);
 const WrappedAuthScreen = withFormEditing(AuthScreen);
@@ -23,9 +24,9 @@ const App = ({reviews}) => (
       <Route path={AppRoute.LOGIN} exact>
         <WrappedAuthScreen />
       </Route>
-      <Route path={AppRoute.FAVORITES} exact>
+      <PrivateRoute path={AppRoute.FAVORITES} exact>
         <FavoritesScreen />
-      </Route>
+      </PrivateRoute>
       <Route path={AppRoute.OFFER_ID} exact>
         <WrappedOfferScreen reviews={reviews} />
       </Route>
