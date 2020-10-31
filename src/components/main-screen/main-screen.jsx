@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {OfferCity, SortType} from '~/common/enums/enums';
 import {offerType} from '~/common/prop-types/prop-types';
+import {getLocations, getFilteredOffers} from '~/store/selectors/selectors';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
 import OffersSort from '~/components/offers-sort/offers-sort';
@@ -14,8 +15,6 @@ import MainScreenEmptyPlaceholder from '~/components/main-screen-empty-placehold
 import {
   getDefaultLocation,
   getLocationByName,
-  getOfferLocations,
-  getFilteredOffers,
 } from './helpers';
 
 const sortTypes = Object.values(SortType);
@@ -27,12 +26,10 @@ const MainScreen = ({
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
-  const {offers, locations} = useSelector(({data}) => ({
-    offers: data.offers,
-    locations: getOfferLocations(data.offers),
-  }));
-  const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
   const [currentLocation, setCurrentLocation] = React.useState(null);
+  const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
+  const locations = useSelector(getLocations);
+  const offers = useSelector(getFilteredOffers(currentLocation, activeSort));
 
   React.useEffect(() => {
     if (!currentLocation) {
@@ -44,14 +41,13 @@ const MainScreen = ({
     return null;
   }
 
+  const hasOffers = Boolean(offers.length);
+
   const handleLocationChange = (offerCity) => {
     const newCurrentLocation = getLocationByName(locations, offerCity);
 
     setCurrentLocation(newCurrentLocation);
   };
-
-  const filteredOffers = getFilteredOffers(offers, currentLocation, activeSort);
-  const hasOffers = Boolean(filteredOffers.length);
 
   return (
     <div className="page page--gray page--main">
@@ -80,7 +76,7 @@ const MainScreen = ({
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">
-                    {filteredOffers.length} places to stay in {currentLocation.name}
+                    {offers.length} places to stay in {currentLocation.name}
                   </b>
                   <OffersSort
                     activeSort={activeSort}
@@ -89,7 +85,7 @@ const MainScreen = ({
                   />
                   <OfferList
                     className="cities__places-list"
-                    offers={filteredOffers}
+                    offers={offers}
                     onActiveOfferChange={onActiveOfferChange}
                   />
                 </section>
@@ -98,7 +94,7 @@ const MainScreen = ({
                     <WrappedMap
                       city={currentLocation}
                       activeOffer={activeOffer}
-                      offers={filteredOffers}
+                      offers={offers}
                     />
                   </section>
                 </div>

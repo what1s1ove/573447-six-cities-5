@@ -1,5 +1,6 @@
 import {adaptUserToClient} from '~/helpers/user';
-import {AppRoute} from '~/common/enums/enums';
+import {getSortedItems} from '~/helpers/array';
+import {AppRoute, SortType} from '~/common/enums/enums';
 
 const MAX_PERCENTS = 100;
 const MAX_OFFER_RATING = 5;
@@ -29,11 +30,52 @@ const getUniqueOfferCities = (offers) => {
   return uniquesOffersCities;
 };
 
+const getSortedLocations = (locations) => {
+  const sortedLocations = getSortedItems(locations, (locationA, locationB) =>
+    locationA.name.localeCompare(locationB.name)
+  );
+
+  return sortedLocations;
+};
+
+const getOfferLocations = (offers) => {
+  const uniqueLocations = getUniqueOfferCities(offers);
+  const sortedLocations = getSortedLocations(uniqueLocations);
+
+  return sortedLocations;
+};
+
 const getOffersByCity = (offers, city) => {
   const offersByCity = offers.filter((offer) => offer.city.name === city.name);
 
   return offersByCity;
 };
+
+const getSortedOffers = (offers, activeFilter) => {
+  switch (activeFilter) {
+    case SortType.TO_HIGHT: {
+      return getSortedItems(
+          offers,
+          (offerA, offerB) => offerA.price - offerB.price
+      );
+    }
+    case SortType.TO_LOW: {
+      return getSortedItems(
+          offers,
+          (offerA, offerB) => offerB.price - offerA.price
+      );
+    }
+    case SortType.TOP_RATE: {
+      return getSortedItems(
+          offers,
+          (offerA, offerB) => offerB.rating - offerA.rating
+      );
+    }
+  }
+
+  return offers;
+};
+
 
 const adaptOfferToClient = (offer) => ({
   id: offer.id,
@@ -64,7 +106,10 @@ export {
   getRatingInPercents,
   getOfferLink,
   getUniqueOfferCities,
+  getSortedLocations,
+  getOfferLocations,
   getOffersByCity,
+  getSortedOffers,
   adaptOfferToClient,
   adaptOffersToClient,
 };
