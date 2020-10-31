@@ -1,3 +1,4 @@
+import {adaptUserToClient} from '~/helpers/user';
 import {AppRoute} from '~/common/enums/enums';
 
 const MAX_PERCENTS = 100;
@@ -50,7 +51,7 @@ const adaptOfferToClient = (offer) => ({
   maxAdultsCount: offer.max_adults,
   location: offer.location,
   goods: offer.goods,
-  host: offer.host,
+  host: adaptUserToClient(offer.host),
 });
 
 const adaptOffersToClient = (offers) => {
