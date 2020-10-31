@@ -1,3 +1,5 @@
 const getUserStatus = ({user}) => user.status;
 
-export {getUserStatus};
+const getUser = ({user}) => user.user;
+
+export {getUserStatus, getUser};
