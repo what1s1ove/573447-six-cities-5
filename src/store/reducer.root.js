@@ -1,8 +1,13 @@
 import {combineReducers} from 'redux';
-import {placesDataReducer, userReducer} from '~/store/reducers/reducers';
+import {
+  placesDataReducer,
+  userReducer,
+  placeReducer,
+} from '~/store/reducers/reducers';
 
 const rootReducer = combineReducers({
   data: placesDataReducer,
+  place: placeReducer,
   user: userReducer,
 });
 
