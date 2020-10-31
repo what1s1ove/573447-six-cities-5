@@ -3,16 +3,12 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import store from '~/store/store';
 import {PlacesDataActionCreator, UserActionCreator} from '~/store/actions/actions';
-import {AppConfig} from '~/common/enums/enums';
-import {generateReviews} from '~/mocks/helpers/helpers';
 import App from '~/components/app/app';
-
-const reviews = generateReviews(AppConfig.REVIEWS_COUNT);
 
 const init = () => {
   ReactDOM.render(
       <Provider store={store}>
-        <App reviews={reviews} />
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );

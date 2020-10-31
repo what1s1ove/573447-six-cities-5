@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {AppRoute} from '~/common/enums/enums';
-import {reviewType} from '~/common/prop-types/prop-types';
 import browserHistory from '~/browser-history';
 import withActiveItem from '~/hocs/with-active-item/with-active-item';
 import withFormEditing from '~/hocs/with-form-editing/with-form-editing';
@@ -16,27 +14,15 @@ const WrappedMainScreen = withActiveItem(MainScreen);
 const WrappedAuthScreen = withFormEditing(AuthScreen);
 const WrappedOfferScreen = withActiveItem(OfferScreen);
 
-const App = ({reviews}) => (
+const App = () => (
   <BrowserRouter history={browserHistory}>
     <Switch>
-      <Route path={AppRoute.MAIN} exact>
-        <WrappedMainScreen />
-      </Route>
-      <Route path={AppRoute.LOGIN} exact>
-        <WrappedAuthScreen />
-      </Route>
-      <PrivateRoute path={AppRoute.FAVORITES} exact>
-        <FavoritesScreen />
-      </PrivateRoute>
-      <Route path={AppRoute.OFFER_ID} exact>
-        <WrappedOfferScreen reviews={reviews} />
-      </Route>
+      <Route path={AppRoute.MAIN} component={WrappedMainScreen} exact />
+      <Route path={AppRoute.LOGIN} component={WrappedAuthScreen} exact />
+      <Route path={AppRoute.OFFER_ID} component={WrappedOfferScreen} exact />
+      <PrivateRoute path={AppRoute.FAVORITES} component={FavoritesScreen} exact />
     </Switch>
   </BrowserRouter>
 );
-
-App.propTypes = {
-  reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
-};
 
 export default App;
