@@ -6,8 +6,8 @@ import Header from '~/components/header/header';
 import FavoriteOffersList from '~/components/favorite-cities-list/favorite-cities-list';
 
 const FavoritesScreen = () => {
-  const {offers} = useSelector(({places}) => ({
-    offers: places.offers,
+  const {offers} = useSelector(({data}) => ({
+    offers: data.offers,
   }));
 
   return (

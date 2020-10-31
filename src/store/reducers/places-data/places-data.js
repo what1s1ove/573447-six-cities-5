@@ -10,8 +10,8 @@ const initialState = {
   locations,
 };
 
-const placesReducer = (state = initialState) => {
+const placesDataReducer = (state = initialState) => {
   return state;
 };
 
-export {placesReducer};
+export {placesDataReducer};

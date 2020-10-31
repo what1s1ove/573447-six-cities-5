@@ -25,9 +25,9 @@ const MainScreen = ({
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
-  const {offers, locations} = useSelector(({places}) => ({
-    offers: places.offers,
-    locations: getSortedLocations(places.locations),
+  const {offers, locations} = useSelector(({data}) => ({
+    offers: data.offers,
+    locations: getSortedLocations(data.locations),
   }));
 
   const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);

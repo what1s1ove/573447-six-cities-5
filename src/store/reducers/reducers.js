@@ -1,1 +1,1 @@
-export * from './places/places';
+export * from './places-data/places-data';

@@ -22,8 +22,8 @@ const OfferScreen = ({
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
-  const {offers} = useSelector(({places}) => ({
-    offers: places.offers,
+  const {offers} = useSelector(({data}) => ({
+    offers: data.offers,
   }));
   const [offer, setOffer] = React.useState(null);
   const params = useParams();
