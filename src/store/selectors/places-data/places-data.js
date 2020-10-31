@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import {getOfferLocations, getOffersByCity, getSortedOffers} from '~/helpers/offer';
 
-const getOffers = (state) => state.data.offers;
+const getOffers = ({data}) => data.offers;
 
 const getLocations = createSelector(getOffers, (offers) => {
   const locations = getOfferLocations(offers);
