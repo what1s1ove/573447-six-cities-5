@@ -32,16 +32,26 @@ const MainScreen = ({
     locations: getOfferLocations(data.offers),
   }));
   const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
-  const [currentLocation, setCurrentLocation] = React.useState(getDefaultLocation(locations));
+  const [currentLocation, setCurrentLocation] = React.useState(null);
 
-  const filteredOffers = getFilteredOffers(offers, currentLocation, activeSort);
-  const hasOffers = Boolean(offers.length);
+  React.useEffect(() => {
+    if (!currentLocation) {
+      setCurrentLocation(getDefaultLocation(locations));
+    }
+  }, [locations]);
+
+  if (!currentLocation) {
+    return null;
+  }
 
   const handleLocationChange = (offerCity) => {
     const newCurrentLocation = getLocationByName(locations, offerCity);
 
     setCurrentLocation(newCurrentLocation);
   };
+
+  const filteredOffers = getFilteredOffers(offers, currentLocation, activeSort);
+  const hasOffers = Boolean(filteredOffers.length);
 
   return (
     <div className="page page--gray page--main">

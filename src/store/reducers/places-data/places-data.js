@@ -1,13 +1,20 @@
-import {generateOffers} from '~/mocks/helpers/helpers';
-import {AppConfig} from '~/common/enums/enums';
-
-const offers = generateOffers(AppConfig.OFFERS_COUNT);
+import {PlacesDataActionType} from '~/common/enums/enums';
+import {extendObject} from '~/helpers/object';
 
 const initialState = {
-  offers,
+  offers: [],
 };
 
-const placesDataReducer = (state = initialState) => {
+const placesDataReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case PlacesDataActionType.LOAD_OFFERS: {
+      const {offers} = action.payload;
+
+      return extendObject(state, {
+        offers,
+      });
+    }
+  }
   return state;
 };
 
