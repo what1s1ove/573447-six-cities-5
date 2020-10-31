@@ -19,10 +19,6 @@ const withMap = (Component) => {
     }, []);
 
     React.useEffect(() => {
-      renderMarkers(allOffers);
-    }, [allOffers]);
-
-    React.useEffect(() => {
       removeMarkers(points);
 
       renderMarkers(allOffers);

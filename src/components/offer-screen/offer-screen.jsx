@@ -34,6 +34,7 @@ const OfferScreen = ({
     similarOffers: getSimilarOffers(state),
   }));
   const offerId = params.id;
+  const hasSimilarOffer = Boolean(similarOffers.length);
 
   React.useEffect(() => {
     dispatch(PlaceActionCreator.fetchOffer(offerId));
@@ -78,11 +79,13 @@ const OfferScreen = ({
             </div>
           </div>
           <section className="property__map map">
-            <WrappedMap
-              city={offer.city}
-              activeOffer={activeOffer}
-              offers={similarOffers}
-            />
+            {hasSimilarOffer && (
+              <WrappedMap
+                city={offer.city}
+                activeOffer={activeOffer}
+                offers={similarOffers}
+              />
+            )}
           </section>
         </section>
         <div className="container">
@@ -90,11 +93,13 @@ const OfferScreen = ({
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <OfferList
-              className="near-places__list"
-              offers={similarOffers}
-              onActiveOfferChange={onActiveOfferChange}
-            />
+            {hasSimilarOffer && (
+              <OfferList
+                className="near-places__list"
+                offers={similarOffers}
+                onActiveOfferChange={onActiveOfferChange}
+              />
+            )}
           </section>
         </div>
       </main>
