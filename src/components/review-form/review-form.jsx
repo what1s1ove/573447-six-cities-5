@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import ReviewRatings from '~/components/review-ratings/review-ratings';
 import {ReviewFormKey} from './common';
 
-const ReviewForm = ({formState, onFormStateChange}) => {
+const ReviewForm = ({
+  formState,
+  onFormStateChange,
+  onFormReset,
+  onReviewFormSubmit,
+}) => {
   const onRatingChange = (newRating) => {
     onFormStateChange(ReviewFormKey.RARING, newRating);
   };
@@ -12,12 +17,28 @@ const ReviewForm = ({formState, onFormStateChange}) => {
     onFormStateChange(ReviewFormKey.COMMENT, target.value);
   };
 
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+
+    onReviewFormSubmit(formState);
+
+    onFormReset();
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      onSubmit={handleFormSubmit}
+      action="#"
+      method="post"
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <ReviewRatings currentRating={formState.rating || ``} onRatingChange={onRatingChange} />
+      <ReviewRatings
+        currentRating={formState.rating || ``}
+        onRatingChange={onRatingChange}
+      />
       <textarea
         className="reviews__textarea form__textarea"
         value={formState.comment || ``}
@@ -45,6 +66,8 @@ const ReviewForm = ({formState, onFormStateChange}) => {
 ReviewForm.propTypes = {
   formState: PropTypes.object.isRequired,
   onFormStateChange: PropTypes.func.isRequired,
+  onFormReset: PropTypes.func.isRequired,
+  onReviewFormSubmit: PropTypes.func.isRequired,
 };
 
 export default ReviewForm;

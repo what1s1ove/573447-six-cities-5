@@ -33,12 +33,17 @@ const OfferScreen = ({
     reviews: getReviews(state),
     similarOffers: getSimilarOffers(state),
   }));
+  const offerId = params.id;
 
   React.useEffect(() => {
-    dispatch(PlaceActionCreator.fetchOffer(params.id));
-    dispatch(PlaceActionCreator.fetchReviews(params.id));
-    dispatch(PlaceActionCreator.fetchSimilarOffers(params.id));
+    dispatch(PlaceActionCreator.fetchOffer(offerId));
+    dispatch(PlaceActionCreator.fetchReviews(offerId));
+    dispatch(PlaceActionCreator.fetchSimilarOffers(offerId));
   }, []);
+
+  const handleReviewFormSubmit = React.useCallback((review) => {
+    dispatch(PlaceActionCreator.uploadReview(offerId, review));
+  }, [offerId, dispatch]);
 
   if (!offer) {
     return null;
@@ -59,7 +64,9 @@ const OfferScreen = ({
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ReviewList reviews={reviews} />
-                <WrappedReviewForm />
+                <WrappedReviewForm
+                  onReviewFormSubmit={handleReviewFormSubmit}
+                />
               </section>
             </div>
           </div>
