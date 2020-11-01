@@ -1104,6 +1104,7 @@ img {
 .property__feature--entire {
   background-image: url(../img/ico-place.svg);
   background-size: 13px 16px;
+  text-transform: capitalize;
 }
 .property__feature--bedrooms {
   background-image: url(../img/ico-bedrooms.svg);
