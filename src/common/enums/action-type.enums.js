@@ -10,10 +10,20 @@ const PlaceActionType = {
   UPDATE_SIMILAR_OFFER: `UPDATE_SIMILAR_OFFER`,
 };
 
+const FavoritesActionType = {
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`,
+};
+
 const UserActionType = {
   SET_AUTH_STATUS: `SET_AUTH_STATUS`,
   SET_USER: `SET_USER`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
-export {PlacesDataActionType, PlaceActionType, UserActionType};
+export {
+  PlacesDataActionType,
+  PlaceActionType,
+  UserActionType,
+  FavoritesActionType,
+};
