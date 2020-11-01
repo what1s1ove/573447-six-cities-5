@@ -8,6 +8,12 @@ const PlacesDataActionCreator = {
       offers,
     },
   }),
+  updateOffer: (offer) => ({
+    type: PlacesDataActionType.UPDATE_OFFER,
+    payload: {
+      offer,
+    },
+  }),
   fetchOffers: () => (dispatch, _, {api}) => {
     api
       .get(`/hotels`)
