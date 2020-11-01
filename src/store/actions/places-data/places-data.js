@@ -14,7 +14,7 @@ const PlacesDataActionCreator = {
       offer,
     },
   }),
-  fetchOffers: () => (dispatch, _, {api}) => {
+  fetchOffers: () => (dispatch, _, {api}) =>
     api
       .get(`/hotels`)
       .then(({data}) =>
@@ -22,26 +22,24 @@ const PlacesDataActionCreator = {
       )
       .catch((err) => {
         throw err;
-      });
-  },
-  toggleFavorite: (offer) => (dispatch, _, {api}) => {
-    dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
-      isSaving: true
-    })));
-
-    api
-      .post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`)
+      }),
+  toggleFavorite: (offer) => (dispatch, _, {api}) => (
+    Promise.resolve(() =>
+      dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
+        isSaving: true,
+      }))))
+      .then(() => api.post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
       .then(({data}) =>
         dispatch(PlacesDataActionCreator.updateOffer(adaptOfferToClient(data)))
       )
       .catch((err) => {
-        dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
+        dispatch(PlacesDataActionCreator.loadOffer(extendObject(offer, {
           isSaving: false
         })));
 
         throw err;
-      });
-  },
+      })
+  ),
 };
 
 export {PlacesDataActionCreator};

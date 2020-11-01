@@ -24,13 +24,12 @@ const FavoritesActionCreator = {
         throw err;
       });
   },
-  toggleFavorite: (offer) => (dispatch, _, {api}) => {
-    dispatch(FavoritesActionCreator.updateFavorite(extendObject(offer, {
-      isSaving: true
-    })));
-
-    api
-      .post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`)
+  toggleFavorite: (offer) => (dispatch, _, {api}) => (
+    Promise.resolve(() =>
+      dispatch(FavoritesActionCreator.updateFavorite(extendObject(offer, {
+        isSaving: true,
+      }))))
+      .then(() => api.post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
       .then(({data}) =>
         dispatch(FavoritesActionCreator.updateFavorite(adaptOfferToClient(data)))
       )
@@ -40,8 +39,8 @@ const FavoritesActionCreator = {
         })));
 
         throw err;
-      });
-  }
+      })
+  )
 };
 
 export {FavoritesActionCreator};

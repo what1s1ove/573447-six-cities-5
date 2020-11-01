@@ -20,7 +20,7 @@ const UserActionCreator = {
       path,
     },
   }),
-  checkAuth: () => (dispatch, _, {api}) => {
+  checkAuth: () => (dispatch, _, {api}) => (
     api
       .get(`/login`)
       .then(({data}) =>
@@ -29,9 +29,9 @@ const UserActionCreator = {
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
       .catch((err) => {
         throw err;
-      });
-  },
-  login: ({email, password}) => (dispatch, _, {api}) => {
+      })
+  ),
+  login: ({email, password}) => (dispatch, _, {api}) => (
     api
       .post(`/login`, {email, password})
       .then(({data}) =>
@@ -41,14 +41,14 @@ const UserActionCreator = {
       .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.MAIN)))
       .catch((err) => {
         throw err;
-      });
-  },
-  logout: () => (dispatch) => {
+      })
+  ),
+  logout: () => (dispatch) => (
     Promise.resolve()
       .then(() => dispatch(UserActionCreator.setUser(null)))
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.NO_AUTH)))
-      .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.LOGIN)));
-  },
+      .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.LOGIN)))
+  ),
 };
 
 export {UserActionCreator};

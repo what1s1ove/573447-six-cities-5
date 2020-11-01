@@ -31,7 +31,7 @@ const PlaceActionCreator = {
       offer
     }
   }),
-  fetchOffer: (offerId) => (dispatch, _, {api}) => {
+  fetchOffer: (offerId) => (dispatch, _, {api}) => (
     api
       .get(`/hotels/${offerId}`)
       .then(({data}) =>
@@ -39,9 +39,9 @@ const PlaceActionCreator = {
       )
       .catch((err) => {
         throw err;
-      });
-  },
-  fetchReviews: (offerId) => (dispatch, _, {api}) => {
+      })
+  ),
+  fetchReviews: (offerId) => (dispatch, _, {api}) => (
     api
       .get(`/comments/${offerId}`)
       .then(({data}) =>
@@ -49,9 +49,9 @@ const PlaceActionCreator = {
       )
       .catch((err) => {
         throw err;
-      });
-  },
-  fetchSimilarOffers: (offerId) => (dispatch, _, {api}) => {
+      })
+  ),
+  fetchSimilarOffers: (offerId) => (dispatch, _, {api}) => (
     api
       .get(`/hotels/${offerId}/nearby`)
       .then(({data}) =>
@@ -61,9 +61,9 @@ const PlaceActionCreator = {
       )
       .catch((err) => {
         throw err;
-      });
-  },
-  uploadReview: (offerId, comment) => (dispatch, _, {api}) => {
+      })
+  ),
+  uploadReview: (offerId, comment) => (dispatch, _, {api}) => (
     api
       .post(`/comments/${offerId}`, comment)
       .then(({data}) =>
@@ -71,15 +71,14 @@ const PlaceActionCreator = {
       )
       .catch((err) => {
         throw err;
-      });
-  },
-  toggleFavorite: (offer) => (dispatch, _, {api}) => {
-    dispatch(PlaceActionCreator.loadOffer(extendObject(offer, {
-      isSaving: true
-    })));
-
-    api
-      .post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`)
+      })
+  ),
+  toggleFavorite: (offer) => (dispatch, _, {api}) => (
+    Promise.resolve(() =>
+      dispatch(PlaceActionCreator.loadOffer(extendObject(offer, {
+        isSaving: true,
+      }))))
+      .then(() => api.post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
@@ -89,15 +88,14 @@ const PlaceActionCreator = {
         })));
 
         throw err;
-      });
-  },
-  toggleSimilarOfferFavorite: (offer) => (dispatch, _, {api}) => {
-    dispatch(PlaceActionCreator.updateSimilarOffer(extendObject(offer, {
-      isSaving: true
-    })));
-
-    api
-      .post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`)
+      })
+  ),
+  toggleSimilarOfferFavorite: (offer) => (dispatch, _, {api}) => (
+    Promise.resolve(() =>
+      dispatch(PlaceActionCreator.updateSimilarOffer(extendObject(offer, {
+        isSaving: true,
+      }))))
+      .then(() => api.post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
       .then(({data}) =>
         dispatch(PlaceActionCreator.updateSimilarOffer(adaptOfferToClient(data)))
       )
@@ -107,8 +105,8 @@ const PlaceActionCreator = {
         })));
 
         throw err;
-      });
-  }
+      })
+  )
 };
 
 export {PlaceActionCreator};
