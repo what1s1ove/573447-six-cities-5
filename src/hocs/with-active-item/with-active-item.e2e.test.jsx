@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {shallow} from 'enzyme';
+import {mockedOffer} from '~/mocks/mocks';
 import withActiveItem from './with-active-item';
 
 const MockedComponent = () => <div />;
@@ -17,8 +18,10 @@ describe(`withActiveItem hoc`, () => {
 
     expect(wrapper.props().activeItem).toBeNull();
 
-    wrapper.props().onActiveItemChange(`active`);
+    wrapper.props().onActiveItemChange(mockedOffer);
 
-    expect(wrapper.props().activeItem).toBe(`active`);
+    expect(handleActiveItemChange).toHaveBeenCalled();
+
+    expect(wrapper.props().activeItem).toBe(mockedOffer);
   });
 });
