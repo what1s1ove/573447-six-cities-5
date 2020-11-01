@@ -1,10 +1,14 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import clsx from 'clsx';
 import {getOfferLink, getRatingInPercents} from '~/helpers/helpers';
 import {offerType} from '~/common/prop-types/prop-types';
 
-const FavoriteOffersItem = ({offer}) => {
+const FavoriteOffersItem = ({offer, onFavoriteToggle}) => {
   const pathToOffer = getOfferLink(offer.id);
+
+  const handleFavoriteToggle = () => onFavoriteToggle(offer);
 
   return (
     <article className="favorites__card place-card">
@@ -26,7 +30,12 @@ const FavoriteOffersItem = ({offer}) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button place-card__bookmark-button--active button"
+            className={clsx(
+                `place-card__bookmark-button button`,
+                offer.isFavorite && `place-card__bookmark-button--active`
+            )}
+            onClick={handleFavoriteToggle}
+            disabled={offer.isSaving}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -56,6 +65,7 @@ const FavoriteOffersItem = ({offer}) => {
 
 FavoriteOffersItem.propTypes = {
   offer: offerType.isRequired,
+  onFavoriteToggle: PropTypes.func.isRequired,
 };
 
 export default FavoriteOffersItem;
