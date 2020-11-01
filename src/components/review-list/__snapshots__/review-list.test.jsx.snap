@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReviewList component should render ReviewList component 1`] = `
+<ul
+  class="reviews__list"
+>
+  <li
+    class="reviews__item"
+  >
+    <div
+      class="reviews__user user"
+    >
+      <div
+        class="reviews__avatar-wrapper user__avatar-wrapper"
+      >
+        <img
+          alt="Reviews avatar"
+          class="reviews__avatar user__avatar"
+          height="54"
+          src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/2.jpg"
+          width="54"
+        />
+      </div>
+      <span
+        class="reviews__user-name"
+      >
+        Jack
+      </span>
+    </div>
+    <div
+      class="reviews__info"
+    >
+      <div
+        class="reviews__rating rating"
+      >
+        <div
+          class="reviews__stars rating__stars"
+        >
+          <span
+            style="width:80%"
+          />
+          <span
+            class="visually-hidden"
+          >
+            Rating
+          </span>
+        </div>
+      </div>
+      <p
+        class="reviews__text"
+      >
+        I stayed here for one night and it was an unpleasant experience.
+      </p>
+      <time
+        class="reviews__time"
+        datetime="2020-10-04T09:29:21.139Z"
+      >
+        October 2020
+      </time>
+    </div>
+  </li>
+  <li
+    class="reviews__item"
+  >
+    <div
+      class="reviews__user user"
+    >
+      <div
+        class="reviews__avatar-wrapper user__avatar-wrapper"
+      >
+        <img
+          alt="Reviews avatar"
+          class="reviews__avatar user__avatar"
+          height="54"
+          src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg"
+          width="54"
+        />
+      </div>
+      <span
+        class="reviews__user-name"
+      >
+        Corey
+      </span>
+    </div>
+    <div
+      class="reviews__info"
+    >
+      <div
+        class="reviews__rating rating"
+      >
+        <div
+          class="reviews__stars rating__stars"
+        >
+          <span
+            style="width:80%"
+          />
+          <span
+            class="visually-hidden"
+          >
+            Rating
+          </span>
+        </div>
+      </div>
+      <p
+        class="reviews__text"
+      >
+        The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.
+      </p>
+      <time
+        class="reviews__time"
+        datetime="2020-10-04T09:29:21.139Z"
+      >
+        October 2020
+      </time>
+    </div>
+  </li>
+  <li
+    class="reviews__item"
+  >
+    <div
+      class="reviews__user user"
+    >
+      <div
+        class="reviews__avatar-wrapper user__avatar-wrapper"
+      >
+        <img
+          alt="Reviews avatar"
+          class="reviews__avatar user__avatar"
+          height="54"
+          src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/3.jpg"
+          width="54"
+        />
+      </div>
+      <span
+        class="reviews__user-name"
+      >
+        Isaac
+      </span>
+    </div>
+    <div
+      class="reviews__info"
+    >
+      <div
+        class="reviews__rating rating"
+      >
+        <div
+          class="reviews__stars rating__stars"
+        >
+          <span
+            style="width:80%"
+          />
+          <span
+            class="visually-hidden"
+          >
+            Rating
+          </span>
+        </div>
+      </div>
+      <p
+        class="reviews__text"
+      >
+        The deluxe room was a quite comfortable one with all the adequate facilities. The only thing that made me feel uncomfortable was the rude behavior of an impolite staff at the reception desk.
+      </p>
+      <time
+        class="reviews__time"
+        datetime="2020-10-04T09:29:21.139Z"
+      >
+        October 2020
+      </time>
+    </div>
+  </li>
+</ul>
+`;
