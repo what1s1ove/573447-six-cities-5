@@ -1,13 +1,19 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '~/common/enums/enums';
-import {useSelector} from 'react-redux';
-import {getOffers} from '~/store/selectors/selectors';
+import {useDispatch, useSelector} from 'react-redux';
+import {FavoritesActionCreator} from '~/store/actions/actions';
+import {getFavorites} from '~/store/selectors/selectors';
 import Header from '~/components/header/header';
 import FavoriteOffersList from '~/components/favorite-cities-list/favorite-cities-list';
 
 const FavoritesScreen = () => {
-  const offers = useSelector(getOffers);
+  const dispatch = useDispatch();
+  const offers = useSelector(getFavorites);
+
+  React.useEffect(() => {
+    dispatch(FavoritesActionCreator.fetchFavorites());
+  }, []);
 
   return (
     <div className="page">

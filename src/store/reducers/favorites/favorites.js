@@ -18,8 +18,8 @@ const favoritesReducer = (state = initialState, action) => {
       const {offer: updatedOffer} = action.payload;
 
       return extendObject(state, {
-        offers: state.favorites.filter(
-            (offer) => offer.id !== updatedOffer.id
+        offers: state.favorites.map(
+            (offer) => offer.id === updatedOffer.id ? updatedOffer : offer
         ),
       });
     }
