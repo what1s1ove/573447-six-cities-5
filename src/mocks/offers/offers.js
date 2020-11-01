@@ -55,6 +55,7 @@ const mockedOffer = {
     zoom: 16,
   },
   id: 1,
+  isSaving: false,
 };
 
 const mockedOffers = [
@@ -116,6 +117,7 @@ const mockedOffers = [
       zoom: 16,
     },
     id: 2,
+    isSaving: false,
   },
   {
     city: {
@@ -173,6 +175,7 @@ const mockedOffers = [
       zoom: 16,
     },
     id: 3,
+    isSaving: false,
   },
 ];
 
