@@ -34,7 +34,7 @@ const placeReducer = (state = initialState, action) => {
       const {offer: updatedOffer} = action.payload;
 
       return extendObject(state, {
-        offers: state.offers.map((offer) =>
+        similarOffers: state.similarOffers.map((offer) =>
           offer.id === updatedOffer.id ? updatedOffer : offer
         ),
       });

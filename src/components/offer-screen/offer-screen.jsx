@@ -50,6 +50,10 @@ const OfferScreen = ({
     dispatch(PlaceActionCreator.toggleFavorite(offer));
   }, [offerId, offer, dispatch]);
 
+  const handleSimilarOfferFavoriteToggle = React.useCallback((similarOffer) => {
+    dispatch(PlaceActionCreator.toggleSimilarOfferFavorite(similarOffer));
+  }, [dispatch]);
+
   if (!offer) {
     return null;
   }
@@ -98,6 +102,7 @@ const OfferScreen = ({
                 className="near-places__list"
                 offers={similarOffers}
                 onActiveOfferChange={onActiveOfferChange}
+                onFavoriteToggle={handleSimilarOfferFavoriteToggle}
               />
             )}
           </section>
