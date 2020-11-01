@@ -30,6 +30,15 @@ const placeReducer = (state = initialState, action) => {
         similarOffers,
       });
     }
+    case PlaceActionType.UPDATE_SIMILAR_OFFER: {
+      const {offer: updatedOffer} = action.payload;
+
+      return extendObject(state, {
+        offers: state.offers.map((offer) =>
+          offer.id === updatedOffer.id ? updatedOffer : offer
+        ),
+      });
+    }
   }
 
   return state;
