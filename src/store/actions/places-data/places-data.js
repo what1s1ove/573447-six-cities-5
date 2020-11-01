@@ -1,5 +1,5 @@
-import {PlacesDataActionType} from '~/common/enums/enums';
-import {adaptOffersToClient} from '~/helpers/offer';
+import {OfferFavoriteStatus, PlacesDataActionType} from '~/common/enums/enums';
+import {adaptOffersToClient, adaptOfferToClient, extendObject} from '~/helpers/helpers';
 
 const PlacesDataActionCreator = {
   loadOffers: (offers) => ({
@@ -21,6 +21,24 @@ const PlacesDataActionCreator = {
         dispatch(PlacesDataActionCreator.loadOffers(adaptOffersToClient(data)))
       )
       .catch((err) => {
+        throw err;
+      });
+  },
+  toggleFavorite: (offer, isFavorite) => (dispatch, _, {api}) => {
+    dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
+      isSaving: true
+    })));
+
+    api
+      .post(`/favorite/${offer.id}/${isFavorite ? OfferFavoriteStatus.TRUE : OfferFavoriteStatus.FALSE}`)
+      .then(({data}) =>
+        dispatch(PlacesDataActionCreator.updateOffer(adaptOfferToClient(data)))
+      )
+      .catch((err) => {
+        dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
+          isSaving: false
+        })));
+
         throw err;
       });
   },
