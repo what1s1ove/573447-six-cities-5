@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerType} from '~/common/prop-types/prop-types';
-import {PlaceActionCreator} from '~/store/actions/place/place';
+import {PlaceActionCreator} from '~/store/actions/actions';
 import {
   getOffer,
   getReviews,
@@ -47,7 +47,7 @@ const OfferScreen = ({
   }, [offerId, dispatch]);
 
   const handleFavoriteToggle = React.useCallback(() => {
-    dispatch(PlaceActionCreator.toggleFavorite(offer, !offer.isFavorite));
+    dispatch(PlaceActionCreator.toggleFavorite(offer));
   }, [offerId, offer, dispatch]);
 
   if (!offer) {

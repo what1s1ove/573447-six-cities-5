@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import {getRatingInPercents, getOfferLink} from '~/helpers/helpers';
 import {offerType} from '~/common/prop-types/prop-types';
 
-const OfferItem = ({offer, onActiveOfferChange}) => {
+const OfferItem = ({offer, onActiveOfferChange, onFavoriteToggle}) => {
   const pathToOffer = getOfferLink(offer.id);
 
   const handleOfferMouseOver = () => {
@@ -15,6 +15,8 @@ const OfferItem = ({offer, onActiveOfferChange}) => {
   const handleMouseOut = () => {
     onActiveOfferChange(null);
   };
+
+  const handleFavoriteToggle = () => onFavoriteToggle(offer);
 
   return (
     <article
@@ -49,6 +51,7 @@ const OfferItem = ({offer, onActiveOfferChange}) => {
                 `place-card__bookmark-button button`,
                 offer.isFavorite && `place-card__bookmark-button--active`
             )}
+            onClick={handleFavoriteToggle}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -79,6 +82,7 @@ const OfferItem = ({offer, onActiveOfferChange}) => {
 OfferItem.propTypes = {
   offer: offerType.isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
+  onFavoriteToggle: PropTypes.func.isRequired,
 };
 
 export default OfferItem;

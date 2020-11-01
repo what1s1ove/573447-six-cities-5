@@ -67,13 +67,13 @@ const PlaceActionCreator = {
         throw err;
       });
   },
-  toggleFavorite: (offer, isFavorite) => (dispatch, _, {api}) => {
+  toggleFavorite: (offer) => (dispatch, _, {api}) => {
     dispatch(PlaceActionCreator.loadOffer(extendObject(offer, {
       isSaving: true
     })));
 
     api
-      .post(`/favorite/${offer.id}/${isFavorite ? OfferFavoriteStatus.TRUE : OfferFavoriteStatus.FALSE}`)
+      .post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`)
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
