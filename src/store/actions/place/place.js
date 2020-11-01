@@ -91,6 +91,24 @@ const PlaceActionCreator = {
         throw err;
       });
   },
+  toggleSimilarOfferFavorite: (offer) => (dispatch, _, {api}) => {
+    dispatch(PlaceActionCreator.updateSimilarOffer(extendObject(offer, {
+      isSaving: true
+    })));
+
+    api
+      .post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`)
+      .then(({data}) =>
+        dispatch(PlaceActionCreator.updateSimilarOffer(adaptOfferToClient(data)))
+      )
+      .catch((err) => {
+        dispatch(PlaceActionCreator.updateSimilarOffer(extendObject(offer, {
+          isSaving: false
+        })));
+
+        throw err;
+      });
+  }
 };
 
 export {PlaceActionCreator};
