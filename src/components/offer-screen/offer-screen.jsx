@@ -40,7 +40,7 @@ const OfferScreen = ({
     dispatch(PlaceActionCreator.fetchOffer(offerId));
     dispatch(PlaceActionCreator.fetchReviews(offerId));
     dispatch(PlaceActionCreator.fetchSimilarOffers(offerId));
-  }, []);
+  }, [offerId]);
 
   const handleReviewFormSubmit = React.useCallback((review) => {
     dispatch(PlaceActionCreator.uploadReview(offerId, review));
@@ -48,7 +48,7 @@ const OfferScreen = ({
 
   const handleFavoriteToggle = React.useCallback(() => {
     dispatch(PlaceActionCreator.toggleFavorite(offer));
-  }, [offerId, offer, dispatch]);
+  }, [offer, dispatch]);
 
   const handleSimilarOfferFavoriteToggle = React.useCallback((similarOffer) => {
     dispatch(PlaceActionCreator.toggleSimilarOfferFavorite(similarOffer));
