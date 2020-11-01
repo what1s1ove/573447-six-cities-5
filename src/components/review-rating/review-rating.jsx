@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 const ReviewRating = ({value, name, isChecked, onRatingChange}) => {
   const ratingLabel = `${value}-stars`;
 
-  const handleRaringChange = ({target}) => {
-    onRatingChange(target.value);
-  };
+  const handleRaringChange = ({target}) => onRatingChange(target.value);
 
   return (
     <>
