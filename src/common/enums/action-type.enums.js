@@ -1,5 +1,6 @@
 const PlacesDataActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
+  UPDATE_OFFER: `UPDATE_OFFER`,
 };
 
 const PlaceActionType = {
