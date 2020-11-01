@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import AuthForm from './auth-form';
 
 describe(`AuthForm component`, () => {
-  it(`should call callback when from submit`, () => {
+  it(`should call callback when form was submitted`, () => {
     const handleFormSubmit = jest.fn();
     const component = shallow(
         <AuthForm

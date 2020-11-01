@@ -4,7 +4,7 @@ import {mockedOffer} from '~/mocks/mocks';
 import FavoriteOffersItem from './favorite-offers-item';
 
 describe(`FavoriteOffersItem component`, () => {
-  it(`should call callback when from favorite button was clicked`, () => {
+  it(`should call callback when favorite button was clicked`, () => {
     const handleFavoriteToggle = jest.fn();
     const component = shallow(
         <FavoriteOffersItem

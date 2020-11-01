@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import LocationsItem from './locations-item';
 
 describe(`LocationsItem component`, () => {
-  it(`should call callback when from location button was clicked`, () => {
+  it(`should call callback when location button was clicked`, () => {
     const handleLocationChange = jest.fn();
     const component = shallow(
         <LocationsItem
