@@ -1,3 +1,3 @@
-const getFavorites = ({favorites}) => favorites.favorites;
+const getFavorites = ({favorites}) => favorites.offers;
 
 export {getFavorites};

@@ -2,7 +2,7 @@ import {extendObject} from '~/helpers/helpers';
 import {FavoritesActionType} from '~/common/enums/enums';
 
 const initialState = {
-  favorites: [],
+  offers: [],
 };
 
 const favoritesReducer = (state = initialState, action) => {
@@ -18,7 +18,7 @@ const favoritesReducer = (state = initialState, action) => {
       const {offer: updatedOffer} = action.payload;
 
       return extendObject(state, {
-        favorites: state.favorites.filter(
+        offers: state.favorites.filter(
             (offer) => offer.id !== updatedOffer.id
         ),
       });
