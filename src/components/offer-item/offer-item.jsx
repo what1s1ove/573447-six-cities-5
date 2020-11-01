@@ -8,13 +8,9 @@ import {offerType} from '~/common/prop-types/prop-types';
 const OfferItem = ({offer, onActiveOfferChange, onFavoriteToggle}) => {
   const pathToOffer = getOfferLink(offer.id);
 
-  const handleOfferMouseOver = () => {
-    onActiveOfferChange(offer);
-  };
+  const handleOfferMouseOver = () => onActiveOfferChange(offer);
 
-  const handleMouseOut = () => {
-    onActiveOfferChange(null);
-  };
+  const handleMouseOut = () => onActiveOfferChange(null);
 
   const handleFavoriteToggle = () => onFavoriteToggle(offer);
 
@@ -52,6 +48,7 @@ const OfferItem = ({offer, onActiveOfferChange, onFavoriteToggle}) => {
                 offer.isFavorite && `place-card__bookmark-button--active`
             )}
             onClick={handleFavoriteToggle}
+            disabled={offer.isSaving}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
