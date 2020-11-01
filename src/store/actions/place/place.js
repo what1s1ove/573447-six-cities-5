@@ -25,6 +25,12 @@ const PlaceActionCreator = {
       similarOffers,
     },
   }),
+  updateSimilarOffer: (offer) => ({
+    type: PlaceActionType.UPDATE_SIMILAR_OFFER,
+    payload: {
+      offer
+    }
+  }),
   fetchOffer: (offerId) => (dispatch, _, {api}) => {
     api
       .get(`/hotels/${offerId}`)
