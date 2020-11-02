@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerType, reviewType} from '~/common/prop-types/prop-types';
+import {getOffers} from '~/store/selectors/selectors';
 import withMap from '~/hocs/with-map/with-map';
 import withFormEditing from '~/hocs/with-form-editing/with-form-editing';
 import Header from '~/components/header/header';
@@ -22,9 +23,7 @@ const OfferScreen = ({
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
-  const {offers} = useSelector(({places}) => ({
-    offers: places.offers,
-  }));
+  const offers = useSelector(getOffers);
   const [offer, setOffer] = React.useState(null);
   const params = useParams();
 
@@ -35,7 +34,7 @@ const OfferScreen = ({
       setOffer(offerById);
       onActiveOfferChange(offerById);
     }
-  }, [params.id]);
+  }, [params.id, offers]);
 
   if (!offer) {
     return null;

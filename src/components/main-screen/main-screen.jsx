@@ -2,8 +2,9 @@ import * as React from 'react';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import {SortType} from '~/common/enums/enums';
+import {OfferCity, SortType} from '~/common/enums/enums';
 import {offerType} from '~/common/prop-types/prop-types';
+import {getLocations, getFilteredOffers} from '~/store/selectors/selectors';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
 import OffersSort from '~/components/offers-sort/offers-sort';
@@ -13,11 +14,11 @@ import OfferList from '~/components/offer-list/offer-list';
 import MainScreenEmptyPlaceholder from '~/components/main-screen-empty-placeholder/main-screen-empty-placeholder';
 import {
   getDefaultLocation,
-  getSortedLocations,
-  getFilteredOffers,
+  getLocationByName,
 } from './helpers';
 
 const sortTypes = Object.values(SortType);
+const offerCities = Object.values(OfferCity);
 
 const WrappedMap = withMap(Map);
 
@@ -25,16 +26,28 @@ const MainScreen = ({
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
-  const {offers, locations} = useSelector(({places}) => ({
-    offers: places.offers,
-    locations: getSortedLocations(places.locations),
-  }));
-
+  const [currentLocation, setCurrentLocation] = React.useState(null);
   const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
-  const [currentLocation, setCurrentLocation] = React.useState(getDefaultLocation(locations));
+  const locations = useSelector(getLocations);
+  const offers = useSelector(getFilteredOffers(currentLocation, activeSort));
 
-  const filteredOffers = getFilteredOffers(offers, currentLocation, activeSort);
+  React.useEffect(() => {
+    if (!currentLocation) {
+      setCurrentLocation(getDefaultLocation(locations));
+    }
+  }, [locations]);
+
+  if (!currentLocation) {
+    return null;
+  }
+
   const hasOffers = Boolean(offers.length);
+
+  const handleLocationChange = (offerCity) => {
+    const newCurrentLocation = getLocationByName(locations, offerCity);
+
+    setCurrentLocation(newCurrentLocation);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -47,9 +60,9 @@ const MainScreen = ({
       >
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList
-          locations={locations}
+          locations={offerCities}
           activeLocation={currentLocation}
-          onLocationChange={setCurrentLocation}
+          onLocationChange={handleLocationChange}
         />
         <div className="cities">
           <div
@@ -63,8 +76,7 @@ const MainScreen = ({
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">
-                    {filteredOffers.length} places to stay in
-                    {currentLocation.name}
+                    {offers.length} places to stay in {currentLocation.name}
                   </b>
                   <OffersSort
                     activeSort={activeSort}
@@ -73,7 +85,7 @@ const MainScreen = ({
                   />
                   <OfferList
                     className="cities__places-list"
-                    offers={filteredOffers}
+                    offers={offers}
                     onActiveOfferChange={onActiveOfferChange}
                   />
                 </section>
@@ -82,7 +94,7 @@ const MainScreen = ({
                     <WrappedMap
                       city={currentLocation}
                       activeOffer={activeOffer}
-                      offers={filteredOffers}
+                      offers={offers}
                     />
                   </section>
                 </div>
