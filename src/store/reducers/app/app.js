@@ -1,4 +1,4 @@
-import {AppActionType} from '~/common/enums/action-type.enum';
+import {AppActionType} from '~/common/enums/enums';
 import {extendObject} from '~/helpers/helpers';
 
 const initialState = {

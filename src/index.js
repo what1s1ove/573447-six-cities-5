@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import store from '~/store/store';
-import {PlacesDataActionCreator} from '~/store/actions/actions';
+import {PlacesDataActionCreator, UserActionCreator} from '~/store/actions/actions';
 import {AppConfig} from '~/common/enums/enums';
 import {generateReviews} from '~/mocks/helpers/helpers';
 import App from '~/components/app/app';
@@ -18,4 +18,7 @@ const init = () => {
   );
 };
 
-Promise.all([store.dispatch(PlacesDataActionCreator.fetchOffers())]).then(() => init());
+Promise.all([
+  store.dispatch(PlacesDataActionCreator.fetchOffers()),
+  store.dispatch(UserActionCreator.checkAuth()),
+]).then(() => init());

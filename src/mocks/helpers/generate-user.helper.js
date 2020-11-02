@@ -1,4 +1,4 @@
-import {getRandomNumber, getRandomItem} from '~/helpers/helpers';
+import {getRandomNumber, getRandomItem, generateRandomId} from '~/helpers/helpers';
 
 const UserConfig = {
   NAMES: [`Angelina`, `Max`, `Oliver`],
@@ -6,6 +6,7 @@ const UserConfig = {
 };
 
 const generateUser = () => ({
+  id: generateRandomId(),
   name: getRandomItem(UserConfig.NAMES),
   avatarUrl: getRandomItem(UserConfig.IMG_PATHS),
   isPro: Boolean(getRandomNumber(0, 1)),

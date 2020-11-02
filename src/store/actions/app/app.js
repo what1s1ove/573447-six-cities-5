@@ -7,6 +7,12 @@ const AppActionCreator = {
       error,
     },
   }),
+  redirectToRoute: (path) => ({
+    type: AppActionType.REDIRECT_TO_ROUTE,
+    payload: {
+      path,
+    },
+  }),
 };
 
 export {AppActionCreator};
