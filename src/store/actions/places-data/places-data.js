@@ -33,7 +33,7 @@ const PlacesDataActionCreator = {
         dispatch(PlacesDataActionCreator.updateOffer(adaptOfferToClient(data)))
       )
       .catch((err) => {
-        dispatch(PlacesDataActionCreator.loadOffer(extendObject(offer, {
+        dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
           isSaving: false
         })));
 
