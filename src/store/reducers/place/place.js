@@ -44,4 +44,4 @@ const placeReducer = (state = initialState, action) => {
   return state;
 };
 
-export {placeReducer};
+export {initialState, placeReducer};
