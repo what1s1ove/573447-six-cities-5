@@ -33,7 +33,7 @@ describe(`Place reducer works correctly`, () => {
     expect(
         placeReducer(
             {
-              offer: [],
+              offer: null,
               reviews: [],
               similarOffers: [],
             },
@@ -45,7 +45,7 @@ describe(`Place reducer works correctly`, () => {
             }
         )
     ).toEqual({
-      offer: [],
+      offer: null,
       reviews: mockedReviews,
       similarOffers: [],
     });
@@ -55,7 +55,7 @@ describe(`Place reducer works correctly`, () => {
     expect(
         placeReducer(
             {
-              offer: [],
+              offer: null,
               reviews: [],
               similarOffers: [],
             },
@@ -67,7 +67,7 @@ describe(`Place reducer works correctly`, () => {
             }
         )
     ).toEqual({
-      offer: [],
+      offer: null,
       reviews: [],
       similarOffers: mockedOffers,
     });
@@ -77,7 +77,7 @@ describe(`Place reducer works correctly`, () => {
     expect(
         placeReducer(
             {
-              offer: [],
+              offer: null,
               reviews: [],
               similarOffers: [{
                 id: 1,
@@ -95,7 +95,7 @@ describe(`Place reducer works correctly`, () => {
             }
         )
     ).toEqual({
-      offer: [],
+      offer: null,
       reviews: [],
       similarOffers: [{
         id: 1,
