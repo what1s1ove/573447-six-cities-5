@@ -1,5 +1,6 @@
-import {PlacesDataActionType} from '~/common/enums/enums';
+import {AppActionCreator} from '~/store/actions/app/app';
 import {adaptOffersToClient} from '~/helpers/offer';
+import {PlacesDataActionType} from '~/common/enums/enums';
 
 const PlacesDataActionCreator = {
   loadOffers: (offers) => ({
@@ -11,14 +12,10 @@ const PlacesDataActionCreator = {
   fetchOffers: () => (dispatch, _, {api}) => {
     api
       .get(`/hotels`)
-      .then(({data}) => {
-        const adaptedOffers = adaptOffersToClient(data);
-
-        dispatch(PlacesDataActionCreator.loadOffers(adaptedOffers));
-      })
-      .catch((err) => {
-        throw err;
-      });
+      .then(({data}) =>
+        dispatch(PlacesDataActionCreator.loadOffers(adaptOffersToClient(data)))
+      )
+      .catch((err) => dispatch(AppActionCreator.setError(err)));
   },
 };
 
