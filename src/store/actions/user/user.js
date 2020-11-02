@@ -38,7 +38,7 @@ const UserActionCreator = {
     Promise.resolve()
       .then(() => dispatch(UserActionCreator.setUser(null)))
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.NO_AUTH)))
-      .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.LOGIN)));
+      .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.LOGIN)));
   },
 };
 
