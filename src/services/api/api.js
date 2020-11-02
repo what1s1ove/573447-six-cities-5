@@ -1,11 +1,11 @@
 import axios from 'axios';
 import {HttpCode} from '~/common/enums/enums';
 
-const BACKEND_URL = `https://5.react.pages.academy/six-cities`;
+const BASE_URL = `https://5.react.pages.academy/six-cities`;
 const REQUEST_TIMEOUT = 5000;
 
 const api = axios.create({
-  baseURL: BACKEND_URL,
+  baseURL: BASE_URL,
   timeout: REQUEST_TIMEOUT,
   withCredentials: true,
 });

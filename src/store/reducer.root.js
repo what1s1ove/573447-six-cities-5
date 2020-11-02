@@ -1,9 +1,14 @@
 import {combineReducers} from 'redux';
-import {placesDataReducer, userReducer} from '~/store/reducers/reducers';
+import {
+  placesDataReducer,
+  userReducer,
+  appReducer,
+} from '~/store/reducers/reducers';
 
 const rootReducer = combineReducers({
-  data: placesDataReducer,
+  app: appReducer,
   user: userReducer,
+  data: placesDataReducer,
 });
 
 export default rootReducer;

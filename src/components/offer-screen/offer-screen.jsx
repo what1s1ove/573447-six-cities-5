@@ -34,7 +34,7 @@ const OfferScreen = ({
       setOffer(offerById);
       onActiveOfferChange(offerById);
     }
-  }, [params.id]);
+  }, [params.id, offers]);
 
   if (!offer) {
     return null;
