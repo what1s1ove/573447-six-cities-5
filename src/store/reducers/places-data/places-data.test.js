@@ -2,7 +2,7 @@ import {PlacesDataActionType} from '~/common/enums/enums';
 import {mockedOffers} from '~/mocks/mocks';
 import {initialState, placesDataReducer} from './places-data';
 
-describe(`User reducer works correctly`, () => {
+describe(`Places data reducer works correctly`, () => {
   it(`Should return initial state without additional parameters `, () => {
     expect(placesDataReducer(void 0, {})).toEqual(initialState);
   });
