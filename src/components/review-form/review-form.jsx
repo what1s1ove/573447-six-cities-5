@@ -1,16 +1,22 @@
 import * as React from 'react';
+import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
+import {PlaceActionCreator} from '~/store/actions/actions';
 import ReviewRatings from '~/components/review-ratings/review-ratings';
 import {checkIsFormValid} from './helpers';
 import {ReviewFormKey, CommentLength} from './common';
 
 const ReviewForm = ({
+  offerId,
   formState,
   onFormStateChange,
   onFormReset,
-  onReviewFormSubmit,
 }) => {
+  const dispatch = useDispatch();
+  const [isFormSaving, setIsFormSaving] = React.useState(false);
+
   const isFormValid = checkIsFormValid(formState);
+
   const onRatingChange = (newRating) => {
     onFormStateChange(ReviewFormKey.RARING, newRating);
   };
@@ -22,9 +28,15 @@ const ReviewForm = ({
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
-    onReviewFormSubmit(formState);
+    setIsFormSaving(true);
 
-    onFormReset();
+    dispatch(PlaceActionCreator.uploadReview(offerId, formState))
+      .then(() => {
+        setIsFormSaving(false);
+
+        onFormReset();
+      })
+      .catch(() => setIsFormSaving(false));
   };
 
   return (
@@ -40,15 +52,17 @@ const ReviewForm = ({
       <ReviewRatings
         currentRating={formState.rating || ``}
         onRatingChange={onRatingChange}
+        isDisabled={isFormSaving}
       />
       <textarea
         className="reviews__textarea form__textarea"
         value={formState.comment || ``}
         onChange={handleCommentChange}
+        maxLength={CommentLength.MAX}
+        disabled={isFormSaving}
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        maxLength={CommentLength.MAX}
         required
       />
       <div className="reviews__button-wrapper">
@@ -56,11 +70,11 @@ const ReviewForm = ({
           To submit review please make sure to set
           <span className="reviews__star">rating</span> and describe your stay
           with at least
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className="reviews__text-amount">{CommentLength.MIN} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
-          disabled={!isFormValid}
+          disabled={!isFormValid || isFormSaving}
           type="submit"
         >
           Submit
@@ -71,10 +85,10 @@ const ReviewForm = ({
 };
 
 ReviewForm.propTypes = {
+  offerId: PropTypes.number.isRequired,
   formState: PropTypes.object.isRequired,
   onFormStateChange: PropTypes.func.isRequired,
   onFormReset: PropTypes.func.isRequired,
-  onReviewFormSubmit: PropTypes.func.isRequired,
 };
 
 export default ReviewForm;
