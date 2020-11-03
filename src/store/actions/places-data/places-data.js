@@ -1,5 +1,7 @@
+import {AppActionCreator} from '~/store/actions/app/app';
+import {adaptOffersToClient, adaptOfferToClient} from '~/helpers/offer';
 import {OfferFavoriteStatus, PlacesDataActionType} from '~/common/enums/enums';
-import {adaptOffersToClient, adaptOfferToClient, extendObject} from '~/helpers/helpers';
+import {extendObject} from '~/helpers/helpers';
 
 const PlacesDataActionCreator = {
   loadOffers: (offers) => ({
@@ -20,9 +22,7 @@ const PlacesDataActionCreator = {
       .then(({data}) =>
         dispatch(PlacesDataActionCreator.loadOffers(adaptOffersToClient(data)))
       )
-      .catch((err) => {
-        throw err;
-      }),
+      .catch((err) => dispatch(AppActionCreator.setError(err))),
   toggleFavorite: (offer) => (dispatch, _, {api}) => (
     Promise.resolve(() =>
       dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
@@ -37,7 +37,7 @@ const PlacesDataActionCreator = {
           isSaving: false
         })));
 
-        throw err;
+        dispatch(AppActionCreator.setError(err));
       })
   ),
 };

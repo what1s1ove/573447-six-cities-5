@@ -1,3 +1,4 @@
+import {AppActionCreator} from '~/store/actions/app/app';
 import {adaptUserToClient} from '~/helpers/helpers';
 import {AppRoute, AuthStatus, UserActionType} from '~/common/enums/enums';
 
@@ -14,12 +15,6 @@ const UserActionCreator = {
       user,
     },
   }),
-  redirectToRoute: (path) => ({
-    type: UserActionType.REDIRECT_TO_ROUTE,
-    payload: {
-      path,
-    },
-  }),
   checkAuth: () => (dispatch, _, {api}) => (
     api
       .get(`/login`)
@@ -27,9 +22,7 @@ const UserActionCreator = {
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
-      .catch((err) => {
-        throw err;
-      })
+      .catch((err) => dispatch(AppActionCreator.setError(err)))
   ),
   login: ({email, password}) => (dispatch, _, {api}) => (
     api
@@ -39,9 +32,7 @@ const UserActionCreator = {
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
       .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.MAIN)))
-      .catch((err) => {
-        throw err;
-      })
+      .catch((err) => dispatch(AppActionCreator.setError(err)))
   ),
   logout: () => (dispatch) => (
     Promise.resolve()

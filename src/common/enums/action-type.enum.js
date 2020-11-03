@@ -1,3 +1,13 @@
+const AppActionType = {
+  SET_ERROR: `SET_ERROR`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+};
+
+const UserActionType = {
+  SET_AUTH_STATUS: `SET_AUTH_STATUS`,
+  SET_USER: `SET_USER`,
+};
+
 const PlacesDataActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   UPDATE_OFFER: `UPDATE_OFFER`,
@@ -15,13 +25,8 @@ const FavoritesActionType = {
   UPDATE_FAVORITE: `UPDATE_FAVORITE`,
 };
 
-const UserActionType = {
-  SET_AUTH_STATUS: `SET_AUTH_STATUS`,
-  SET_USER: `SET_USER`,
-  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
-};
-
 export {
+  AppActionType,
   PlacesDataActionType,
   PlaceActionType,
   UserActionType,
