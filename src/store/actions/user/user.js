@@ -1,6 +1,6 @@
 import {AppActionCreator} from '~/store/actions/app/app';
 import {adaptUserToClient} from '~/helpers/helpers';
-import {AppRoute, AuthStatus, UserActionType} from '~/common/enums/enums';
+import {ApiRoute, AppRoute, AuthStatus, UserActionType} from '~/common/enums/enums';
 
 const UserActionCreator = {
   setAuthStatus: (status) => ({
@@ -17,7 +17,7 @@ const UserActionCreator = {
   }),
   checkAuth: () => (dispatch, _, {api}) => {
     api
-      .get(`/login`)
+      .get(ApiRoute.LOGIN)
       .then(({data}) =>
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )
@@ -26,7 +26,7 @@ const UserActionCreator = {
   },
   login: ({email, password}) => (dispatch, _, {api}) => {
     api
-      .post(`/login`, {email, password})
+      .post(ApiRoute.LOGIN, {email, password})
       .then(({data}) =>
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )

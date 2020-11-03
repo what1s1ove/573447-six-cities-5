@@ -1,6 +1,6 @@
 import {AppActionCreator} from '~/store/actions/app/app';
 import {adaptOffersToClient} from '~/helpers/offer';
-import {PlacesDataActionType} from '~/common/enums/enums';
+import {ApiRoute, PlacesDataActionType} from '~/common/enums/enums';
 
 const PlacesDataActionCreator = {
   loadOffers: (offers) => ({
@@ -11,7 +11,7 @@ const PlacesDataActionCreator = {
   }),
   fetchOffers: () => (dispatch, _, {api}) => {
     api
-      .get(`/hotels`)
+      .get(ApiRoute.HOTELS)
       .then(({data}) =>
         dispatch(PlacesDataActionCreator.loadOffers(adaptOffersToClient(data)))
       )
