@@ -1,6 +1,10 @@
 import {AppActionCreator} from '~/store/actions/app/app';
 import {adaptOffersToClient, adaptOfferToClient} from '~/helpers/offer';
-import {OfferFavoriteStatus, PlacesDataActionType} from '~/common/enums/enums';
+import {
+  ApiRoute,
+  OfferFavoriteStatus,
+  PlacesDataActionType,
+} from '~/common/enums/enums';
 import {extendObject} from '~/helpers/helpers';
 
 const PlacesDataActionCreator = {
@@ -18,7 +22,7 @@ const PlacesDataActionCreator = {
   }),
   fetchOffers: () => (dispatch, _, {api}) =>
     api
-      .get(`/hotels`)
+      .get(ApiRoute.HOTELS)
       .then(({data}) =>
         dispatch(PlacesDataActionCreator.loadOffers(adaptOffersToClient(data)))
       )
@@ -28,7 +32,7 @@ const PlacesDataActionCreator = {
       dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
         isSaving: true,
       }))))
-      .then(() => api.post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
+      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
       .then(({data}) =>
         dispatch(PlacesDataActionCreator.updateOffer(adaptOfferToClient(data)))
       )

@@ -5,6 +5,8 @@ const HttpCode = {
 const ApiRoute = {
   LOGIN: `/login`,
   HOTELS: `/hotels`,
+  FAVORITE: `/favorite`,
+  COMMENTS: `/comments`,
 };
 
 export {HttpCode, ApiRoute};

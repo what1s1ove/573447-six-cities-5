@@ -1,5 +1,9 @@
 import {AppActionCreator} from '~/store/actions/app/app';
-import {PlaceActionType, OfferFavoriteStatus} from '~/common/enums/enums';
+import {
+  PlaceActionType,
+  OfferFavoriteStatus,
+  ApiRoute,
+} from '~/common/enums/enums';
 import {
   adaptOffersToClient,
   adaptOfferToClient,
@@ -34,7 +38,7 @@ const PlaceActionCreator = {
   }),
   fetchOffer: (offerId) => (dispatch, _, {api}) => (
     api
-      .get(`/hotels/${offerId}`)
+      .get(`${ApiRoute.HOTELS}/${offerId}`)
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
@@ -44,7 +48,7 @@ const PlaceActionCreator = {
   ),
   fetchReviews: (offerId) => (dispatch, _, {api}) => (
     api
-      .get(`/comments/${offerId}`)
+      .get(`${ApiRoute.COMMENTS}/${offerId}`)
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadReviews(adaptReviewsToClient(data)))
       )
@@ -54,7 +58,7 @@ const PlaceActionCreator = {
   ),
   fetchSimilarOffers: (offerId) => (dispatch, _, {api}) => (
     api
-      .get(`/hotels/${offerId}/nearby`)
+      .get(`${ApiRoute.HOTELS}/${offerId}/nearby`)
       .then(({data}) =>
         dispatch(
             PlaceActionCreator.loadSimilarOffers(adaptOffersToClient(data))
@@ -66,7 +70,7 @@ const PlaceActionCreator = {
   ),
   uploadReview: (offerId, comment) => (dispatch, _, {api}) => (
     api
-      .post(`/comments/${offerId}`, comment)
+      .post(`${ApiRoute.COMMENTS}/${offerId}`, comment)
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadReviews(adaptReviewsToClient(data)))
       )
@@ -77,7 +81,7 @@ const PlaceActionCreator = {
       dispatch(PlaceActionCreator.loadOffer(extendObject(offer, {
         isSaving: true,
       }))))
-      .then(() => api.post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
+      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
@@ -94,7 +98,7 @@ const PlaceActionCreator = {
       dispatch(PlaceActionCreator.updateSimilarOffer(extendObject(offer, {
         isSaving: true,
       }))))
-      .then(() => api.post(`/favorite/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
+      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
       .then(({data}) =>
         dispatch(PlaceActionCreator.updateSimilarOffer(adaptOfferToClient(data)))
       )
