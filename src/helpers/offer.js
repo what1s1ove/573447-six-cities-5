@@ -107,7 +107,7 @@ const getOfferFavoriteStatus = (isFavorite) => {
   const offerStatus = isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE;
 
   return offerStatus;
-}
+};
 
 export {
   getRatingInPercents,
