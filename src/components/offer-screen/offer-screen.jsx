@@ -8,7 +8,9 @@ import {
   getOffer,
   getReviews,
   getSimilarOffers,
+  getUserStatus,
 } from '~/store/selectors/selectors';
+import {AuthStatus} from '~/common/enums/enums';
 import withMap from '~/hocs/with-map/with-map';
 import withFormEditing from '~/hocs/with-form-editing/with-form-editing';
 import Header from '~/components/header/header';
@@ -20,6 +22,7 @@ import ReviewList from '~/components/review-list/review-list';
 import ReviewForm from '~/components/review-form/review-form';
 import {getFilteredReviews} from './helpers';
 
+
 const WrappedMap = withMap(Map);
 const WrappedReviewForm = withFormEditing(ReviewForm);
 
@@ -29,7 +32,8 @@ const OfferScreen = ({
 }) => {
   const dispatch = useDispatch();
   const params = useParams();
-  const {offer, reviews, similarOffers} = useSelector((state) => ({
+  const {userStatus, offer, reviews, similarOffers} = useSelector((state) => ({
+    userStatus: getUserStatus(state),
     offer: getOffer(state),
     reviews: getReviews(state),
     similarOffers: getSimilarOffers(state),
@@ -77,9 +81,11 @@ const OfferScreen = ({
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ReviewList reviews={getFilteredReviews(reviews)} />
-                <WrappedReviewForm
-                  onReviewFormSubmit={handleReviewFormSubmit}
-                />
+                {userStatus === AuthStatus.AUTH && (
+                  <WrappedReviewForm
+                    onReviewFormSubmit={handleReviewFormSubmit}
+                  />
+                )}
               </section>
             </div>
           </div>
