@@ -36,14 +36,14 @@ const UserActionCreator = {
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
-      .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.MAIN)))
+      .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.MAIN)))
       .catch((err) => dispatch(AppActionCreator.setError(err)))
   ),
   logout: () => (dispatch) => (
     Promise.resolve()
       .then(() => dispatch(UserActionCreator.setUser(null)))
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.NO_AUTH)))
-      .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.LOGIN)))
+      .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.LOGIN)))
   ),
 };
 

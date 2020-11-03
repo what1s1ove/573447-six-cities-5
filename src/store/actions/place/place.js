@@ -1,14 +1,11 @@
 import {AppActionCreator} from '~/store/actions/app/app';
-import {
-  PlaceActionType,
-  OfferFavoriteStatus,
-  ApiRoute,
-} from '~/common/enums/enums';
+import {PlaceActionType, ApiRoute} from '~/common/enums/enums';
 import {
   adaptOffersToClient,
   adaptOfferToClient,
   adaptReviewsToClient,
   extendObject,
+  getOfferFavoriteStatus,
 } from '~/helpers/helpers';
 
 const PlaceActionCreator = {
@@ -81,7 +78,7 @@ const PlaceActionCreator = {
       dispatch(PlaceActionCreator.loadOffer(extendObject(offer, {
         isSaving: true,
       }))))
-      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
+      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${getOfferFavoriteStatus(offer.isFavorite)}`))
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
@@ -98,7 +95,7 @@ const PlaceActionCreator = {
       dispatch(PlaceActionCreator.updateSimilarOffer(extendObject(offer, {
         isSaving: true,
       }))))
-      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
+      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${getOfferFavoriteStatus(offer.isFavorite)}`))
       .then(({data}) =>
         dispatch(PlaceActionCreator.updateSimilarOffer(adaptOfferToClient(data)))
       )

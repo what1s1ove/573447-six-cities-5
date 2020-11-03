@@ -1,13 +1,10 @@
 import {AppActionCreator} from '~/store/actions/app/app';
-import {
-  ApiRoute,
-  FavoritesActionType,
-  OfferFavoriteStatus,
-} from '~/common/enums/enums';
+import {ApiRoute, FavoritesActionType} from '~/common/enums/enums';
 import {
   adaptOffersToClient,
   adaptOfferToClient,
   extendObject,
+  getOfferFavoriteStatus,
 } from '~/helpers/helpers';
 
 const FavoritesActionCreator = {
@@ -36,7 +33,7 @@ const FavoritesActionCreator = {
       dispatch(FavoritesActionCreator.updateFavorite(extendObject(offer, {
         isSaving: true,
       }))))
-      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
+      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${getOfferFavoriteStatus(offer.isFavorite)}`))
       .then(({data}) =>
         dispatch(FavoritesActionCreator.updateFavorite(adaptOfferToClient(data)))
       )
