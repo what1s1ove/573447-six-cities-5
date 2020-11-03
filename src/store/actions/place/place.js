@@ -1,3 +1,4 @@
+import {AppActionCreator} from '~/store/actions/app/app';
 import {PlaceActionType, OfferFavoriteStatus} from '~/common/enums/enums';
 import {
   adaptOffersToClient,
@@ -69,9 +70,7 @@ const PlaceActionCreator = {
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadReviews(adaptReviewsToClient(data)))
       )
-      .catch((err) => {
-        throw err;
-      })
+      .catch((err) => dispatch(AppActionCreator.setError(err)))
   ),
   toggleFavorite: (offer) => (dispatch, _, {api}) => (
     Promise.resolve(() =>
@@ -87,7 +86,7 @@ const PlaceActionCreator = {
           isSaving: false
         })));
 
-        throw err;
+        dispatch(AppActionCreator.setError(err));
       })
   ),
   toggleSimilarOfferFavorite: (offer) => (dispatch, _, {api}) => (
@@ -104,7 +103,7 @@ const PlaceActionCreator = {
           isSaving: false
         })));
 
-        throw err;
+        dispatch(AppActionCreator.setError(err));
       })
   )
 };

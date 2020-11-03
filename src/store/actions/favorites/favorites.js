@@ -1,3 +1,4 @@
+import {AppActionCreator} from '~/store/actions/app/app';
 import {FavoritesActionType, OfferFavoriteStatus} from '~/common/enums/enums';
 import {adaptOffersToClient, adaptOfferToClient, extendObject} from '~/helpers/helpers';
 
@@ -20,9 +21,7 @@ const FavoritesActionCreator = {
       .then(({data}) =>
         dispatch(FavoritesActionCreator.loadFavorites(adaptOffersToClient(data)))
       )
-      .catch((err) => {
-        throw err;
-      });
+      .catch((err) => dispatch(AppActionCreator.setError(err)));
   },
   toggleFavorite: (offer) => (dispatch, _, {api}) => (
     Promise.resolve(() =>
@@ -38,7 +37,7 @@ const FavoritesActionCreator = {
           isSaving: false
         })));
 
-        throw err;
+        dispatch(AppActionCreator.setError(err));
       })
   )
 };
