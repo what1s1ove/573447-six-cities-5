@@ -2,4 +2,9 @@ const HttpCode = {
   UNAUTHORIZED: 401,
 };
 
-export {HttpCode};
+const ApiRoute = {
+  LOGIN: `/login`,
+  HOTELS: `/hotels`,
+};
+
+export {HttpCode, ApiRoute};
