@@ -4,6 +4,7 @@ import {
   ApiRoute,
   AppRoute,
   AuthStatus,
+  NotificationType,
   UserActionType,
 } from '~/common/enums/enums';
 
@@ -27,7 +28,11 @@ const UserActionCreator = {
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
-      .catch((err) => dispatch(AppActionCreator.setError(err)))
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+        isShow: false,
+      })))
   ),
   login: ({email, password}) => (dispatch, _, {api}) => (
     api
@@ -37,7 +42,10 @@ const UserActionCreator = {
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
       .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.MAIN)))
-      .catch((err) => dispatch(AppActionCreator.setError(err)))
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
   ),
   logout: () => (dispatch) => (
     Promise.resolve()

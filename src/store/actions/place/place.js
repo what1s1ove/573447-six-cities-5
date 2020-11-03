@@ -1,5 +1,9 @@
 import {AppActionCreator} from '~/store/actions/app/app';
-import {PlaceActionType, ApiRoute} from '~/common/enums/enums';
+import {
+  PlaceActionType,
+  ApiRoute,
+  NotificationType,
+} from '~/common/enums/enums';
 import {
   adaptOffersToClient,
   adaptOfferToClient,
@@ -39,9 +43,10 @@ const PlaceActionCreator = {
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
-      .catch((err) => {
-        throw err;
-      })
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
   ),
   fetchReviews: (offerId) => (dispatch, _, {api}) => (
     api
@@ -49,9 +54,10 @@ const PlaceActionCreator = {
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadReviews(adaptReviewsToClient(data)))
       )
-      .catch((err) => {
-        throw err;
-      })
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
   ),
   fetchSimilarOffers: (offerId) => (dispatch, _, {api}) => (
     api
@@ -61,9 +67,10 @@ const PlaceActionCreator = {
             PlaceActionCreator.loadSimilarOffers(adaptOffersToClient(data))
         )
       )
-      .catch((err) => {
-        throw err;
-      })
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
   ),
   uploadReview: (offerId, comment) => (dispatch, _, {api}) => (
     api
@@ -71,7 +78,10 @@ const PlaceActionCreator = {
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadReviews(adaptReviewsToClient(data)))
       )
-      .catch((err) => dispatch(AppActionCreator.setError(err)))
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
   ),
   toggleFavorite: (offer) => (dispatch, _, {api}) => (
     Promise.resolve(() =>
@@ -82,12 +92,15 @@ const PlaceActionCreator = {
       .then(({data}) =>
         dispatch(PlaceActionCreator.loadOffer(adaptOfferToClient(data)))
       )
-      .catch((err) => {
+      .catch(({response: {data}}) => {
         dispatch(PlaceActionCreator.loadOffer(extendObject(offer, {
           isSaving: false
         })));
 
-        dispatch(AppActionCreator.setError(err));
+        dispatch(AppActionCreator.setNotification({
+          message: data.error,
+          type: NotificationType.ERROR,
+        }));
       })
   ),
   toggleSimilarOfferFavorite: (offer) => (dispatch, _, {api}) => (
@@ -99,12 +112,15 @@ const PlaceActionCreator = {
       .then(({data}) =>
         dispatch(PlaceActionCreator.updateSimilarOffer(adaptOfferToClient(data)))
       )
-      .catch((err) => {
+      .catch(({response: {data}}) => {
         dispatch(PlaceActionCreator.updateSimilarOffer(extendObject(offer, {
           isSaving: false
         })));
 
-        dispatch(AppActionCreator.setError(err));
+        dispatch(AppActionCreator.setNotification({
+          message: data.error,
+          type: NotificationType.ERROR,
+        }));
       })
   )
 };

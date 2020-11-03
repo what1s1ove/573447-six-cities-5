@@ -13,4 +13,8 @@ const SortType = {
   TOP_RATE: `Top rated first`,
 };
 
-export {AppRoute, SortType};
+const NotificationType = {
+  ERROR: `error`,
+};
+
+export {AppRoute, SortType, NotificationType};
