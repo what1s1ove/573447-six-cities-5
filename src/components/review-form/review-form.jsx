@@ -1,7 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import ReviewRatings from '~/components/review-ratings/review-ratings';
-import {ReviewFormKey} from './common';
+import {checkIsFormValid} from './helpers';
+import {ReviewFormKey, CommentLength} from './common';
 
 const ReviewForm = ({
   formState,
@@ -9,6 +10,7 @@ const ReviewForm = ({
   onFormReset,
   onReviewFormSubmit,
 }) => {
+  const isFormValid = checkIsFormValid(formState);
   const onRatingChange = (newRating) => {
     onFormStateChange(ReviewFormKey.RARING, newRating);
   };
@@ -46,6 +48,7 @@ const ReviewForm = ({
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        maxLength={CommentLength.MAX}
         required
       />
       <div className="reviews__button-wrapper">
@@ -55,7 +58,11 @@ const ReviewForm = ({
           with at least
           <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit">
+        <button
+          className="reviews__submit form__submit button"
+          disabled={!isFormValid}
+          type="submit"
+        >
           Submit
         </button>
       </div>
