@@ -18,6 +18,7 @@ import OfferList from '~/components/offer-list/offer-list';
 import OfferGalleryList from '~/components/offer-gallery-list/offer-gallery-list';
 import ReviewList from '~/components/review-list/review-list';
 import ReviewForm from '~/components/review-form/review-form';
+import {getFilteredReviews} from './helpers';
 
 const WrappedMap = withMap(Map);
 const WrappedReviewForm = withFormEditing(ReviewForm);
@@ -75,7 +76,7 @@ const OfferScreen = ({
                   Reviews &middot;
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewList reviews={reviews} />
+                <ReviewList reviews={getFilteredReviews(reviews)} />
                 <WrappedReviewForm
                   onReviewFormSubmit={handleReviewFormSubmit}
                 />
