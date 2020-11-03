@@ -22,7 +22,6 @@ import ReviewList from '~/components/review-list/review-list';
 import ReviewForm from '~/components/review-form/review-form';
 import {getFilteredReviews} from './helpers';
 
-
 const WrappedMap = withMap(Map);
 const WrappedReviewForm = withFormEditing(ReviewForm);
 
