@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const ReviewRating = ({value, name, isChecked, onRatingChange}) => {
+const ReviewRating = ({value, name, isChecked, isDisabled, onRatingChange}) => {
   const ratingLabel = `${value}-stars`;
 
   const handleRaringChange = ({target}) => {
@@ -15,6 +15,7 @@ const ReviewRating = ({value, name, isChecked, onRatingChange}) => {
         onChange={handleRaringChange}
         value={value}
         checked={isChecked}
+        disabled={isDisabled}
         id={ratingLabel}
         name="rating"
         type="radio"
@@ -37,6 +38,7 @@ ReviewRating.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   isChecked: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
   onRatingChange: PropTypes.func.isRequired,
 };
 

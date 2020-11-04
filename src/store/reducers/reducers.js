@@ -1,3 +1,4 @@
-export * from './places-data/places-data';
 export * from './user/user';
-export * from './app/app';
+export * from './places-data/places-data';
+export * from './place/place';
+export * from './favorites/favorites';

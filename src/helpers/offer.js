@@ -1,6 +1,6 @@
 import {adaptUserToClient} from '~/helpers/user';
 import {getSortedItems} from '~/helpers/array';
-import {AppRoute, SortType} from '~/common/enums/enums';
+import {AppRoute, OfferFavoriteStatus, SortType} from '~/common/enums/enums';
 
 const MAX_PERCENTS = 100;
 const MAX_OFFER_RATING = 5;
@@ -94,12 +94,19 @@ const adaptOfferToClient = (offer) => ({
   location: offer.location,
   goods: offer.goods,
   host: adaptUserToClient(offer.host),
+  isSaving: false,
 });
 
 const adaptOffersToClient = (offers) => {
   const adaptedOffers = offers.map(adaptOfferToClient);
 
   return adaptedOffers;
+};
+
+const getOfferFavoriteStatus = (isFavorite) => {
+  const offerStatus = isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE;
+
+  return offerStatus;
 };
 
 export {
@@ -112,4 +119,5 @@ export {
   getSortedOffers,
   adaptOfferToClient,
   adaptOffersToClient,
+  getOfferFavoriteStatus,
 };

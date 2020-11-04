@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {OfferCity, SortType} from '~/common/enums/enums';
 import {offerType} from '~/common/prop-types/prop-types';
+import {PlacesDataActionCreator} from '~/store/actions/actions';
 import {getLocations, getFilteredOffers} from '~/store/selectors/selectors';
 import withMap from '~/hocs/with-map/with-map';
 import Header from '~/components/header/header';
@@ -30,16 +31,13 @@ const MainScreen = ({
   const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
   const locations = useSelector(getLocations);
   const offers = useSelector(getFilteredOffers(currentLocation, activeSort));
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (!currentLocation) {
       setCurrentLocation(getDefaultLocation(locations));
     }
   }, [locations]);
-
-  if (!currentLocation) {
-    return null;
-  }
 
   const hasOffers = Boolean(offers.length);
 
@@ -48,6 +46,14 @@ const MainScreen = ({
 
     setCurrentLocation(newCurrentLocation);
   };
+
+  const handleFavoriteToggle = React.useCallback((offer) => {
+    dispatch(PlacesDataActionCreator.toggleFavorite(offer));
+  }, [dispatch]);
+
+  if (!currentLocation) {
+    return null;
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -87,6 +93,7 @@ const MainScreen = ({
                     className="cities__places-list"
                     offers={offers}
                     onActiveOfferChange={onActiveOfferChange}
+                    onFavoriteToggle={handleFavoriteToggle}
                   />
                 </section>
                 <div className="cities__right-section">

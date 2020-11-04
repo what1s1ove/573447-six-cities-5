@@ -1,6 +1,12 @@
 import {AppActionCreator} from '~/store/actions/app/app';
 import {adaptUserToClient} from '~/helpers/helpers';
-import {AppRoute, AuthStatus, UserActionType} from '~/common/enums/enums';
+import {
+  ApiRoute,
+  AppRoute,
+  AuthStatus,
+  NotificationType,
+  UserActionType,
+} from '~/common/enums/enums';
 
 const UserActionCreator = {
   setAuthStatus: (status) => ({
@@ -15,31 +21,38 @@ const UserActionCreator = {
       user,
     },
   }),
-  checkAuth: () => (dispatch, _, {api}) => {
+  checkAuth: () => (dispatch, _, {api}) => (
     api
-      .get(`/login`)
+      .get(ApiRoute.LOGIN)
       .then(({data}) =>
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
-      .catch((err) => AppActionCreator.setError(err));
-  },
-  login: ({email, password}) => (dispatch, _, {api}) => {
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+        isShow: false,
+      })))
+  ),
+  login: ({email, password}) => (dispatch, _, {api}) => (
     api
-      .post(`/login`, {email, password})
+      .post(ApiRoute.LOGIN, {email, password})
       .then(({data}) =>
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
       .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.MAIN)))
-      .catch((err) => AppActionCreator.setError(err));
-  },
-  logout: () => (dispatch) => {
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
+  ),
+  logout: () => (dispatch) => (
     Promise.resolve()
       .then(() => dispatch(UserActionCreator.setUser(null)))
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.NO_AUTH)))
-      .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.LOGIN)));
-  },
+      .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.LOGIN)))
+  ),
 };
 
 export {UserActionCreator};

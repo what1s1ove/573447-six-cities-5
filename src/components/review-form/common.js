@@ -3,4 +3,9 @@ const ReviewFormKey = {
   RARING: `rating`,
 };
 
-export {ReviewFormKey};
+const CommentLength = {
+  MIN: 50,
+  MAX: 300,
+};
+
+export {ReviewFormKey, CommentLength};

@@ -1,15 +1,12 @@
-const MAX_SIMILAR_OFFERS_COUNT = 3;
+import {getSortedItems} from '~/helpers/helpers';
 
-const getOfferById = (offers, id) => {
-  const offerById = offers.find((offer) => offer.id === Number(id));
+const MAX_REVIEWS_COUNT = 10;
 
-  return offerById || null;
+const getFilteredReviews = (reviews) => {
+  const sortedReviews = getSortedItems(reviews, (reviewA, reviewB) => reviewB.date - reviewA.date);
+  const filteredReviews = sortedReviews.slice(0, MAX_REVIEWS_COUNT);
+
+  return filteredReviews;
 };
 
-const getSimilarOffer = (offers) => {
-  const similarOffers = offers.slice(0, MAX_SIMILAR_OFFERS_COUNT);
-
-  return similarOffers;
-};
-
-export {getOfferById, getSimilarOffer};
+export {getFilteredReviews};

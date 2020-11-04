@@ -14,6 +14,15 @@ const placesDataReducer = (state = initialState, action) => {
         offers,
       });
     }
+    case PlacesDataActionType.UPDATE_OFFER: {
+      const {offer: updatedOffer} = action.payload;
+
+      return extendObject(state, {
+        offers: state.offers.map((offer) =>
+          offer.id === updatedOffer.id ? updatedOffer : offer
+        ),
+      });
+    }
   }
   return state;
 };

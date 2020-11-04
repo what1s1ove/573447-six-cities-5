@@ -1,10 +1,12 @@
 import {AppActionType} from '~/common/enums/enums';
 
 const AppActionCreator = {
-  setError: (error) => ({
-    type: AppActionType.SET_ERROR,
+  setNotification: ({message, type, isShow = true}) => ({
+    type: AppActionType.SET_NOTIFICATION,
     payload: {
-      error,
+      message,
+      type,
+      isShow,
     },
   }),
   redirectToRoute: (path) => ({

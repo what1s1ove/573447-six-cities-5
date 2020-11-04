@@ -1,14 +1,18 @@
 import {combineReducers} from 'redux';
+import {reducer as toastrReducer} from 'react-redux-toastr';
 import {
-  placesDataReducer,
   userReducer,
-  appReducer,
+  placesDataReducer,
+  placeReducer,
+  favoritesReducer,
 } from '~/store/reducers/reducers';
 
 const rootReducer = combineReducers({
-  app: appReducer,
   user: userReducer,
+  toastr: toastrReducer,
   data: placesDataReducer,
+  place: placeReducer,
+  favorites: favoritesReducer,
 });
 
 export default rootReducer;

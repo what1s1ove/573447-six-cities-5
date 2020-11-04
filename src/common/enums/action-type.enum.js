@@ -1,5 +1,5 @@
 const AppActionType = {
-  SET_ERROR: `SET_ERROR`,
+  SET_NOTIFICATION: `SET_NOTIFICATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
@@ -10,6 +10,25 @@ const UserActionType = {
 
 const PlacesDataActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
+  UPDATE_OFFER: `UPDATE_OFFER`,
 };
 
-export {AppActionType, PlacesDataActionType, UserActionType};
+const PlaceActionType = {
+  LOAD_OFFER: `LOAD_OFFER`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  LOAD_SIMILAR_OFFERS: `LOAD_SIMILAR_OFFERS`,
+  UPDATE_SIMILAR_OFFER: `UPDATE_SIMILAR_OFFER`,
+};
+
+const FavoritesActionType = {
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`,
+};
+
+export {
+  AppActionType,
+  PlacesDataActionType,
+  PlaceActionType,
+  UserActionType,
+  FavoritesActionType,
+};

@@ -1,9 +1,16 @@
 import * as React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {offerType, reviewType} from '~/common/prop-types/prop-types';
-import {getOffers} from '~/store/selectors/selectors';
+import {offerType} from '~/common/prop-types/prop-types';
+import {PlaceActionCreator} from '~/store/actions/actions';
+import {
+  getOffer,
+  getReviews,
+  getSimilarOffers,
+  getUserStatus,
+} from '~/store/selectors/selectors';
+import {AuthStatus} from '~/common/enums/enums';
 import withMap from '~/hocs/with-map/with-map';
 import withFormEditing from '~/hocs/with-form-editing/with-form-editing';
 import Header from '~/components/header/header';
@@ -13,34 +20,47 @@ import OfferList from '~/components/offer-list/offer-list';
 import OfferGalleryList from '~/components/offer-gallery-list/offer-gallery-list';
 import ReviewList from '~/components/review-list/review-list';
 import ReviewForm from '~/components/review-form/review-form';
-import {getOfferById, getSimilarOffer} from './helpers';
+import {getFilteredReviews} from './helpers';
 
 const WrappedMap = withMap(Map);
 const WrappedReviewForm = withFormEditing(ReviewForm);
 
 const OfferScreen = ({
-  reviews,
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
-  const offers = useSelector(getOffers);
-  const [offer, setOffer] = React.useState(null);
+  const dispatch = useDispatch();
   const params = useParams();
+  const {userStatus, offer, reviews, similarOffers} = useSelector((state) => ({
+    userStatus: getUserStatus(state),
+    offer: getOffer(state),
+    reviews: getReviews(state),
+    similarOffers: getSimilarOffers(state),
+  }));
+  const offerId = params.id;
+  const hasSimilarOffer = Boolean(similarOffers.length);
 
   React.useEffect(() => {
-    const offerById = getOfferById(offers, params.id);
+    dispatch(PlaceActionCreator.fetchOffer(offerId));
+    dispatch(PlaceActionCreator.fetchReviews(offerId));
+    dispatch(PlaceActionCreator.fetchSimilarOffers(offerId));
+  }, [offerId]);
 
-    if (offerById) {
-      setOffer(offerById);
-      onActiveOfferChange(offerById);
-    }
-  }, [params.id, offers]);
+  const handleFavoriteToggle = React.useCallback(() => {
+    dispatch(PlaceActionCreator.toggleFavorite(offer));
+  }, [offer, dispatch]);
+
+  const handleFormReviewSubmit = React.useCallback((review) => (
+    dispatch(PlaceActionCreator.uploadReview(offerId, review))
+  ), [offerId, dispatch]);
+
+  const handleSimilarOfferFavoriteToggle = React.useCallback((similarOffer) => {
+    dispatch(PlaceActionCreator.toggleSimilarOfferFavorite(similarOffer));
+  }, [dispatch]);
 
   if (!offer) {
     return null;
   }
-
-  const similarOffers = getSimilarOffer(offers);
 
   return (
     <div className="page">
@@ -50,23 +70,30 @@ const OfferScreen = ({
           <OfferGalleryList imgPaths={offer.images} />
           <div className="property__container container">
             <div className="property__wrapper">
-              <OfferPropertyDashboard offer={offer} />
+              <OfferPropertyDashboard
+                offer={offer}
+                onFavoriteToggle={handleFavoriteToggle}
+              />
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">
                   Reviews &middot;
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewList reviews={reviews} />
-                <WrappedReviewForm />
+                <ReviewList reviews={getFilteredReviews(reviews)} />
+                {userStatus === AuthStatus.AUTH && (
+                  <WrappedReviewForm onFormSubmit={handleFormReviewSubmit} />
+                )}
               </section>
             </div>
           </div>
           <section className="property__map map">
-            <WrappedMap
-              city={offer.city}
-              activeOffer={activeOffer}
-              offers={similarOffers}
-            />
+            {hasSimilarOffer && (
+              <WrappedMap
+                city={offer.city}
+                activeOffer={activeOffer}
+                offers={similarOffers}
+              />
+            )}
           </section>
         </section>
         <div className="container">
@@ -74,11 +101,14 @@ const OfferScreen = ({
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <OfferList
-              className="near-places__list"
-              offers={similarOffers}
-              onActiveOfferChange={onActiveOfferChange}
-            />
+            {hasSimilarOffer && (
+              <OfferList
+                className="near-places__list"
+                offers={similarOffers}
+                onActiveOfferChange={onActiveOfferChange}
+                onFavoriteToggle={handleSimilarOfferFavoriteToggle}
+              />
+            )}
           </section>
         </div>
       </main>
@@ -88,7 +118,6 @@ const OfferScreen = ({
 
 OfferScreen.propTypes = {
   activeItem: offerType,
-  reviews: PropTypes.arrayOf(reviewType.isRequired).isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
 };
 

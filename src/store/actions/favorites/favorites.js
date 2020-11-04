@@ -1,34 +1,34 @@
 import {AppActionCreator} from '~/store/actions/app/app';
 import {
+  ApiRoute,
+  FavoritesActionType,
+  NotificationType,
+} from '~/common/enums/enums';
+import {
   adaptOffersToClient,
   adaptOfferToClient,
-  getOfferFavoriteStatus,
   extendObject,
+  getOfferFavoriteStatus,
 } from '~/helpers/helpers';
-import {
-  ApiRoute,
-  NotificationType,
-  PlacesDataActionType,
-} from '~/common/enums/enums';
 
-const PlacesDataActionCreator = {
-  loadOffers: (offers) => ({
-    type: PlacesDataActionType.LOAD_OFFERS,
+const FavoritesActionCreator = {
+  loadFavorites: (offers) => ({
+    type: FavoritesActionType.LOAD_FAVORITES,
     payload: {
       offers,
     },
   }),
-  updateOffer: (offer) => ({
-    type: PlacesDataActionType.UPDATE_OFFER,
+  updateFavorite: (offer) => ({
+    type: FavoritesActionType.UPDATE_FAVORITE,
     payload: {
       offer,
     },
   }),
-  fetchOffers: () => (dispatch, _, {api}) => (
+  fetchFavorites: () => (dispatch, _, {api}) => (
     api
-      .get(ApiRoute.HOTELS)
+      .get(ApiRoute.FAVORITE)
       .then(({data}) =>
-        dispatch(PlacesDataActionCreator.loadOffers(adaptOffersToClient(data)))
+        dispatch(FavoritesActionCreator.loadFavorites(adaptOffersToClient(data)))
       )
       .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
         message: data.error,
@@ -37,15 +37,15 @@ const PlacesDataActionCreator = {
   ),
   toggleFavorite: (offer) => (dispatch, _, {api}) => (
     Promise.resolve(() =>
-      dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
+      dispatch(FavoritesActionCreator.updateFavorite(extendObject(offer, {
         isSaving: true,
       }))))
       .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${getOfferFavoriteStatus(offer.isFavorite)}`))
       .then(({data}) =>
-        dispatch(PlacesDataActionCreator.updateOffer(adaptOfferToClient(data)))
+        dispatch(FavoritesActionCreator.updateFavorite(adaptOfferToClient(data)))
       )
       .catch(({response: {data}}) => {
-        dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
+        dispatch(FavoritesActionCreator.updateFavorite(extendObject(offer, {
           isSaving: false
         })));
 
@@ -54,7 +54,7 @@ const PlacesDataActionCreator = {
           type: NotificationType.ERROR,
         }));
       })
-  ),
+  )
 };
 
-export {PlacesDataActionCreator};
+export {FavoritesActionCreator};

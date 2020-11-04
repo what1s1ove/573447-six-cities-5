@@ -6,10 +6,6 @@ const AppRoute = {
   OFFER_ID: `/offer/:id`,
 };
 
-const AppConfig = {
-  REVIEWS_COUNT: 5,
-};
-
 const SortType = {
   POPULAR: `Popular`,
   TO_HIGHT: `Price: low to high`,
@@ -17,4 +13,8 @@ const SortType = {
   TOP_RATE: `Top rated first`,
 };
 
-export {AppRoute, AppConfig, SortType};
+const NotificationType = {
+  ERROR: `error`,
+};
+
+export {AppRoute, SortType, NotificationType};
