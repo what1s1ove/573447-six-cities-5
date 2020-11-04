@@ -1,3 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PrivateRoute component should render PrivateRoute component 1`] = `null`;
+exports[`PrivateRoute component should render PrivateRoute component 1`] = `
+<p>
+  Private Component
+</p>
+`;
