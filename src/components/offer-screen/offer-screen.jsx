@@ -50,6 +50,10 @@ const OfferScreen = ({
     dispatch(PlaceActionCreator.toggleFavorite(offer));
   }, [offer, dispatch]);
 
+  const handleFormReviewSubmit = React.useCallback((review) => (
+    dispatch(PlaceActionCreator.uploadReview(offerId, review))
+  ), [offerId, dispatch]);
+
   const handleSimilarOfferFavoriteToggle = React.useCallback((similarOffer) => {
     dispatch(PlaceActionCreator.toggleSimilarOfferFavorite(similarOffer));
   }, [dispatch]);
@@ -77,7 +81,7 @@ const OfferScreen = ({
                 </h2>
                 <ReviewList reviews={getFilteredReviews(reviews)} />
                 {userStatus === AuthStatus.AUTH && (
-                  <WrappedReviewForm offerId={offer.id} />
+                  <WrappedReviewForm onFormSubmit={handleFormReviewSubmit} />
                 )}
               </section>
             </div>

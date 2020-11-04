@@ -1,23 +1,19 @@
 import * as React from 'react';
-import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
-import {PlaceActionCreator} from '~/store/actions/actions';
 import ReviewRatings from '~/components/review-ratings/review-ratings';
 import {checkIsFormValid} from './helpers';
 import {ReviewFormKey, CommentLength} from './common';
 
 const ReviewForm = ({
-  offerId,
   formState,
   onFormStateChange,
+  onFormSubmit,
   onFormReset,
 }) => {
-  const dispatch = useDispatch();
   const [isFormSaving, setIsFormSaving] = React.useState(false);
-
   const isFormValid = checkIsFormValid(formState);
 
-  const onRatingChange = (newRating) => {
+  const handleRatingChange = (newRating) => {
     onFormStateChange(ReviewFormKey.RARING, newRating);
   };
 
@@ -30,13 +26,9 @@ const ReviewForm = ({
 
     setIsFormSaving(true);
 
-    dispatch(PlaceActionCreator.uploadReview(offerId, formState))
-      .then(() => {
-        setIsFormSaving(false);
-
-        onFormReset();
-      })
-      .catch(() => setIsFormSaving(false));
+    onFormSubmit(formState)
+      .then(() => onFormReset())
+      .finally(() => setIsFormSaving(false));
   };
 
   return (
@@ -51,7 +43,7 @@ const ReviewForm = ({
       </label>
       <ReviewRatings
         currentRating={formState.rating || ``}
-        onRatingChange={onRatingChange}
+        onRatingChange={handleRatingChange}
         isDisabled={isFormSaving}
       />
       <textarea
@@ -88,6 +80,7 @@ ReviewForm.propTypes = {
   offerId: PropTypes.number.isRequired,
   formState: PropTypes.object.isRequired,
   onFormStateChange: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
   onFormReset: PropTypes.func.isRequired,
 };
 
