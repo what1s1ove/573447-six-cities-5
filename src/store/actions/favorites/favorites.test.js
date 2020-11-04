@@ -14,7 +14,7 @@ const api = createAPI({
   onUnauthorized: jest.fn(),
 });
 
-describe(`Favorites creator works correctly`, () => {
+describe(`Favorites action creator works correctly`, () => {
   it(`loadFavorites ac returns correct action`, () => {
     expect(FavoritesActionCreator.loadFavorites(mockedOffers)).toEqual({
       type: FavoritesActionType.LOAD_FAVORITES,
