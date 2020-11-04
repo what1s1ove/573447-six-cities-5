@@ -2,7 +2,12 @@ import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '~/services/api/api';
 import {adaptUserToClient} from '~/helpers/helpers';
 import {mockedUser, mockedFetchedUser} from '~/mocks/mocks';
-import {AppRoute, AuthStatus, UserActionType} from '~/common/enums/enums';
+import {
+  AppRoute,
+  AuthStatus,
+  HttpCode,
+  UserActionType,
+} from '~/common/enums/enums';
 import {UserActionCreator} from './user';
 
 const api = createAPI({
@@ -42,7 +47,7 @@ describe(`User action creator works correctly`, () => {
     const dispatch = jest.fn();
     const checkAuthLoader = UserActionCreator.checkAuth();
 
-    apiMock.onGet(`/login`).reply(200, mockedFetchedUser);
+    apiMock.onGet(`/login`).reply(HttpCode.SUCCESS, mockedFetchedUser);
 
     return checkAuthLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(2);
@@ -69,7 +74,7 @@ describe(`User action creator works correctly`, () => {
     const fakeUser = {login: `test@test.ru`, password: `123456`};
     const loginLoader = UserActionCreator.login(fakeUser);
 
-    apiMock.onPost(`/login`).reply(200, mockedFetchedUser);
+    apiMock.onPost(`/login`).reply(HttpCode.SUCCESS, mockedFetchedUser);
 
     return loginLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(3);

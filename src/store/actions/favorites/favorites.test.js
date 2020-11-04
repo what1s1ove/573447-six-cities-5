@@ -7,7 +7,11 @@ import {
   mockedFetchedOffers,
   mockedFetchedOffer,
 } from '~/mocks/mocks';
-import {FavoritesActionType, OfferFavoriteStatus} from '~/common/enums/enums';
+import {
+  FavoritesActionType,
+  HttpCode,
+  OfferFavoriteStatus,
+} from '~/common/enums/enums';
 import {FavoritesActionCreator} from './favorites';
 
 const api = createAPI({
@@ -38,7 +42,7 @@ describe(`Favorites action creator works correctly`, () => {
     const dispatch = jest.fn();
     const fetchFavoritesLoader = FavoritesActionCreator.fetchFavorites();
 
-    apiMock.onGet(`/favorite`).reply(200, mockedFetchedOffers);
+    apiMock.onGet(`/favorite`).reply(HttpCode.SUCCESS, mockedFetchedOffers);
 
     return fetchFavoritesLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -59,7 +63,7 @@ describe(`Favorites action creator works correctly`, () => {
 
     apiMock
       .onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`)
-      .reply(200, mockedFetchedOffer);
+      .reply(HttpCode.SUCCESS, mockedFetchedOffer);
 
     return toggleFavoriteLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);

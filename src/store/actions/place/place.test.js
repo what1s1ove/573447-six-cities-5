@@ -13,7 +13,11 @@ import {
   adaptOfferToClient,
   adaptReviewsToClient,
 } from '~/helpers/helpers';
-import {OfferFavoriteStatus, PlaceActionType} from '~/common/enums/enums';
+import {
+  HttpCode,
+  OfferFavoriteStatus,
+  PlaceActionType,
+} from '~/common/enums/enums';
 import {PlaceActionCreator} from './place';
 
 const api = createAPI({
@@ -62,7 +66,7 @@ describe(`Place action creator works correctly`, () => {
     const dispatch = jest.fn();
     const fetchOfferLoader = PlaceActionCreator.fetchOffer(mockedFetchedOffer.id);
 
-    apiMock.onGet(`/hotels/${mockedFetchedOffer.id}`).reply(200, mockedFetchedOffer);
+    apiMock.onGet(`/hotels/${mockedFetchedOffer.id}`).reply(HttpCode.SUCCESS, mockedFetchedOffer);
 
     return fetchOfferLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -81,7 +85,7 @@ describe(`Place action creator works correctly`, () => {
     const dispatch = jest.fn();
     const fetchReviewsLoader = PlaceActionCreator.fetchReviews(mockedOffer.id);
 
-    apiMock.onGet(`/comments/${mockedOffer.id}`).reply(200, mockedFetchedReviews);
+    apiMock.onGet(`/comments/${mockedOffer.id}`).reply(HttpCode.SUCCESS, mockedFetchedReviews);
 
     return fetchReviewsLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -100,7 +104,7 @@ describe(`Place action creator works correctly`, () => {
     const dispatch = jest.fn();
     const fetchSimilarOffersLoader = PlaceActionCreator.fetchSimilarOffers(mockedFetchedOffer.id);
 
-    apiMock.onGet(`/hotels/${mockedFetchedOffer.id}/nearby`).reply(200, mockedFetchedOffers);
+    apiMock.onGet(`/hotels/${mockedFetchedOffer.id}/nearby`).reply(HttpCode.SUCCESS, mockedFetchedOffers);
 
     return fetchSimilarOffersLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -120,7 +124,7 @@ describe(`Place action creator works correctly`, () => {
     const fakeComment = {comment: `Comment`, rating: `5`};
     const uploadReviewLoader = PlaceActionCreator.uploadReview(mockedOffer.id, fakeComment);
 
-    apiMock.onPost(`/comments/${mockedOffer.id}`).reply(200, mockedFetchedReviews);
+    apiMock.onPost(`/comments/${mockedOffer.id}`).reply(HttpCode.SUCCESS, mockedFetchedReviews);
 
     return uploadReviewLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -139,7 +143,7 @@ describe(`Place action creator works correctly`, () => {
     const dispatch = jest.fn();
     const toggleFavoriteLoader = PlaceActionCreator.toggleFavorite(mockedOffer);
 
-    apiMock.onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`).reply(200, mockedFetchedOffer);
+    apiMock.onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`).reply(HttpCode.SUCCESS, mockedFetchedOffer);
 
     return toggleFavoriteLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -158,7 +162,7 @@ describe(`Place action creator works correctly`, () => {
     const dispatch = jest.fn();
     const toggleSimilarOfferFavoriteLoader = PlaceActionCreator.toggleSimilarOfferFavorite(mockedOffer);
 
-    apiMock.onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`).reply(200, mockedFetchedOffer);
+    apiMock.onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`).reply(HttpCode.SUCCESS, mockedFetchedOffer);
 
     return toggleSimilarOfferFavoriteLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);

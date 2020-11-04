@@ -1,8 +1,17 @@
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '~/services/api/api';
 import {adaptOffersToClient, adaptOfferToClient} from '~/helpers/helpers';
-import {mockedOffer, mockedOffers, mockedFetchedOffers, mockedFetchedOffer} from '~/mocks/mocks';
-import {OfferFavoriteStatus, PlacesDataActionType} from '~/common/enums/enums';
+import {
+  mockedOffer,
+  mockedOffers,
+  mockedFetchedOffers,
+  mockedFetchedOffer,
+} from '~/mocks/mocks';
+import {
+  HttpCode,
+  OfferFavoriteStatus,
+  PlacesDataActionType,
+} from '~/common/enums/enums';
 import {PlacesDataActionCreator} from './places-data';
 
 const api = createAPI({
@@ -33,7 +42,7 @@ describe(`Place data action creator works correctly`, () => {
     const dispatch = jest.fn();
     const fetchOffersLoader = PlacesDataActionCreator.fetchOffers();
 
-    apiMock.onGet(`/hotels`).reply(200, mockedFetchedOffers);
+    apiMock.onGet(`/hotels`).reply(HttpCode.SUCCESS, mockedFetchedOffers);
 
     return fetchOffersLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -52,7 +61,7 @@ describe(`Place data action creator works correctly`, () => {
     const dispatch = jest.fn();
     const toggleFavoriteLoader = PlacesDataActionCreator.toggleFavorite(mockedOffer);
 
-    apiMock.onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`).reply(200, mockedFetchedOffer);
+    apiMock.onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`).reply(HttpCode.SUCCESS, mockedFetchedOffer);
 
     return toggleFavoriteLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
