@@ -14,7 +14,7 @@ const FavoritesActionCreator = {
       offer,
     },
   }),
-  fetchFavorites: () => (dispatch, _, {api}) => {
+  fetchFavorites: () => (dispatch, _, {api}) => (
     api
       .get(`/favorite`)
       .then(({data}) =>
@@ -22,8 +22,8 @@ const FavoritesActionCreator = {
       )
       .catch((err) => {
         throw err;
-      });
-  },
+      })
+  ),
   toggleFavorite: (offer) => (dispatch, _, {api}) => (
     Promise.resolve(() =>
       dispatch(FavoritesActionCreator.updateFavorite(extendObject(offer, {
