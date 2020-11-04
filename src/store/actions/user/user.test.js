@@ -3,6 +3,7 @@ import {createAPI} from '~/services/api/api';
 import {adaptUserToClient} from '~/helpers/helpers';
 import {mockedUser, mockedFetchedUser} from '~/mocks/mocks';
 import {
+  ApiRoute,
   AppRoute,
   AuthStatus,
   HttpCode,
@@ -47,7 +48,7 @@ describe(`User action creator works correctly`, () => {
     const dispatch = jest.fn();
     const checkAuthLoader = UserActionCreator.checkAuth();
 
-    apiMock.onGet(`/login`).reply(HttpCode.SUCCESS, mockedFetchedUser);
+    apiMock.onGet(ApiRoute.LOGIN).reply(HttpCode.SUCCESS, mockedFetchedUser);
 
     return checkAuthLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(2);
@@ -74,7 +75,7 @@ describe(`User action creator works correctly`, () => {
     const fakeUser = {login: `test@test.ru`, password: `123456`};
     const loginLoader = UserActionCreator.login(fakeUser);
 
-    apiMock.onPost(`/login`).reply(HttpCode.SUCCESS, mockedFetchedUser);
+    apiMock.onPost(ApiRoute.LOGIN).reply(HttpCode.SUCCESS, mockedFetchedUser);
 
     return loginLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(3);

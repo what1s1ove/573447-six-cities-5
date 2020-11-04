@@ -8,6 +8,7 @@ import {
   mockedFetchedOffer,
 } from '~/mocks/mocks';
 import {
+  ApiRoute,
   FavoritesActionType,
   HttpCode,
   OfferFavoriteStatus,
@@ -42,7 +43,7 @@ describe(`Favorites action creator works correctly`, () => {
     const dispatch = jest.fn();
     const fetchFavoritesLoader = FavoritesActionCreator.fetchFavorites();
 
-    apiMock.onGet(`/favorite`).reply(HttpCode.SUCCESS, mockedFetchedOffers);
+    apiMock.onGet(ApiRoute.FAVORITE).reply(HttpCode.SUCCESS, mockedFetchedOffers);
 
     return fetchFavoritesLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -62,7 +63,7 @@ describe(`Favorites action creator works correctly`, () => {
     const toggleFavoriteLoader = FavoritesActionCreator.toggleFavorite(mockedOffer);
 
     apiMock
-      .onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`)
+      .onPost(`${ApiRoute.FAVORITE}/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`)
       .reply(HttpCode.SUCCESS, mockedFetchedOffer);
 
     return toggleFavoriteLoader(dispatch, jest.fn(), {api}).then(() => {

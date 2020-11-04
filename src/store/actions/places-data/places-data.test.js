@@ -8,6 +8,7 @@ import {
   mockedFetchedOffer,
 } from '~/mocks/mocks';
 import {
+  ApiRoute,
   HttpCode,
   OfferFavoriteStatus,
   PlacesDataActionType,
@@ -42,7 +43,7 @@ describe(`Place data action creator works correctly`, () => {
     const dispatch = jest.fn();
     const fetchOffersLoader = PlacesDataActionCreator.fetchOffers();
 
-    apiMock.onGet(`/hotels`).reply(HttpCode.SUCCESS, mockedFetchedOffers);
+    apiMock.onGet(ApiRoute.HOTELS).reply(HttpCode.SUCCESS, mockedFetchedOffers);
 
     return fetchOffersLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -61,7 +62,7 @@ describe(`Place data action creator works correctly`, () => {
     const dispatch = jest.fn();
     const toggleFavoriteLoader = PlacesDataActionCreator.toggleFavorite(mockedOffer);
 
-    apiMock.onPost(`/favorite/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`).reply(HttpCode.SUCCESS, mockedFetchedOffer);
+    apiMock.onPost(`${ApiRoute.FAVORITE}/${mockedOffer.id}/${OfferFavoriteStatus.TRUE}`).reply(HttpCode.SUCCESS, mockedFetchedOffer);
 
     return toggleFavoriteLoader(dispatch, jest.fn(), {api}).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
