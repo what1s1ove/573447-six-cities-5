@@ -222,10 +222,10 @@ const mockedOffers = [
       `Towels`,
     ],
     host: {
-      'id': 25,
-      'name': `Angelina`,
-      'is_pro': true,
-      'avatar_url': `img/avatar-angelina.jpg`,
+      id: 25,
+      name: `Angelina`,
+      isPro: true,
+      avatarUrl: `img/avatar-angelina.jpg`,
     },
     description: `Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.`,
     location: {
