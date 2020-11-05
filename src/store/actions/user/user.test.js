@@ -34,15 +34,6 @@ describe(`User action creator works correctly`, () => {
     });
   });
 
-  it(`redirectToRoute ac returns correct action`, () => {
-    expect(UserActionCreator.redirectToRoute(AppRoute.MAIN)).toEqual({
-      type: UserActionType.REDIRECT_TO_ROUTE,
-      payload: {
-        path: AppRoute.MAIN,
-      },
-    });
-  });
-
   it(`checkAuth ac returns correct action. Should make a correct API call to /login`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
