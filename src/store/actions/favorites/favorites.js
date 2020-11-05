@@ -1,15 +1,16 @@
 import {AppActionCreator} from '~/store/actions/app/app';
 import {
-  ApiRoute,
-  FavoritesActionType,
-  NotificationType,
-} from '~/common/enums/enums';
-import {
   adaptOffersToClient,
   adaptOfferToClient,
   extendObject,
   getOfferFavoriteStatus,
 } from '~/helpers/helpers';
+import {
+  ApiRoute,
+  FavoritesActionType,
+  NotificationType,
+} from '~/common/enums/enums';
+
 
 const FavoritesActionCreator = {
   loadFavorites: (offers) => ({

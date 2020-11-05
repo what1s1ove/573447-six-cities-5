@@ -1,16 +1,16 @@
 import {AppActionCreator} from '~/store/actions/app/app';
 import {
-  PlaceActionType,
-  ApiRoute,
-  NotificationType,
-} from '~/common/enums/enums';
-import {
   adaptOffersToClient,
   adaptOfferToClient,
   adaptReviewsToClient,
   extendObject,
   getOfferFavoriteStatus,
 } from '~/helpers/helpers';
+import {
+  PlaceActionType,
+  ApiRoute,
+  NotificationType,
+} from '~/common/enums/enums';
 
 const PlaceActionCreator = {
   loadOffer: (offer) => ({
