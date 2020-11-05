@@ -10,7 +10,7 @@ describe(`ReviewForm component`, () => {
           formState={{}}
           onFormStateChange={jest.fn()}
           onFormReset={jest.fn()}
-          onReviewFormSubmit={handleFormSubmit}
+          onFormSubmit={handleFormSubmit}
         />
     );
 

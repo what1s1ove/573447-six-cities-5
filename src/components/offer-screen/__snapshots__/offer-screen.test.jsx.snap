@@ -626,6 +626,7 @@ exports[`OfferScreen component should render OfferScreen component 1`] = `
               <textarea
                 class="reviews__textarea form__textarea"
                 id="review"
+                maxlength="300"
                 name="review"
                 placeholder="Tell how was your stay, what you like and what can be improved"
                 required=""
@@ -652,6 +653,7 @@ exports[`OfferScreen component should render OfferScreen component 1`] = `
                 </p>
                 <button
                   class="reviews__submit form__submit button"
+                  disabled=""
                   type="submit"
                 >
                   Submit

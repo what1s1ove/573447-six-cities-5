@@ -13,13 +13,9 @@ const ReviewForm = ({
   const [isFormSaving, setIsFormSaving] = React.useState(false);
   const isFormValid = checkIsFormValid(formState);
 
-  const handleRatingChange = (newRating) => {
-    onFormStateChange(ReviewFormKey.RARING, newRating);
-  };
+  const handleRatingChange = (newRating) => onFormStateChange(ReviewFormKey.RARING, newRating);
 
-  const handleCommentChange = ({target}) => {
-    onFormStateChange(ReviewFormKey.COMMENT, target.value);
-  };
+  const handleCommentChange = ({target}) => onFormStateChange(ReviewFormKey.COMMENT, target.value);
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
@@ -77,7 +73,6 @@ const ReviewForm = ({
 };
 
 ReviewForm.propTypes = {
-  offerId: PropTypes.number.isRequired,
   formState: PropTypes.object.isRequired,
   onFormStateChange: PropTypes.func.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
