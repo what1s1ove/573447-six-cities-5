@@ -4,7 +4,7 @@ import ReviewForm from './review-form';
 
 describe(`ReviewForm component`, () => {
   it(`should call callback when form was submitted`, () => {
-    const handleFormSubmit = jest.fn();
+    const handleFormSubmit = jest.fn().mockImplementation(() => Promise.resolve());
     const component = shallow(
         <ReviewForm
           formState={{}}
