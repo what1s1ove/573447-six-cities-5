@@ -28,4 +28,4 @@ const favoritesReducer = (state = initialState, action) => {
   return state;
 };
 
-export {favoritesReducer};
+export {initialState, favoritesReducer};

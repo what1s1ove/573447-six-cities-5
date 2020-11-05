@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReviewRating component should render ReviewRating component 1`] = `
+Array [
+  <input
+    class="form__rating-input visually-hidden"
+    id="value-stars"
+    name="rating"
+    required=""
+    type="radio"
+    value="value"
+  />,
+  <label
+    class="reviews__rating-label form__rating-label"
+    for="value-stars"
+    title="name"
+  >
+    <svg
+      class="form__star-image"
+      height="33"
+      width="37"
+    >
+      <use
+        href="#icon-star"
+      />
+    </svg>
+  </label>,
+]
+`;

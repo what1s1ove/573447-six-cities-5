@@ -1,4 +1,6 @@
-export * from './user/user';
-export * from './places-data/places-data';
-export * from './place/place';
-export * from './favorites/favorites';
+import {placesDataReducer} from './places-data/places-data';
+import {userReducer} from './user/user';
+import {placeReducer} from './place/place';
+import {favoritesReducer} from './favorites/favorites';
+
+export {placesDataReducer, userReducer, placeReducer, favoritesReducer};

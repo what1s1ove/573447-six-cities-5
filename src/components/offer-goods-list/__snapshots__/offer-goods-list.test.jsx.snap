@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OfferGoodsList component should render OfferGoodsList component 1`] = `
+<ul
+  class="property__inside-list"
+>
+  <li
+    class="property__inside-item"
+  >
+    TV
+  </li>
+</ul>
+`;

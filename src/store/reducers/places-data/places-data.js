@@ -27,4 +27,4 @@ const placesDataReducer = (state = initialState, action) => {
   return state;
 };
 
-export {placesDataReducer};
+export {initialState, placesDataReducer};

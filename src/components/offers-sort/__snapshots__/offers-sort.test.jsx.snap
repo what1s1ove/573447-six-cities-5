@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OffersSort component should render OffersSort component 1`] = `
+<form
+  action="#"
+  class="places__sorting"
+  method="get"
+>
+  <span
+    class="places__sorting-caption"
+  >
+    Sort by
+  </span>
+  <select
+    class="places__sorting-type"
+  >
+    <option
+      class="places__option"
+      selected=""
+      value="Popular"
+    >
+      Popular
+    </option>
+    <option
+      class="places__option"
+      value="Price: low to high"
+    >
+      Price: low to high
+    </option>
+    <option
+      class="places__option"
+      value="Price: high to low"
+    >
+      Price: high to low
+    </option>
+    <option
+      class="places__option"
+      value="Top rated first"
+    >
+      Top rated first
+    </option>
+  </select>
+</form>
+`;

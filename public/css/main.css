@@ -760,15 +760,16 @@ img {
   background-color: #f2f2f2;
 }
 .places__sorting-caption {
-  margin: 0 15px 0 0;
+  margin: 0 5px 0 0;
   font-size: 12px;
   line-height: 1.167;
   font-weight: 700;
   white-space: nowrap;
 }
 .places__sorting-type {
+  width: 135px;
   margin: 0;
-  padding: 5px 8px;
+  padding: 5px 0;
   list-style: none;
   color: #383838;
   font-size: 14px;

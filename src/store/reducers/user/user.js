@@ -27,4 +27,4 @@ const userReducer = (state = initialState, action) => {
   return state;
 };
 
-export {userReducer};
+export {initialState, userReducer};

@@ -2,8 +2,8 @@ import {AppActionCreator} from '~/store/actions/app/app';
 import {
   adaptOffersToClient,
   adaptOfferToClient,
-  getOfferFavoriteStatus,
   extendObject,
+  getOfferFavoriteStatus,
 } from '~/helpers/helpers';
 import {
   ApiRoute,
