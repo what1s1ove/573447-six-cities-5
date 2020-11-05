@@ -4,6 +4,7 @@ import {adaptUserToClient} from '~/helpers/helpers';
 import {mockedUser, mockedFetchedUser} from '~/mocks/mocks';
 import {
   ApiRoute,
+  AppActionType,
   AppRoute,
   AuthStatus,
   HttpCode,
@@ -86,7 +87,7 @@ describe(`User action creator works correctly`, () => {
       });
 
       expect(dispatch).toHaveBeenNthCalledWith(3, {
-        type: UserActionType.REDIRECT_TO_ROUTE,
+        type: AppActionType.REDIRECT_TO_ROUTE,
         payload: {
           path: AppRoute.MAIN,
         },
@@ -116,7 +117,7 @@ describe(`User action creator works correctly`, () => {
       });
 
       expect(dispatch).toHaveBeenNthCalledWith(3, {
-        type: UserActionType.REDIRECT_TO_ROUTE,
+        type: AppActionType.REDIRECT_TO_ROUTE,
         payload: {
           path: AppRoute.LOGIN,
         },
