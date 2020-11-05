@@ -1,12 +1,14 @@
+import {AppActionCreator} from '~/store/actions/app/app';
 import {
   ApiRoute,
   FavoritesActionType,
-  OfferFavoriteStatus,
+  NotificationType,
 } from '~/common/enums/enums';
 import {
   adaptOffersToClient,
   adaptOfferToClient,
   extendObject,
+  getOfferFavoriteStatus,
 } from '~/helpers/helpers';
 
 const FavoritesActionCreator = {
@@ -28,25 +30,29 @@ const FavoritesActionCreator = {
       .then(({data}) =>
         dispatch(FavoritesActionCreator.loadFavorites(adaptOffersToClient(data)))
       )
-      .catch((err) => {
-        throw err;
-      })
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
   ),
   toggleFavorite: (offer) => (dispatch, _, {api}) => (
     Promise.resolve(() =>
       dispatch(FavoritesActionCreator.updateFavorite(extendObject(offer, {
         isSaving: true,
       }))))
-      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
+      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${getOfferFavoriteStatus(offer.isFavorite)}`))
       .then(({data}) =>
         dispatch(FavoritesActionCreator.updateFavorite(adaptOfferToClient(data)))
       )
-      .catch((err) => {
+      .catch(({response: {data}}) => {
         dispatch(FavoritesActionCreator.updateFavorite(extendObject(offer, {
           isSaving: false
         })));
 
-        throw err;
+        dispatch(AppActionCreator.setNotification({
+          message: data.error,
+          type: NotificationType.ERROR,
+        }));
       })
   )
 };

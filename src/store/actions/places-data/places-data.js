@@ -1,12 +1,14 @@
+import {AppActionCreator} from '~/store/actions/app/app';
 import {
   ApiRoute,
-  OfferFavoriteStatus,
+  NotificationType,
   PlacesDataActionType,
 } from '~/common/enums/enums';
 import {
   adaptOffersToClient,
   adaptOfferToClient,
   extendObject,
+  getOfferFavoriteStatus,
 } from '~/helpers/helpers';
 
 const PlacesDataActionCreator = {
@@ -22,30 +24,35 @@ const PlacesDataActionCreator = {
       offer,
     },
   }),
-  fetchOffers: () => (dispatch, _, {api}) =>
+  fetchOffers: () => (dispatch, _, {api}) => (
     api
       .get(ApiRoute.HOTELS)
       .then(({data}) =>
         dispatch(PlacesDataActionCreator.loadOffers(adaptOffersToClient(data)))
       )
-      .catch((err) => {
-        throw err;
-      }),
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
+  ),
   toggleFavorite: (offer) => (dispatch, _, {api}) => (
     Promise.resolve(() =>
       dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
         isSaving: true,
       }))))
-      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${offer.isFavorite ? OfferFavoriteStatus.FALSE : OfferFavoriteStatus.TRUE}`))
+      .then(() => api.post(`${ApiRoute.FAVORITE}/${offer.id}/${getOfferFavoriteStatus(offer.isFavorite)}`))
       .then(({data}) =>
         dispatch(PlacesDataActionCreator.updateOffer(adaptOfferToClient(data)))
       )
-      .catch((err) => {
+      .catch(({response: {data}}) => {
         dispatch(PlacesDataActionCreator.updateOffer(extendObject(offer, {
           isSaving: false
         })));
 
-        throw err;
+        dispatch(AppActionCreator.setNotification({
+          message: data.error,
+          type: NotificationType.ERROR,
+        }));
       })
   ),
 };

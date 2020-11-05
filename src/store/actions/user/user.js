@@ -1,8 +1,10 @@
+import {AppActionCreator} from '~/store/actions/app/app';
 import {adaptUserToClient} from '~/helpers/helpers';
 import {
   ApiRoute,
   AppRoute,
   AuthStatus,
+  NotificationType,
   UserActionType,
 } from '~/common/enums/enums';
 
@@ -19,12 +21,6 @@ const UserActionCreator = {
       user,
     },
   }),
-  redirectToRoute: (path) => ({
-    type: UserActionType.REDIRECT_TO_ROUTE,
-    payload: {
-      path,
-    },
-  }),
   checkAuth: () => (dispatch, _, {api}) => (
     api
       .get(ApiRoute.LOGIN)
@@ -32,9 +28,11 @@ const UserActionCreator = {
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
-      .catch((err) => {
-        throw err;
-      })
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+        isShow: false,
+      })))
   ),
   login: ({email, password}) => (dispatch, _, {api}) => (
     api
@@ -43,16 +41,17 @@ const UserActionCreator = {
         dispatch(UserActionCreator.setUser(adaptUserToClient(data)))
       )
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.AUTH)))
-      .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.MAIN)))
-      .catch((err) => {
-        throw err;
-      })
+      .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.MAIN)))
+      .catch(({response: {data}}) => dispatch(AppActionCreator.setNotification({
+        message: data.error,
+        type: NotificationType.ERROR,
+      })))
   ),
   logout: () => (dispatch) => (
     Promise.resolve()
       .then(() => dispatch(UserActionCreator.setUser(null)))
       .then(() => dispatch(UserActionCreator.setAuthStatus(AuthStatus.NO_AUTH)))
-      .then(() => dispatch(UserActionCreator.redirectToRoute(AppRoute.LOGIN)))
+      .then(() => dispatch(AppActionCreator.redirectToRoute(AppRoute.LOGIN)))
   ),
 };
 
