@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {getRatingInPercents} from '~/helpers/helpers';
 import {offerType} from '~/common/prop-types/prop-types';
 import OfferGoodsList from '~/components/offer-goods-list/offer-goods-list';
+import {roomTypeToDescMap} from './common';
 
 const OfferPropertyDashboard = ({offer, onFavoriteToggle}) => (
   <>
@@ -44,7 +45,7 @@ const OfferPropertyDashboard = ({offer, onFavoriteToggle}) => (
     </div>
     <ul className="property__features">
       <li className="property__feature property__feature--entire">
-        {offer.type}
+        {roomTypeToDescMap[offer.type]}
       </li>
       <li className="property__feature property__feature--bedrooms">
         {offer.bedroomCount} Bedrooms
