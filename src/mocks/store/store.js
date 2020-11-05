@@ -22,6 +22,10 @@ const store = storeConfig({
     user: mockedUser,
     status: AuthStatus.AUTH,
   },
+  toastr: {
+    toastrs: [],
+    confirm: null,
+  },
 });
 
 export {store};
