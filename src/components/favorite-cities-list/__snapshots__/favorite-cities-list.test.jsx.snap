@@ -228,6 +228,29 @@ exports[`FavoriteCitiesList component should render FavoriteCitiesList component
           </p>
         </div>
       </article>
+    </div>
+  </li>
+  <li
+    class="favorites__locations-items"
+  >
+    <div
+      class="favorites__locations locations locations--current"
+    >
+      <div
+        class="locations__item"
+      >
+        <span
+          class="locations__item-link"
+        >
+          <span>
+            Amsterdam
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="favorites__places"
+    >
       <article
         class="favorites__card place-card"
       >

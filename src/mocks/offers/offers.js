@@ -180,7 +180,7 @@ const mockedOffers = [
   },
   {
     city: {
-      name: `Cologne`,
+      name: `Amsterdam`,
       location: {
         latitude: 50.938361,
         longitude: 6.959974,
@@ -300,7 +300,7 @@ const mockedFetchedOffers = [
   },
   {
     'city': {
-      name: `Cologne`,
+      name: `Amsterdam`,
       location: {
         latitude: 50.938361,
         longitude: 6.959974,
