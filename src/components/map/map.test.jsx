@@ -4,7 +4,8 @@ import Map from './map';
 
 describe(`Map component`, () => {
   it(`should render Map component`, () => {
-    const component = render(<Map renderMap={jest.fn()} />);
+    const handleMapRender = () => <p>Map</p>;
+    const component = render(<Map renderMap={handleMapRender} />);
 
     expect(component).toMatchSnapshot();
   });

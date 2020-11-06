@@ -9,24 +9,32 @@ const OfferList = ({
   className,
   onActiveOfferChange,
   onFavoriteToggle,
-}) => (
-  <div className={clsx(`places__list`, className)}>
-    {offers.map((offer) => (
-      <OfferItem
-        offer={offer}
-        onActiveOfferChange={onActiveOfferChange}
-        onFavoriteToggle={onFavoriteToggle}
-        key={offer.id}
-      />
-    ))}
-  </div>
-);
+}) => {
+  const handleActiveOfferChange = (offer) => {
+    if (onActiveOfferChange) {
+      onActiveOfferChange(offer);
+    }
+  };
+
+  return (
+    <div className={clsx(`places__list`, className)}>
+      {offers.map((offer) => (
+        <OfferItem
+          offer={offer}
+          onActiveOfferChange={handleActiveOfferChange}
+          onFavoriteToggle={onFavoriteToggle}
+          key={offer.id}
+        />
+      ))}
+    </div>
+  );
+};
 
 OfferList.propTypes = {
   className: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerType.isRequired).isRequired,
-  onActiveOfferChange: PropTypes.func.isRequired,
   onFavoriteToggle: PropTypes.func.isRequired,
+  onActiveOfferChange: PropTypes.func,
 };
 
 export default OfferList;

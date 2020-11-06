@@ -13,10 +13,7 @@ import Map from '~/components/map/map';
 import LocationsList from '~/components/locations-list/locations-list';
 import OfferList from '~/components/offer-list/offer-list';
 import MainScreenEmptyPlaceholder from '~/components/main-screen-empty-placeholder/main-screen-empty-placeholder';
-import {
-  getDefaultLocation,
-  getLocationByName,
-} from './helpers';
+import {getLocationByName} from './helpers';
 
 const sortTypes = Object.values(SortType);
 const offerCities = Object.values(OfferCity);
@@ -27,33 +24,18 @@ const MainScreen = ({
   activeItem: activeOffer,
   onActiveItemChange: onActiveOfferChange,
 }) => {
-  const [currentLocation, setCurrentLocation] = React.useState(null);
+  const [currentCity, setCurrentCity] = React.useState(OfferCity.AMSTERDAM);
   const [activeSort, setActiveSort] = React.useState(SortType.POPULAR);
   const locations = useSelector(getLocations);
-  const offers = useSelector(getFilteredOffers(currentLocation, activeSort));
+  const offers = useSelector(getFilteredOffers(currentCity, activeSort));
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (!currentLocation) {
-      setCurrentLocation(getDefaultLocation(locations));
-    }
-  }, [locations]);
-
+  const currentLocation = getLocationByName(locations, currentCity);
   const hasOffers = Boolean(offers.length);
-
-  const handleLocationChange = (offerCity) => {
-    const newCurrentLocation = getLocationByName(locations, offerCity);
-
-    setCurrentLocation(newCurrentLocation);
-  };
 
   const handleFavoriteToggle = React.useCallback((offer) => {
     dispatch(PlacesDataActionCreator.toggleFavorite(offer));
   }, [dispatch]);
-
-  if (!currentLocation) {
-    return null;
-  }
 
   return (
     <div className="page page--gray page--main">
@@ -68,7 +50,7 @@ const MainScreen = ({
         <LocationsList
           locations={offerCities}
           activeLocation={currentLocation}
-          onLocationChange={handleLocationChange}
+          onLocationChange={setCurrentCity}
         />
         <div className="cities">
           <div

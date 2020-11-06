@@ -51,6 +51,12 @@ const getOffersByCity = (offers, city) => {
   return offersByCity;
 };
 
+const getOffersByCityName = (offers, cityName) => {
+  const offersByCityName = offers.filter((offer) => offer.city.name === cityName);
+
+  return offersByCityName;
+};
+
 const getSortedOffers = (offers, activeFilter) => {
   switch (activeFilter) {
     case SortType.TO_HIGHT: {
@@ -116,6 +122,7 @@ export {
   getSortedLocations,
   getOfferLocations,
   getOffersByCity,
+  getOffersByCityName,
   getSortedOffers,
   adaptOfferToClient,
   adaptOffersToClient,

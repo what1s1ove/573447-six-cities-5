@@ -46,6 +46,12 @@ const OfferScreen = ({
     dispatch(PlaceActionCreator.fetchSimilarOffers(offerId));
   }, [offerId]);
 
+  React.useEffect(() => {
+    if (offer) {
+      onActiveOfferChange(offer);
+    }
+  }, [offer]);
+
   const handleFavoriteToggle = React.useCallback(() => {
     dispatch(PlaceActionCreator.toggleFavorite(offer));
   }, [offer, dispatch]);
@@ -91,7 +97,7 @@ const OfferScreen = ({
               <WrappedMap
                 city={offer.city}
                 activeOffer={activeOffer}
-                offers={similarOffers}
+                offers={[...similarOffers, offer]}
               />
             )}
           </section>
@@ -105,7 +111,6 @@ const OfferScreen = ({
               <OfferList
                 className="near-places__list"
                 offers={similarOffers}
-                onActiveOfferChange={onActiveOfferChange}
                 onFavoriteToggle={handleSimilarOfferFavoriteToggle}
               />
             )}

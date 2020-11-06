@@ -1,4 +1,8 @@
-import {PlacesDataActionType} from '~/common/enums/enums';
+import {
+  FavoritesActionType,
+  PlaceActionType,
+  PlacesDataActionType,
+} from '~/common/enums/enums';
 import {extendObject} from '~/helpers/object';
 
 const initialState = {
@@ -14,7 +18,10 @@ const placesDataReducer = (state = initialState, action) => {
         offers,
       });
     }
-    case PlacesDataActionType.UPDATE_OFFER: {
+    case PlacesDataActionType.UPDATE_OFFER:
+    case PlaceActionType.UPDATE_SIMILAR_OFFER:
+    case PlaceActionType.LOAD_OFFER:
+    case FavoritesActionType.UPDATE_FAVORITE: {
       const {offer: updatedOffer} = action.payload;
 
       return extendObject(state, {
@@ -24,6 +31,7 @@ const placesDataReducer = (state = initialState, action) => {
       });
     }
   }
+
   return state;
 };
 

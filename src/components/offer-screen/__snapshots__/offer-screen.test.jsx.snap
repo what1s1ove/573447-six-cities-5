@@ -193,7 +193,7 @@ exports[`OfferScreen component should render OfferScreen component 1`] = `
             <li
               class="property__feature property__feature--entire"
             >
-              room
+              Private Room
             </li>
             <li
               class="property__feature property__feature--bedrooms"

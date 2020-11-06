@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {getOfferLocations, getOffersByCity, getSortedOffers} from '~/helpers/offer';
+import {getOfferLocations, getOffersByCityName, getSortedOffers} from '~/helpers/offer';
 
 const getOffers = ({data}) => data.offers;
 
@@ -9,17 +9,17 @@ const getLocations = createSelector(getOffers, (offers) => {
   return locations;
 });
 
-const getFilteredOffers = (currentLocation, activeSort) =>
+const getFilteredOffers = (currentCityName, activeSort) =>
   createSelector(
       getOffers,
-      () => currentLocation,
+      () => currentCityName,
       () => activeSort,
-      (offers, location, sort) => {
-        if (!offers.length || !location || !sort) {
+      (offers, cityName, sort) => {
+        if (!offers.length || !cityName || !sort) {
           return [];
         }
 
-        const offersByLocation = getOffersByCity(offers, location);
+        const offersByLocation = getOffersByCityName(offers, cityName);
         const sortedOffers = getSortedOffers(offersByLocation, sort);
 
         return sortedOffers;
