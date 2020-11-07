@@ -30,14 +30,14 @@ const OfferScreen = ({
   onActiveItemChange: onActiveOfferChange,
 }) => {
   const dispatch = useDispatch();
-  const params = useParams();
+  const {id: offerId} = useParams();
   const {userStatus, offer, reviews, similarOffers} = useSelector((state) => ({
     userStatus: getUserStatus(state),
     offer: getOffer(state),
     reviews: getReviews(state),
     similarOffers: getSimilarOffers(state),
   }));
-  const offerId = params.id;
+
   const hasSimilarOffer = Boolean(similarOffers.length);
 
   React.useEffect(() => {
@@ -97,7 +97,7 @@ const OfferScreen = ({
               <WrappedMap
                 city={offer.city}
                 activeOffer={activeOffer}
-                offers={[...similarOffers, offer]}
+                offers={similarOffers}
               />
             )}
           </section>

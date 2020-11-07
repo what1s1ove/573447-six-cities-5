@@ -19,12 +19,14 @@ const withMap = (Component) => {
     }, []);
 
     React.useEffect(() => {
+      setMapView(city.location.latitude, city.location.longitude);
+    }, [city]);
+
+    React.useEffect(() => {
       removeMarkers(points);
 
       renderMarkers(allOffers);
-
-      setMapView(city.location.latitude, city.location.longitude);
-    }, [city]);
+    }, [allOffers]);
 
     React.useEffect(() => {
       if (activePoint) {
