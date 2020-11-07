@@ -10,7 +10,7 @@ const OfferItem = ({offer, onActiveOfferChange, onFavoriteToggle}) => {
 
   const handleOfferMouseOver = () => onActiveOfferChange(offer);
 
-  const handleMouseOut = () => onActiveOfferChange(null);
+  const handleOfferMouseOut = () => onActiveOfferChange(null);
 
   const handleFavoriteToggle = () => onFavoriteToggle(offer);
 
@@ -18,7 +18,7 @@ const OfferItem = ({offer, onActiveOfferChange, onFavoriteToggle}) => {
     <article
       className="cities__place-card place-card"
       onMouseOver={handleOfferMouseOver}
-      onMouseOut={handleMouseOut}
+      onMouseOut={handleOfferMouseOut}
     >
       {offer.isPremium && (
         <div className="place-card__mark">

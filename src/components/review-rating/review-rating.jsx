@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 const ReviewRating = ({value, name, isChecked, isDisabled, onRatingChange}) => {
   const ratingLabel = `${value}-stars`;
 
-  const handleRaringChange = ({target}) => onRatingChange(target.value);
+  const handleRatingChange = ({target}) => onRatingChange(target.value);
 
   return (
     <>
       <input
         className="form__rating-input visually-hidden"
-        onChange={handleRaringChange}
+        onChange={handleRatingChange}
         value={value}
         checked={isChecked}
         disabled={isDisabled}
