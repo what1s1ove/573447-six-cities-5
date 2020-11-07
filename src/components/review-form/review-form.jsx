@@ -11,6 +11,7 @@ const ReviewForm = ({
   onFormReset,
 }) => {
   const [isFormSaving, setIsFormSaving] = React.useState(false);
+
   const isFormValid = checkIsFormValid(formState);
 
   const handleRatingChange = (newRating) => onFormStateChange(ReviewFormKey.RARING, newRating);
@@ -23,7 +24,7 @@ const ReviewForm = ({
     setIsFormSaving(true);
 
     onFormSubmit(formState)
-      .then(() => onFormReset())
+      .then(onFormReset)
       .finally(() => setIsFormSaving(false));
   };
 
