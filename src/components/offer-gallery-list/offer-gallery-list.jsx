@@ -10,8 +10,8 @@ const OfferGalleryList = ({imgPaths}) => {
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
-        {cutImgPaths.map((imgPath, idx) => (
-          <OfferGalleryItem imgPath={imgPath} key={`${imgPath}-${idx}`} />
+        {cutImgPaths.map((imgPath) => (
+          <OfferGalleryItem imgPath={imgPath} key={imgPath} />
         ))}
       </div>
     </div>
