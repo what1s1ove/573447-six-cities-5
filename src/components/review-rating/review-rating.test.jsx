@@ -9,6 +9,7 @@ describe(`ReviewRating component`, () => {
           value="value"
           name="name"
           isChecked={false}
+          isDisabled={false}
           onRatingChange={jest.fn()}
         />
     );
