@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocationsItem component should render LocationsItem component 1`] = `
+<li
+  class="locations__item"
+>
+  <button
+    class="locations__item-link tabs__item"
+  >
+    <span>
+      Amsterdam
+    </span>
+  </button>
+</li>
+`;

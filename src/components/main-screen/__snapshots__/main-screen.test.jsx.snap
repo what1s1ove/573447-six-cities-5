@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainScreen component should render MainScreen component 1`] = `
+<div
+  class="page page--gray page--main"
+>
+  <header
+    class="header"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="header__wrapper"
+      >
+        <div
+          class="header__left"
+        >
+          <a
+            class="header__logo-link header__logo-link--active"
+            href="/"
+          >
+            <img
+              alt="6 cities logo"
+              class="header__logo"
+              height="41"
+              src="img/logo.svg"
+              width="81"
+            />
+          </a>
+        </div>
+        <nav
+          class="header__nav"
+        >
+          <ul
+            class="header__nav-list"
+          >
+            <li
+              class="header__nav-item user"
+            >
+              <a
+                class="header__nav-link header__nav-link--profile"
+                href="/favorites"
+              >
+                <div
+                  class="header__avatar-wrapper user__avatar-wrapper"
+                />
+                <span
+                  class="header__user-name user__name"
+                >
+                  oliver@mail.com
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main
+    class="page__main page__main--index"
+  >
+    <h1
+      class="visually-hidden"
+    >
+      Cities
+    </h1>
+    <div
+      class="tabs"
+    >
+      <section
+        class="locations container"
+      >
+        <ul
+          class="locations__list tabs__list"
+        >
+          <li
+            class="locations__item"
+          >
+            <button
+              class="locations__item-link tabs__item tabs__item--active"
+            >
+              <span>
+                Amsterdam
+              </span>
+            </button>
+          </li>
+          <li
+            class="locations__item"
+          >
+            <button
+              class="locations__item-link tabs__item"
+            >
+              <span>
+                Brussels
+              </span>
+            </button>
+          </li>
+          <li
+            class="locations__item"
+          >
+            <button
+              class="locations__item-link tabs__item"
+            >
+              <span>
+                Cologne
+              </span>
+            </button>
+          </li>
+          <li
+            class="locations__item"
+          >
+            <button
+              class="locations__item-link tabs__item"
+            >
+              <span>
+                Dusseldorf
+              </span>
+            </button>
+          </li>
+          <li
+            class="locations__item"
+          >
+            <button
+              class="locations__item-link tabs__item"
+            >
+              <span>
+                Hamburg
+              </span>
+            </button>
+          </li>
+          <li
+            class="locations__item"
+          >
+            <button
+              class="locations__item-link tabs__item"
+            >
+              <span>
+                Paris
+              </span>
+            </button>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <div
+      class="cities"
+    >
+      <div
+        class="cities__places-container container"
+      >
+        <section
+          class="cities__places places"
+        >
+          <h2
+            class="visually-hidden"
+          >
+            Places
+          </h2>
+          <b
+            class="places__found"
+          >
+            1 places to stay in Amsterdam
+          </b>
+          <form
+            action="#"
+            class="places__sorting"
+            method="get"
+          >
+            <span
+              class="places__sorting-caption"
+            >
+              Sort by
+            </span>
+            <select
+              class="places__sorting-type"
+            >
+              <option
+                class="places__option"
+                selected=""
+                value="Popular"
+              >
+                Popular
+              </option>
+              <option
+                class="places__option"
+                value="Price: low to high"
+              >
+                Price: low to high
+              </option>
+              <option
+                class="places__option"
+                value="Price: high to low"
+              >
+                Price: high to low
+              </option>
+              <option
+                class="places__option"
+                value="Top rated first"
+              >
+                Top rated first
+              </option>
+            </select>
+          </form>
+          <div
+            class="places__list cities__places-list"
+          >
+            <article
+              class="cities__place-card place-card"
+            >
+              <div
+                class="cities__image-wrapper place-card__image-wrapper"
+              >
+                <a
+                  href="/offer/3"
+                >
+                  <img
+                    alt="Place image"
+                    class="place-card__image"
+                    height="200"
+                    src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg"
+                    width="260"
+                  />
+                </a>
+              </div>
+              <div
+                class="place-card__info"
+              >
+                <div
+                  class="place-card__price-wrapper"
+                >
+                  <div
+                    class="place-card__price"
+                  >
+                    <b
+                      class="place-card__price-value"
+                    >
+                      €191
+                    </b>
+                    <span
+                      class="place-card__price-text"
+                    >
+                      / night
+                    </span>
+                  </div>
+                  <button
+                    class="place-card__bookmark-button button place-card__bookmark-button--active"
+                    type="button"
+                  >
+                    <svg
+                      class="place-card__bookmark-icon"
+                      height="19"
+                      width="18"
+                    >
+                      <use
+                        href="#icon-bookmark"
+                      />
+                    </svg>
+                    <span
+                      class="visually-hidden"
+                    >
+                      To bookmarks
+                    </span>
+                  </button>
+                </div>
+                <div
+                  class="place-card__rating rating"
+                >
+                  <div
+                    class="place-card__stars rating__stars"
+                  >
+                    <span
+                      style="width:80%"
+                    />
+                    <span
+                      class="visually-hidden"
+                    >
+                      Rating
+                    </span>
+                  </div>
+                </div>
+                <h2
+                  class="place-card__name"
+                >
+                  <a
+                    href="/offer/3"
+                  >
+                    The Pondhouse - A Magical Place
+                  </a>
+                </h2>
+                <p
+                  class="place-card__type"
+                >
+                  house
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+        <div
+          class="cities__right-section"
+        >
+          <section
+            class="cities__map map"
+          >
+            <div
+              id="map"
+            />
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+`;

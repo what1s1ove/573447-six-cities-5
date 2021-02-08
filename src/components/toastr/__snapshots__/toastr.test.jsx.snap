@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toastr component should render Toastr component 1`] = `
+<div
+  aria-live="assertive"
+  class="redux-toastr"
+>
+  <div>
+    <div
+      class="top-left"
+    />
+    <div
+      class="top-right"
+    />
+    <div
+      class="top-center"
+    />
+    <div
+      class="bottom-left"
+    />
+    <div
+      class="bottom-right"
+    />
+    <div
+      class="bottom-center"
+    />
+  </div>
+</div>
+`;

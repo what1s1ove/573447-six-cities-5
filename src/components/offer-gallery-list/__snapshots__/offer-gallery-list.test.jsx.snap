@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OfferGalleryList component should render OfferGalleryList component 1`] = `
+<div
+  class="property__gallery-container container"
+>
+  <div
+    class="property__gallery"
+  >
+    <div
+      class="property__image-wrapper"
+    >
+      <img
+        alt="Photo studio"
+        class="property__image"
+        src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg"
+      />
+    </div>
+  </div>
+</div>
+`;
